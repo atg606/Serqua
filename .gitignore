@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.DS_Store
+.env
+.env.*
+!.env.example
+*.log
+*.pdf
+/job_search/
+/.impeccable/
+/BILLABLE_EXPENSES.md
+/WhatsApp Image*.jpeg

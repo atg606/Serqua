@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#090a0b" />
+    <meta name="description" content="Shop Serqua Prollegen — a premium whey protein and collagen formula for performance, recovery and beauty." />
+    <title>Shop Prollegen — Serqua</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/shop/shop.css" />
+    <link rel="stylesheet" href="/brand.css" />
+    <link rel="stylesheet" href="/account/account-modal.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#products">Skip to products</a>
+
+    <div class="announcement" aria-label="Store information">
+      <p>Free shipping on orders of ₹4,499 and above</p>
+      <span aria-hidden="true">·</span>
+      <p>COD available on eligible orders</p>
+    </div>
+
+    <header class="site-header">
+      <a class="wordmark" href="/" aria-label="Serqua home">Serqua</a>
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="/">Home</a>
+        <a href="/shop/" aria-current="page">Shop</a>
+        <a href="/catalog">Catalog</a>
+        <a href="/help/">Help</a>
+      </nav>
+      <div class="header-actions">
+        <button class="account-link" type="button" data-account-open>Account</button>
+        <button class="cart-button" type="button" aria-label="Open cart, 0 items" aria-controls="cart-drawer">
+          Bag <span class="cart-count" aria-hidden="true">0</span>
+        </button>
+        <button class="menu-button" type="button" aria-expanded="false" aria-controls="mobile-menu">
+          <span></span><span></span><span></span><span class="sr-only">Menu</span>
+        </button>
+      </div>
+      <nav class="mobile-nav" id="mobile-menu" aria-label="Mobile navigation" hidden>
+        <a href="/">Home</a>
+        <a href="/shop/" aria-current="page">Shop</a>
+        <a href="/catalog">Catalog</a>
+        <a href="/help/">Help &amp; customer care</a>
+        <button type="button" data-account-open>Customer account</button>
+        <button type="button" data-open-cart>Open bag <span class="mobile-cart-count">(0)</span></button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="collection" id="products" aria-labelledby="collection-title">
+        <div class="shop-layout">
+          <aside class="catalog-sidebar" aria-label="Shop categories">
+            <div class="sidebar-intro">
+              <p><span class="brand-script">Serqua</span> shop</p>
+              <h1 id="collection-title">All products.</h1>
+              <span data-filter-summary>2 products</span>
+            </div>
+            <nav class="category-nav" aria-label="Product filters">
+              <p>Categories</p>
+              <button class="is-active" type="button" data-category="all" aria-pressed="true"><span>All products</span><b>2</b></button>
+              <button type="button" data-category="prollegen" aria-pressed="false"><span>Prollegen</span><b>2</b></button>
+              <p>Shop by size</p>
+              <button type="button" data-category="1000" aria-pressed="false"><span>1 kilogram</span><b>1</b></button>
+              <button type="button" data-category="500" aria-pressed="false"><span>500 grams</span><b>1</b></button>
+              <p>Coming soon</p>
+              <button type="button" disabled><span>Wellness</span><b>0</b></button>
+              <button type="button" disabled><span>Accessories</span><b>0</b></button>
+            </nav>
+            <div class="sidebar-note"><strong>Need help choosing?</strong><span>Talk to us on WhatsApp for product guidance.</span><a href="https://wa.me/918792917772" target="_blank" rel="noreferrer">Start a conversation ↗</a></div>
+          </aside>
+
+          <div class="collection-main">
+            <header class="collection-header">
+              <div>
+                <p>Performance + beauty nutrition</p>
+                <h2 data-collection-heading>Prollegen collection</h2>
+              </div>
+              <div class="collection-tools">
+                <label for="sort">Sort by</label>
+                <select id="sort" name="sort" data-sort>
+                  <option value="featured">Featured</option>
+                  <option value="price-asc">Price: low to high</option>
+                  <option value="price-desc">Price: high to low</option>
+                  <option value="size-desc">Size: large to small</option>
+                </select>
+              </div>
+            </header>
+
+            <div class="shop-grid" data-product-grid>
+          <article class="shop-card" data-category="prollegen" data-price="4499" data-size="1000" data-featured="2">
+            <button class="card-art product-open" type="button" data-open-product data-product="PROL-1000" aria-label="View details for Prollegen one kilogram">
+              <img src="../assets/official-prollegen-1kg.png" alt="" loading="eager" />
+            </button>
+            <div class="card-info">
+              <div class="card-heading"><p>PROL-1000 · 33 servings</p><h3><button type="button" data-open-product data-product="PROL-1000">Prollegen™ 1kg</button></h3></div>
+              <p class="card-price"><del>₹5,499</del><strong>₹4,499</strong></p>
+              <div class="card-actions">
+                <button class="quick-view" type="button" data-open-product data-product="PROL-1000">Quick view</button>
+                <button class="add-to-bag" type="button" data-product="PROL-1000">Add to bag</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="shop-card" data-category="prollegen" data-price="2999" data-size="500" data-featured="1">
+            <button class="card-art product-open" type="button" data-open-product data-product="PROL-500" aria-label="View details for Prollegen 500 grams">
+              <img src="../assets/official-prollegen-500g.png" alt="" loading="eager" />
+            </button>
+            <div class="card-info">
+              <div class="card-heading"><p>PROL-500 · 16 servings</p><h3><button type="button" data-open-product data-product="PROL-500">Prollegen™ 500g</button></h3></div>
+              <p class="card-price"><del>₹3,499</del><strong>₹2,999</strong></p>
+              <div class="card-actions">
+                <button class="quick-view" type="button" data-open-product data-product="PROL-500">Quick view</button>
+                <button class="add-to-bag" type="button" data-product="PROL-500">Add to bag</button>
+              </div>
+            </div>
+          </article>
+            </div>
+            <p class="filter-empty" data-filter-empty hidden>No approved products are available in this category yet.</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer id="help">
+      <div class="footer-lead"><a class="wordmark" href="/">Serqua</a></div>
+      <div class="footer-links">
+        <div><p>Explore</p><a href="/">Home</a><a href="/shop/">Shop</a><a href="/catalog">Catalog</a></div>
+        <div><p>Customer care</p><a href="/help/#track-order">Track your order</a><a href="/help/#shipping">Shipping</a><a href="/help/#returns">Returns &amp; refunds</a><a href="/terms/">Terms and conditions</a><a href="/privacy/">Privacy policy</a></div>
+        <div><p>Contact</p><a href="https://wa.me/918792917772" target="_blank" rel="noreferrer">WhatsApp</a><a href="mailto:carol.serqua@gmail.com">Email support</a><a href="https://www.instagram.com/serquaworld/" target="_blank" rel="noreferrer">Instagram</a></div>
+      </div>
+      <div class="footer-bottom"><span>© 2026 Serqua Private Limited</span><span>Balance is Power.</span></div>
+    </footer>
+
+    <dialog class="quick-dialog" id="quick-view" aria-labelledby="quick-title">
+      <button class="dialog-close" type="button" data-close-quick aria-label="Close quick view">×</button>
+      <div class="quick-art" aria-hidden="true"><img src="../assets/official-prollegen-1kg.png" alt="" data-quick-image /></div>
+      <div class="quick-content">
+        <p>Prollegen™ / Dark vanilla*</p>
+        <h2 id="quick-title" data-quick-title>Prollegen™ 1kg</h2>
+        <div class="quick-price"><strong data-quick-selling>₹4,499</strong><del data-quick-mrp>₹5,499</del><span>Inclusive of taxes</span></div>
+        <p class="quick-meta"><span data-quick-sku>PROL-1000</span><span data-quick-servings>33 servings</span></p>
+        <p class="quick-description">A refined whey protein and collagen formula designed to elevate performance, recovery and everyday beauty.</p>
+        <ul><li>24g high-quality protein</li><li>Type I &amp; III collagen peptides</li><li>With Vitamin C, MSM and DigeZyme®</li><li>Zero carbohydrates and zero added sugar</li></ul>
+        <div class="quick-details">
+          <details><summary>Formula details</summary><p>Whey protein isolate with Type I &amp; III collagen peptides, 120mg Vitamin C, MSM and DigeZyme® digestive enzymes.</p></details>
+          <details><summary>How to use</summary><p>Use one 30g serving as directed on the final product packaging.</p></details>
+          <details><summary>Delivery &amp; returns</summary><p>Estimated delivery in 3–7 business days. Free shipping applies at ₹4,499 and above; COD is available on eligible orders.</p></details>
+        </div>
+        <div class="quick-purchase">
+          <div class="quantity" aria-label="Quantity selector"><button type="button" data-qty-minus aria-label="Decrease quantity">−</button><output data-qty>1</output><button type="button" data-qty-plus aria-label="Increase quantity">+</button></div>
+          <button class="quick-add" type="button" data-quick-add>Add to bag · <span data-quick-price>₹4,499</span></button>
+        </div>
+        <small>*Exact flavour name and final formulation remain subject to approval.</small>
+      </div>
+    </dialog>
+
+    <dialog class="cart-drawer" id="cart-drawer" aria-labelledby="cart-title">
+      <header><div><p>Your selection</p><h2 id="cart-title">Bag <span data-cart-heading>(0)</span></h2></div><button type="button" data-close-cart aria-label="Close cart">×</button></header>
+      <div class="shipping-progress"><p data-shipping-message>Add ₹4,499 for free shipping</p><div><i data-shipping-bar></i></div></div>
+      <div class="cart-items" data-cart-items><p class="empty-cart">Your bag is ready for a better ritual.</p></div>
+      <footer>
+        <div><span>Subtotal</span><strong data-subtotal>₹0</strong></div>
+        <button type="button" data-checkout disabled>Secure checkout</button>
+        <small>Checkout, shipping and eligible COD are securely handled by Shopify.</small>
+      </footer>
+    </dialog>
+
+    <div class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+    <script type="module" src="/shop/shop.js"></script>
+    <script type="module" src="/account/account-modal.js"></script>
+  </body>
+</html>

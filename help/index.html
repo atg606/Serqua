@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#090a0b" />
+    <meta name="description" content="Get help with Serqua products, orders, delivery, returns and customer accounts." />
+    <title>Contact &amp; Help — Serqua</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/help/help.css" />
+    <link rel="stylesheet" href="/brand.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to help content</a>
+    <div class="announcement"><p>Free shipping on orders of ₹4,499 and above</p><span>·</span><p>COD available on eligible orders</p></div>
+    <header class="site-header">
+      <a class="wordmark" href="/" aria-label="Serqua home">Serqua</a>
+      <nav aria-label="Primary navigation"><a href="/">Home</a><a href="/shop/">Shop</a><a href="/catalog">Catalog</a><a href="/help/" aria-current="page">Help</a></nav>
+      <a class="account-link" href="/account/">Account</a>
+    </header>
+
+    <main id="main">
+      <section class="help-hero" aria-labelledby="help-title">
+        <div><p><span class="brand-script">Serqua</span> customer care</p><h1 id="help-title">How can<br />we help?</h1></div>
+        <p>Questions about Prollegen, your order or your account? Start here, or speak directly with our support team.</p>
+      </section>
+
+      <section class="support-area" aria-labelledby="contact-title">
+        <aside class="contact-rail">
+          <div><p>Contact us</p><h2 id="contact-title">Talk to a person.</h2></div>
+          <a href="https://wa.me/918792917772" target="_blank" rel="noreferrer"><span>WhatsApp</span><strong>Fastest response</strong><i>↗</i></a>
+          <a href="mailto:carol.serqua@gmail.com"><span>Email</span><strong>carol.serqua@gmail.com</strong><i>↗</i></a>
+          <div class="support-hours"><span>Support hours</span><strong>9am–8pm IST</strong><small>Response times may vary on holidays.</small></div>
+        </aside>
+
+        <div class="support-form-wrap">
+          <header><p>Send a request</p><h2>Tell us what you need.</h2><span>Fields marked * are required.</span></header>
+          <form class="support-form" data-support-form>
+            <div class="field-row">
+              <div><label for="support-name">Full name *</label><input id="support-name" name="name" type="text" autocomplete="name" required /></div>
+              <div><label for="support-email">Email address *</label><input id="support-email" name="email" type="email" autocomplete="email" inputmode="email" required /></div>
+            </div>
+            <div class="field-row">
+              <div><label for="support-phone">Mobile number <span>Optional</span></label><input id="support-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+91 98765 43210" pattern="[+0-9 ()-]{8,20}" /></div>
+              <div><label for="support-order">Order number <span>If applicable</span></label><input id="support-order" name="order" type="text" autocomplete="off" placeholder="e.g. SERQUA-1001" /></div>
+            </div>
+            <label for="support-topic">What can we help with? *</label>
+            <select id="support-topic" name="topic" required><option value="">Select a topic</option><option>Product question</option><option>Order or payment</option><option>Delivery or tracking</option><option>Return or refund</option><option>Customer account</option><option>Other</option></select>
+            <label for="support-message">Message *</label>
+            <textarea id="support-message" name="message" rows="5" minlength="10" placeholder="Include any details that will help us assist you." required></textarea>
+            <label class="consent-field"><input type="checkbox" required /><span>I agree that Serqua may use these details to respond to my request.</span></label>
+            <button type="submit">Send request <span aria-hidden="true">→</span></button>
+            <p class="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+
+      <section class="track-order" id="track-order" aria-labelledby="track-title">
+        <div><p>Order status</p><h2 id="track-title">Track your order.</h2><span>Tracking will be securely connected to Shopify.</span></div>
+        <form data-tracking-form><label for="tracking-order">Order number</label><input id="tracking-order" name="order" type="text" placeholder="SERQUA-1001" required /><label for="tracking-email">Order email</label><input id="tracking-email" name="email" type="email" inputmode="email" placeholder="you@example.com" required /><button type="submit">Check status</button><p role="status" aria-live="polite"></p></form>
+      </section>
+
+      <section class="faq" id="faq" aria-labelledby="faq-title">
+        <header><p>Frequently asked questions</p><h2 id="faq-title">Quick answers.</h2></header>
+        <div class="faq-list">
+          <details><summary>What is Prollegen™?</summary><p>Prollegen combines whey protein isolate with Type I &amp; III collagen peptides, Vitamin C, MSM and DigeZyme® digestive enzymes for performance, recovery and everyday wellbeing.</p></details>
+          <details><summary>What sizes are available?</summary><p>Prollegen is currently listed in 500g and 1kg sizes, offering approximately 16.67 and 33.33 servings respectively.</p></details>
+          <details id="shipping"><summary>How long does delivery take?</summary><p>Typical delivery is estimated at 3–7 business days to serviceable locations across India. Final timing is shown during checkout.</p></details>
+          <details><summary>When is shipping free?</summary><p>Free shipping applies to orders of ₹4,499 and above.</p></details>
+          <details><summary>Is cash on delivery available?</summary><p>COD is available on eligible orders and serviceable locations. Eligibility will be confirmed during Shopify checkout.</p></details>
+          <details id="returns"><summary>How do returns and refunds work?</summary><p>Please contact support with your order number before returning anything. Final eligibility will follow the published return and refund policy shown when the store launches.</p></details>
+          <details><summary>How will customer accounts work?</summary><p>Shopify customer accounts will use secure passwordless verification. Your profile, addresses, orders and tracking details will be managed through Shopify after integration.</p></details>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <a class="wordmark" href="/">Serqua</a>
+      <nav><a href="/">Home</a><a href="/shop/">Shop</a><a href="/account/">Account</a><a href="#faq">FAQs</a><a href="/terms/">Terms</a><a href="/privacy/">Privacy</a></nav>
+      <div><span>© 2026 Serqua Private Limited</span><span>Balance is Power.</span></div>
+    </footer>
+    <script type="module" src="/help/help.js"></script>
+  </body>
+</html>

@@ -1,0 +1,88 @@
+:root { --white: oklch(.99 0 0); --silver-1: oklch(.955 0 0); --silver-2: oklch(.86 0 0); --silver-3: oklch(.67 0 0); --graphite: oklch(.22 0 0); --black: oklch(.075 0 0); --ink: oklch(.105 0 0); --muted: oklch(.42 0 0); --rule: oklch(.82 0 0); --focus: oklch(.72 .045 230); --header: 76px; --ease: cubic-bezier(.22,1,.36,1); }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; color: var(--ink); background: var(--silver-1); font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+button { color: inherit; font: inherit; cursor: pointer; }
+h1, h2, h3, h4 { text-wrap: balance; }
+p { text-wrap: pretty; }
+[hidden] { display: none !important; }
+.skip-link { position: fixed; z-index: 30; top: 10px; left: 10px; padding: 11px 16px; background: var(--white); transform: translateY(-150%); }
+.skip-link:focus-visible { transform: translateY(0); }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+.announcement { min-height: 34px; padding: 7px 24px; display: flex; justify-content: center; gap: 16px; color: var(--silver-1); background: var(--black); font-size: 9px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
+.announcement p { margin: 0; }
+.announcement span { color: var(--silver-3); }
+.site-header { position: sticky; z-index: 20; top: 0; height: var(--header); padding: 0 clamp(20px,4vw,62px); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; color: var(--silver-1); background: var(--black); border-top: 1px solid var(--graphite); }
+.wordmark { width: max-content; font-family: "Bodoni Moda", serif; font-size: 30px; font-style: italic; letter-spacing: -.035em; }
+.site-header nav { height: 100%; display: flex; align-items: center; gap: 38px; }
+.site-header nav a { position: relative; height: 100%; display: grid; place-items: center; color: var(--silver-3); font-size: 10px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+.site-header nav a[aria-current="page"] { color: var(--silver-1); }
+.site-header nav a[aria-current="page"]::after { content: ""; position: absolute; inset: auto 0 0; height: 2px; background: var(--silver-1); }
+.shop-link { justify-self: end; padding-bottom: 4px; border-bottom: 1px solid currentColor; font-size: 9px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.dashboard-shell { min-height: calc(100svh - 110px); display: grid; grid-template-columns: clamp(250px,23vw,330px) minmax(0,1fr); }
+.dashboard-sidebar { min-height: calc(100svh - 110px); padding: clamp(45px,5vw,72px) 28px; display: flex; flex-direction: column; background: var(--silver-2); }
+.dashboard-sidebar > div > p { margin: 0 0 10px; font-size: 9px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.dashboard-sidebar h1 { margin: 0 0 13px; font-size: clamp(36px,3.7vw,50px); font-weight: 800; line-height: .98; letter-spacing: -.035em; }
+.dashboard-sidebar > div > span { color: var(--muted); font-size: 10px; }
+.dashboard-sidebar nav { margin-top: 42px; border-top: 1px solid var(--ink); }
+.dashboard-sidebar nav button { width: 100%; min-height: 52px; padding: 0; display: flex; justify-content: space-between; align-items: center; border: 0; border-bottom: 1px solid var(--rule); background: transparent; color: var(--muted); font-size: 12px; text-align: left; }
+.dashboard-sidebar nav button i { font-size: 9px; font-style: normal; }
+.dashboard-sidebar nav button.is-active { color: var(--ink); font-weight: 800; }
+.dashboard-sidebar nav button.is-active span::before { content: "→"; margin-right: 10px; }
+.sign-out { margin-top: auto; padding: 14px 0; display: flex; justify-content: space-between; border: 0; border-bottom: 1px solid currentColor; background: transparent; color: var(--muted); font-size: 10px; font-weight: 700; text-transform: uppercase; }
+.sign-out:disabled { cursor: not-allowed; opacity: .48; }
+.dashboard-content { min-width: 0; padding: clamp(42px,6vw,85px); }
+.connection-notice { margin-bottom: 48px; padding: 17px 19px; display: flex; gap: 14px; align-items: start; color: var(--silver-1); background: var(--black); }
+.connection-notice > span { font-size: 17px; }
+.connection-notice strong { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+.connection-notice p { margin: 4px 0 0; color: var(--silver-2); font-size: 11px; line-height: 1.5; }
+.view-header { padding-bottom: 28px; display: flex; justify-content: space-between; align-items: end; gap: 30px; border-bottom: 1px solid var(--ink); }
+.view-header p { margin: 0 0 10px; font-size: 9px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.view-header h2 { margin: 0; font-size: clamp(40px,5vw,64px); font-weight: 800; line-height: .95; letter-spacing: -.035em; }
+.view-header > a { padding-bottom: 4px; border-bottom: 1px solid currentColor; font-size: 9px; font-weight: 800; text-transform: uppercase; }
+.account-metrics { display: grid; grid-template-columns: repeat(3,1fr); border-bottom: 1px solid var(--rule); }
+.account-metrics > div { min-height: 145px; padding: 25px 20px; border-right: 1px solid var(--rule); }
+.account-metrics > div:last-child { border-right: 0; }
+.account-metrics span, .account-metrics small { display: block; color: var(--muted); font-size: 9px; text-transform: uppercase; }
+.account-metrics strong { display: block; margin: 12px 0; font-family: "Bodoni Moda", serif; font-size: 32px; font-weight: 500; }
+.account-metrics .status-word { font-family: "Manrope", sans-serif; font-size: 20px; font-weight: 800; }
+.dashboard-section { margin-top: 48px; background: var(--white); }
+.section-heading { min-height: 64px; padding: 0 22px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--rule); }
+.section-heading h3 { margin: 0; font-size: 16px; }
+.section-heading button { padding: 0 0 3px; border: 0; border-bottom: 1px solid currentColor; background: transparent; font-size: 9px; font-weight: 800; text-transform: uppercase; }
+.section-heading > span { color: var(--muted); font-size: 9px; text-transform: uppercase; }
+.empty-state { min-height: 300px; padding: 52px 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.empty-state > span { margin-bottom: 16px; font-size: 25px; }
+.empty-state h4 { margin: 0 0 9px; font-family: "Bodoni Moda", serif; font-size: 24px; font-weight: 500; }
+.empty-state p { max-width: 53ch; margin: 0; color: var(--muted); font-size: 11px; line-height: 1.6; }
+.empty-state a, .empty-state button { margin-top: 22px; padding: 11px 17px; border: 1px solid var(--ink); background: transparent; font-size: 9px; font-weight: 800; text-transform: uppercase; }
+.empty-state button:disabled { cursor: not-allowed; opacity: .5; }
+.profile-preview dl { margin: 0; padding: 0 22px; }
+.profile-preview dl div { padding: 18px 0; display: grid; grid-template-columns: 190px 1fr; border-bottom: 1px solid var(--rule); }
+.profile-preview dt { font-size: 11px; font-weight: 800; }
+.profile-preview dd { margin: 0; color: var(--muted); font-size: 11px; }
+.profile-preview > button { margin: 22px; padding: 11px 17px; border: 0; color: var(--white); background: var(--black); font-size: 9px; font-weight: 800; text-transform: uppercase; opacity: .4; }
+.dashboard-toast { position: fixed; right: 20px; bottom: 20px; padding: 12px 16px; background: var(--black); color: var(--white); font-size: 10px; transform: translateY(150%); }
+@media (max-width: 800px) {
+  .site-header { grid-template-columns: 1fr auto; }
+  .site-header nav { display: none; }
+  .dashboard-shell { grid-template-columns: 1fr; }
+  .dashboard-sidebar { min-height: 0; padding: 30px 20px 18px; }
+  .dashboard-sidebar nav { margin-top: 26px; display: flex; overflow-x: auto; border-top: 0; }
+  .dashboard-sidebar nav button { flex: 0 0 auto; width: auto; padding: 0 15px; gap: 10px; border: 1px solid var(--rule); }
+  .dashboard-sidebar nav button.is-active { color: var(--white); background: var(--black); }
+  .dashboard-sidebar nav button.is-active span::before { display: none; }
+  .sign-out { display: none; }
+  .dashboard-content { padding: 40px 20px 70px; }
+}
+@media (max-width: 560px) {
+  .announcement span { display: none; }
+  .shop-link { font-size: 0; }
+  .shop-link span { font-size: 16px; }
+  .view-header { align-items: start; flex-direction: column; }
+  .account-metrics { grid-template-columns: 1fr; }
+  .account-metrics > div { min-height: 110px; border-right: 0; border-bottom: 1px solid var(--rule); }
+  .profile-preview dl div { grid-template-columns: 1fr; gap: 6px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
