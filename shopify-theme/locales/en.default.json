@@ -76,9 +76,14 @@
   "cart": {
     "title": "Your bag",
     "empty": "Your bag is ready for a better ritual.",
+    "items": "Items in your bag",
     "quantity": "Quantity",
     "remove": "Remove",
     "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "calculated_checkout": "Calculated at checkout",
+    "order_summary": "Order summary",
+    "checkout_note": "Taxes and shipping are calculated at checkout.",
     "update": "Update bag",
     "checkout": "Secure checkout"
   },

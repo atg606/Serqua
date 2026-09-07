@@ -1,52 +1,103 @@
 <section class="native-cart">
-  <h1>{{ 'cart.title' | t }}</h1>
-  {% if cart.item_count == 0 %}
-    <p>{{ 'cart.empty' | t }}</p>
-    <a class="cart-continue" href="{{ routes.all_products_collection_url }}">{{ 'general.continue_shopping' | t }}</a>
-  {% else %}
-    <form action="{{ routes.cart_url }}" method="post">
-      <div class="native-cart__items">
-        {% for item in cart.items %}
-          <article class="native-cart__item{% unless item.image %} native-cart__item--without-image{% endunless %}">
-            {% if item.image %}
-              <a class="native-cart__image" href="{{ item.url }}">
-                {{ item.image | image_url: width: 320 | image_tag: loading: 'lazy', alt: item.product.title }}
-              </a>
-            {% endif %}
-            <div class="native-cart__copy">
-              <p>{{ item.product.title }}</p>
-              {% unless item.variant.title == 'Default Title' %}<small>{{ item.variant.title }}</small>{% endunless %}
-              <a class="native-cart__remove" href="{{ item.url_to_remove }}">{{ 'cart.remove' | t }}</a>
-            </div>
-            <label for="Quantity-{{ forloop.index }}">{{ 'cart.quantity' | t }}<input id="Quantity-{{ forloop.index }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0"></label>
-            <strong>{{ item.final_line_price | money }}</strong>
-          </article>
-        {% endfor %}
+  <div class="native-cart__shell">
+    <header class="native-cart__heading">
+      <h1>{{ 'cart.title' | t }}</h1>
+      <a href="{{ routes.all_products_collection_url }}">{{ 'general.continue_shopping' | t }} <span aria-hidden="true">→</span></a>
+    </header>
+
+    {% if cart.item_count == 0 %}
+      <div class="native-cart__empty">
+        <p>{{ 'cart.empty' | t }}</p>
+        <a class="cart-continue" href="{{ routes.all_products_collection_url }}">{{ 'general.continue_shopping' | t }}</a>
       </div>
-      <div class="native-cart__summary"><p><span>{{ 'cart.subtotal' | t }}</span><strong>{{ cart.total_price | money }}</strong></p><button type="submit" name="update">{{ 'cart.update' | t }}</button><button type="submit" name="checkout">{{ 'cart.checkout' | t }}</button></div>
-    </form>
-  {% endif %}
+    {% else %}
+      <form class="native-cart__layout" action="{{ routes.cart_url }}" method="post">
+        <div class="native-cart__items" aria-label="{{ 'cart.items' | t }}">
+          {% for item in cart.items %}
+            <article class="native-cart__item{% unless item.image %} native-cart__item--without-image{% endunless %}">
+              {% if item.image %}
+                <a class="native-cart__image" href="{{ item.url }}">
+                  {{ item.image | image_url: width: 440 | image_tag: loading: 'lazy', alt: item.product.title }}
+                </a>
+              {% endif %}
+
+              <div class="native-cart__copy">
+                <p class="native-cart__meta">{{ item.product.vendor }}{% if item.sku != blank %} · {{ item.sku }}{% endif %}</p>
+                <h2><a href="{{ item.url }}">{{ item.product.title }}</a></h2>
+                {% unless item.variant.title == 'Default Title' %}<p class="native-cart__variant">{{ item.variant.title }}</p>{% endunless %}
+                <a class="native-cart__remove" href="{{ item.url_to_remove }}">{{ 'cart.remove' | t }}</a>
+              </div>
+
+              <div class="native-cart__purchase">
+                <label for="Quantity-{{ forloop.index }}">
+                  <span>{{ 'cart.quantity' | t }}</span>
+                  <input id="Quantity-{{ forloop.index }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0" inputmode="numeric">
+                </label>
+                <strong>{{ item.final_line_price | money }}</strong>
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+
+        <aside class="native-cart__summary">
+          <h2>{{ 'cart.order_summary' | t }}</h2>
+          <dl>
+            <div><dt>{{ 'cart.subtotal' | t }}</dt><dd>{{ cart.total_price | money }}</dd></div>
+            <div><dt>{{ 'cart.shipping' | t }}</dt><dd>{{ 'cart.calculated_checkout' | t }}</dd></div>
+          </dl>
+          <button class="native-cart__checkout" type="submit" name="checkout">{{ 'cart.checkout' | t }} <span aria-hidden="true">→</span></button>
+          <button class="native-cart__update" type="submit" name="update">{{ 'cart.update' | t }}</button>
+          <p class="native-cart__note">{{ 'cart.checkout_note' | t }}</p>
+        </aside>
+      </form>
+    {% endif %}
+  </div>
 </section>
 
 {% stylesheet %}
-  .native-cart { max-width: 1120px; min-height: 55vh; margin: 0 auto; padding: clamp(55px, 8vw, 110px) 20px; }
-  .native-cart h1 { margin: 0 0 40px; font-family: "Barlow Condensed", sans-serif; font-size: clamp(60px, 8vw, 100px); font-weight: 600; line-height: .85; text-transform: uppercase; }
-  .native-cart__item { padding: 20px 0; display: grid; grid-template-columns: 110px 1fr 130px auto; gap: 20px; align-items: center; border-top: 1px solid var(--rule); }
-  .native-cart__item--without-image { grid-template-columns: 1fr 130px auto; }
-  .native-cart__image { display: block; margin: 0; border: 0; background: var(--silver-1); }
-  .native-cart__image img { width: 110px; height: 110px; display: block; object-fit: cover; }
-  .native-cart__item p { margin: 0 0 5px; font-weight: 700; }
-  .native-cart__item small { display: block; color: var(--muted); }
-  .native-cart__remove { display: inline-block; margin-top: 10px; border-bottom: 1px solid; font-size: 10px; text-transform: uppercase; }
-  .native-cart__item label { font-size: 10px; text-transform: uppercase; }
-  .native-cart__item input { width: 100%; min-height: 42px; margin-top: 6px; padding: 0 10px; border: 1px solid var(--ink); }
-  .native-cart__summary { max-width: 430px; margin: 35px 0 0 auto; }
-  .native-cart__summary p { display: flex; justify-content: space-between; font-size: 18px; }
-  .native-cart__summary button,
-  .cart-continue { width: 100%; min-height: 52px; margin-top: 10px; display: grid; place-items: center; border: 1px solid var(--ink); background: var(--white); font-size: 11px; font-weight: 800; text-transform: uppercase; }
-  .native-cart__summary button[name="checkout"] { color: var(--white); background: var(--black); }
-  .cart-continue { max-width: 280px; }
-  @media (max-width: 650px) { .native-cart__item { grid-template-columns: 80px 1fr; } .native-cart__item--without-image { grid-template-columns: 1fr; } .native-cart__image img { width: 80px; height: 80px; } .native-cart__item label, .native-cart__item > strong { grid-column: 2; } .native-cart__item--without-image label, .native-cart__item--without-image > strong { grid-column: 1; } }
+  .native-cart { min-height: 62vh; padding: clamp(38px, 5vw, 72px) clamp(18px, 4vw, 60px) clamp(64px, 8vw, 112px); background: var(--silver-1); }
+  .native-cart__shell { width: min(1240px, 100%); margin: 0 auto; }
+  .native-cart__heading { padding-bottom: clamp(20px, 2.4vw, 30px); display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; border-bottom: 1px solid var(--ink); }
+  .native-cart__heading h1 { margin: 0; font-family: "Barlow Condensed", sans-serif; font-size: clamp(58px, 7vw, 88px); font-weight: 600; line-height: .86; letter-spacing: -.025em; text-transform: uppercase; text-wrap: balance; }
+  .native-cart__heading > a { min-height: 44px; padding-bottom: 5px; display: inline-flex; align-items: center; gap: 9px; border-bottom: 1px solid var(--ink); font-size: 11px; font-weight: 700; }
+  .native-cart__heading > a span { transition: transform .25s var(--ease); }
+  .native-cart__heading > a:hover span { transform: translateX(4px); }
+  .native-cart__layout { padding-top: clamp(24px, 3vw, 38px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(330px, 390px); gap: clamp(26px, 4vw, 52px); align-items: start; }
+  .native-cart__items { min-width: 0; border-top: 1px solid var(--rule); }
+  .native-cart__item { padding: 22px 0; display: grid; grid-template-columns: 156px minmax(0, 1fr) auto; gap: 24px; align-items: center; border-bottom: 1px solid var(--rule); }
+  .native-cart__item--without-image { grid-template-columns: minmax(0, 1fr) auto; }
+  .native-cart__image { display: block; overflow: hidden; background: var(--silver-2); }
+  .native-cart__image img { width: 156px; height: 156px; display: block; object-fit: cover; transition: transform .45s var(--ease); }
+  .native-cart__image:hover img { transform: scale(1.025); }
+  .native-cart__meta { margin: 0 0 10px; color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+  .native-cart__copy h2 { margin: 0; font-size: clamp(19px, 2vw, 24px); line-height: 1.15; }
+  .native-cart__copy h2 a { transition: color .2s; }
+  .native-cart__copy h2 a:hover { color: var(--muted); }
+  .native-cart__variant { margin: 8px 0 0; color: var(--muted); font-size: 13px; }
+  .native-cart__remove { min-height: 44px; padding-top: 16px; display: inline-flex; align-items: flex-start; border-bottom: 1px solid currentColor; font-size: 10px; font-weight: 700; text-transform: uppercase; }
+  .native-cart__purchase { min-width: 142px; display: grid; justify-items: end; gap: 22px; }
+  .native-cart__purchase label { display: grid; justify-items: end; gap: 7px; color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
+  .native-cart__purchase input { width: 92px; min-height: 46px; padding: 0 12px; border: 1px solid var(--ink); border-radius: 0; background: var(--white); color: var(--ink); font: inherit; font-size: 14px; text-align: center; }
+  .native-cart__purchase strong { font-size: 18px; white-space: nowrap; }
+  .native-cart__summary { position: sticky; top: 134px; padding: clamp(25px, 3vw, 34px); color: var(--silver-1); background: var(--black); }
+  .native-cart__summary h2 { margin: 0 0 28px; font-family: "Barlow Condensed", sans-serif; font-size: clamp(36px, 4vw, 48px); font-weight: 600; line-height: .9; letter-spacing: -.02em; text-transform: uppercase; }
+  .native-cart__summary dl { margin: 0 0 28px; }
+  .native-cart__summary dl div { padding: 16px 0; display: flex; align-items: baseline; justify-content: space-between; gap: 20px; border-top: 1px solid var(--graphite); }
+  .native-cart__summary dl div:last-child { border-bottom: 1px solid var(--graphite); }
+  .native-cart__summary dt { color: var(--silver-2); font-size: 12px; }
+  .native-cart__summary dd { margin: 0; font-size: 13px; font-weight: 700; text-align: right; }
+  .native-cart__summary button { width: 100%; min-height: 54px; padding: 0 20px; border-radius: 0; cursor: pointer; font-size: 11px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; transition: background-color .25s, color .25s, transform .25s var(--ease); }
+  .native-cart__summary button:hover { transform: translateY(-2px); }
+  .native-cart__checkout { display: flex; align-items: center; justify-content: space-between; border: 1px solid var(--silver-1); background: var(--silver-1); color: var(--ink); }
+  .native-cart__update { margin-top: 10px; border: 1px solid var(--graphite); background: transparent; color: var(--silver-1); }
+  .native-cart__update:hover { border-color: var(--silver-2); }
+  .native-cart__note { margin: 18px 0 0; color: var(--silver-3); font-size: 10px; line-height: 1.55; text-align: center; }
+  .native-cart__empty { min-height: 330px; padding: clamp(50px, 8vw, 96px) 0; display: flex; flex-direction: column; align-items: flex-start; }
+  .native-cart__empty p { max-width: 22ch; margin: 0 0 26px; font-family: "Bodoni Moda", serif; font-size: clamp(24px, 3vw, 36px); line-height: 1.25; }
+  .cart-continue { min-height: 52px; padding: 0 24px; display: inline-flex; align-items: center; justify-content: center; background: var(--black); color: var(--white); font-size: 11px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; }
+  @media (max-width: 880px) { .native-cart__layout { grid-template-columns: 1fr; } .native-cart__summary { position: static; } }
+  @media (max-width: 600px) { .native-cart { padding-inline: 16px; } .native-cart__heading { align-items: flex-start; flex-direction: column; gap: 10px; } .native-cart__heading h1 { font-size: 58px; } .native-cart__heading > a { min-height: 36px; } .native-cart__item { grid-template-columns: 104px minmax(0, 1fr); gap: 16px; } .native-cart__item--without-image { grid-template-columns: 1fr; } .native-cart__image img { width: 104px; height: 104px; } .native-cart__purchase { grid-column: 2; min-width: 0; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; } .native-cart__item--without-image .native-cart__purchase { grid-column: 1; } .native-cart__purchase label { justify-items: start; } .native-cart__summary { padding: 24px 20px; } }
+  @media (prefers-reduced-motion: reduce) { .native-cart__heading > a span, .native-cart__image img, .native-cart__summary button { transition: none; } }
 {% endstylesheet %}
 
 {% schema %}{"name":"Main cart","settings":[]}{% endschema %}
