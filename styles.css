@@ -39,7 +39,7 @@ h1, h2, h3, p { text-wrap: pretty; }
 .site-header > .wordmark { align-self: stretch; display: flex; align-items: center; padding: 0 .06em 0 0; font-size: clamp(42px, 4vw, 52px); transform: translate(-9px, -12px); }
 .desktop-nav { display: flex; height: 100%; align-items: center; gap: clamp(24px, 3vw, 48px); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; }
 .desktop-nav a { position: relative; display: grid; place-items: center; height: 100%; color: var(--silver-3); transition: color .25s; }
-.desktop-nav a::after { content: ""; position: absolute; left: 50%; bottom: 0; width: 0; height: 2px; background: var(--silver-1); transition: width .3s var(--ease), left .3s var(--ease); }
+.desktop-nav a::after { content: ""; position: absolute; left: 50%; bottom: calc(50% - 13px); width: 0; height: 2px; background: var(--silver-1); transition: width .3s var(--ease), left .3s var(--ease); }
 .desktop-nav a:hover, .desktop-nav a[aria-current="page"] { color: var(--silver-1); }
 .desktop-nav a:hover::after, .desktop-nav a[aria-current="page"]::after { left: 0; width: 100%; }
 .header-actions { justify-self: end; display: flex; align-items: center; gap: 7px; }
@@ -112,7 +112,7 @@ h1, h2, h3, p { text-wrap: pretty; }
 .product-buy > p { margin: 0; font-size: 14px; }
 .product-buy del { margin-right: 7px; color: var(--muted); }
 .product-actions { display: flex; align-items: center; gap: 14px; }
-.product-actions a { padding-bottom: 2px; border-bottom: 1px solid var(--ink); font-size: 10px; font-weight: 700; text-transform: uppercase; }
+.product-actions .quick-view { min-height: 44px; padding: 0 0 2px; border: 0; border-bottom: 1px solid var(--ink); background: transparent; cursor: pointer; font-size: 10px; font-weight: 700; text-transform: uppercase; }
 .add-button { min-height: 40px; padding: 0 18px; border: 0; background: var(--black); color: var(--silver-1); cursor: pointer; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; transition: transform .2s var(--ease), background .2s; }
 .add-button:hover { transform: translateY(-2px); background: var(--graphite); }
 .add-button:disabled { cursor: default; opacity: .65; transform: none; }

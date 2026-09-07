@@ -69,6 +69,24 @@
       {% assign current_year = 'now' | date: '%Y' %}
       <div class="footer-bottom"><span>{{ 'footer.copyright' | t: year: current_year }}</span><span>{{ 'footer.tagline' | t }}</span></div>
     </footer>
+    <dialog class="quick-dialog" id="quick-view" aria-labelledby="quick-title">
+      <button class="dialog-close" type="button" data-close-quick aria-label="{{ 'products.close_quick_view' | t }}">×</button>
+      <div class="quick-art"><img src="{{ 'official-prollegen-1kg.png' | asset_url }}" width="1254" height="1254" alt="" data-quick-image></div>
+      <div class="quick-content">
+        <p>{{ 'products.quick_view' | t }}</p>
+        <h2 id="quick-title" data-quick-title></h2>
+        <div class="quick-price"><strong data-quick-price></strong><del data-quick-compare hidden></del></div>
+        <p class="quick-meta" data-quick-sku></p>
+        <p class="quick-description">{{ 'products.quick_description' | t }}</p>
+        <ul><li>{{ 'products.quick_benefit_protein' | t }}</li><li>{{ 'products.quick_benefit_collagen' | t }}</li><li>{{ 'products.quick_benefit_nutrients' | t }}</li><li>{{ 'products.quick_benefit_sugar' | t }}</li></ul>
+        <form class="quick-purchase" method="post" action="{{ routes.cart_add_url }}">
+          <input type="hidden" name="id" value="" data-quick-variant>
+          <label><span class="sr-only">{{ 'cart.quantity' | t }}</span><input type="number" name="quantity" min="1" max="10" value="1"></label>
+          <button class="quick-add" type="submit">{{ 'products.add_to_cart' | t }}</button>
+        </form>
+        <a class="quick-full-link" href="{{ routes.all_products_collection_url }}" data-quick-link>{{ 'products.view_full_details' | t }}</a>
+      </div>
+    </dialog>
     <script src="{{ 'theme.js' | asset_url }}" defer></script>
   </body>
 </html>

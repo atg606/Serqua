@@ -234,6 +234,12 @@ document.querySelector("[data-checkout]").addEventListener("click", () => {
 
 renderCart();
 
-if (new URLSearchParams(window.location.search).get("cart") === "open") {
+const pageParams = new URLSearchParams(window.location.search);
+const requestedProduct = products[pageParams.get("product")];
+
+if (requestedProduct) {
+  updateQuickView(requestedProduct);
+  openDialog(quickDialog);
+} else if (pageParams.get("cart") === "open") {
   openDialog(cartDialog);
 }

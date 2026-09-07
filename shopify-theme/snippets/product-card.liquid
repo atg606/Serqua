@@ -12,6 +12,13 @@ Renders a Serqua product card backed by a Shopify product and native cart form.
   if product.title contains '500'
     assign fallback_asset = 'official-prollegen-500g.png'
   endif
+  if product.featured_image
+    assign quick_image = product.featured_image | image_url: width: 1400
+    assign quick_image_alt = product.featured_image.alt | default: product.title
+  else
+    assign quick_image = fallback_asset | asset_url
+    assign quick_image_alt = product.title
+  endif
 %}
 
 <article class="{% if card_context == 'home' %}product-card{% else %}shop-card{% endif %}">
@@ -28,7 +35,7 @@ Renders a Serqua product card backed by a Shopify product and native cart form.
       <div class="product-buy">
         <p>{% if product.compare_at_price_max > product.price %}<del>{{ product.compare_at_price_max | money }}</del>{% endif %} <strong>{{ product.price | money }}</strong></p>
         <div class="product-actions">
-          <a href="{{ product.url }}">{{ 'products.quick_view' | t }}</a>
+          <button class="quick-view" type="button" data-quick-view data-product-title="{{ product.title | escape }}" data-product-url="{{ product.url }}" data-product-image="{{ quick_image }}" data-product-image-alt="{{ quick_image_alt | escape }}" data-product-price="{{ product.price | money | escape }}" data-product-compare-price="{% if product.compare_at_price_max > product.price %}{{ product.compare_at_price_max | money | escape }}{% endif %}" data-product-sku="{{ variant.sku | escape }}" data-product-variant="{{ variant.id }}" data-product-available="{{ variant.available }}">{{ 'products.quick_view' | t }}</button>
           {% form 'product', product %}
             <input type="hidden" name="id" value="{{ variant.id }}">
             <button class="add-button" type="submit"{% unless variant.available %} disabled{% endunless %}>{% if variant.available %}{{ 'products.add_to_cart' | t }}{% else %}{{ 'products.sold_out' | t }}{% endif %}</button>
@@ -48,7 +55,7 @@ Renders a Serqua product card backed by a Shopify product and native cart form.
       <div class="card-heading"><p>{{ variant.sku }}</p><h3><a href="{{ product.url }}">{{ product.title }}</a></h3></div>
       <p class="card-price">{% if product.compare_at_price_max > product.price %}<del>{{ product.compare_at_price_max | money }}</del>{% endif %}<strong>{{ product.price | money }}</strong></p>
       <div class="card-actions">
-        <a class="quick-view" href="{{ product.url }}">{{ 'products.quick_view' | t }}</a>
+        <button class="quick-view" type="button" data-quick-view data-product-title="{{ product.title | escape }}" data-product-url="{{ product.url }}" data-product-image="{{ quick_image }}" data-product-image-alt="{{ quick_image_alt | escape }}" data-product-price="{{ product.price | money | escape }}" data-product-compare-price="{% if product.compare_at_price_max > product.price %}{{ product.compare_at_price_max | money | escape }}{% endif %}" data-product-sku="{{ variant.sku | escape }}" data-product-variant="{{ variant.id }}" data-product-available="{{ variant.available }}">{{ 'products.quick_view' | t }}</button>
         {% form 'product', product %}
           <input type="hidden" name="id" value="{{ variant.id }}">
           <button class="add-to-bag" type="submit"{% unless variant.available %} disabled{% endunless %}>{% if variant.available %}{{ 'products.add_to_cart' | t }}{% else %}{{ 'products.sold_out' | t }}{% endif %}</button>

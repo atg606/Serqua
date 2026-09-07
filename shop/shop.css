@@ -37,7 +37,7 @@ h1, h2, h3, p { text-wrap: pretty; }
 .wordmark { width: max-content; font-family: "Bodoni Moda", serif; font-size: 30px; font-style: italic; letter-spacing: -.035em; }
 .desktop-nav { display: flex; height: 100%; align-items: center; gap: clamp(24px, 3vw, 48px); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; }
 .desktop-nav a { position: relative; display: grid; place-items: center; height: 100%; color: var(--silver-3); transition: color .25s; }
-.desktop-nav a::after { content: ""; position: absolute; left: 50%; bottom: 0; width: 0; height: 2px; background: var(--silver-1); transition: width .3s var(--ease), left .3s var(--ease); }
+.desktop-nav a::after { content: ""; position: absolute; left: 50%; bottom: calc(50% - 13px); width: 0; height: 2px; background: var(--silver-1); transition: width .3s var(--ease), left .3s var(--ease); }
 .desktop-nav a:hover, .desktop-nav a[aria-current="page"] { color: var(--silver-1); }
 .desktop-nav a:hover::after, .desktop-nav a[aria-current="page"]::after { left: 0; width: 100%; }
 .header-actions { justify-self: end; display: flex; align-items: center; gap: 20px; }

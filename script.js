@@ -4,6 +4,7 @@ const cartButton = document.querySelector('.cart-button');
 const cartCount = document.querySelector('.cart-count');
 const toast = document.querySelector('.toast');
 const addButtons = document.querySelectorAll('.add-button');
+const quickViewButtons = document.querySelectorAll('[data-home-quick-view]');
 
 const homepageProducts = {
   'Prollegen 1kg': { id: 'PROL-1000', name: 'Prollegen™ 1kg', size: '1KG', servings: '33 servings', price: 4499, mrp: 5499 },
@@ -68,4 +69,11 @@ addButtons.forEach((button) => {
 
 cartButton.addEventListener('click', () => {
   window.location.href = '/shop/?cart=open';
+});
+
+quickViewButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    const product = encodeURIComponent(button.dataset.homeQuickView);
+    window.location.href = `/shop/?product=${product}`;
+  });
 });

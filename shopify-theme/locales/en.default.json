@@ -41,6 +41,13 @@
   "products": {
     "add_to_cart": "Add to cart",
     "quick_view": "Quick view",
+    "close_quick_view": "Close quick view",
+    "quick_description": "A refined whey protein and collagen formula designed to elevate performance, recovery and everyday beauty.",
+    "quick_benefit_protein": "24g high-quality protein",
+    "quick_benefit_collagen": "Type I & III collagen peptides",
+    "quick_benefit_nutrients": "With Vitamin C, MSM and DigeZyme®",
+    "quick_benefit_sugar": "Zero carbohydrates and zero added sugar",
+    "view_full_details": "View full details",
     "sold_out": "Sold out",
     "from": "From",
     "choose": "Choose Prollegen",

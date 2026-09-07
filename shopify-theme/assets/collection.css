@@ -38,7 +38,7 @@ h1, h2, h3, p { text-wrap: pretty; }
 .wordmark { width: max-content; font-family: "Bodoni Moda", serif; font-size: 30px; font-style: italic; letter-spacing: -.035em; }
 .desktop-nav { display: flex; height: 100%; align-items: center; gap: clamp(24px, 3vw, 48px); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; }
 .desktop-nav a { position: relative; display: grid; place-items: center; height: 100%; color: var(--silver-3); transition: color .25s; }
-.desktop-nav a::after { content: ""; position: absolute; left: 50%; bottom: 0; width: 0; height: 2px; background: var(--silver-1); transition: width .3s var(--ease), left .3s var(--ease); }
+.desktop-nav a::after { content: ""; position: absolute; left: 50%; bottom: calc(50% - 13px); width: 0; height: 2px; background: var(--silver-1); transition: width .3s var(--ease), left .3s var(--ease); }
 .desktop-nav a:hover, .desktop-nav a[aria-current="page"] { color: var(--silver-1); }
 .desktop-nav a:hover::after, .desktop-nav a[aria-current="page"]::after { left: 0; width: 100%; }
 .header-actions { justify-self: end; display: flex; align-items: center; gap: 20px; }
@@ -157,10 +157,13 @@ dialog::backdrop { background: oklch(0.03 0 0 / .72); backdrop-filter: blur(4px)
 .quick-details summary { padding: 11px 0; cursor: pointer; font-size: 10px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
 .quick-details details p { margin: 0; padding: 0 0 13px; color: var(--muted); font-size: 11px; line-height: 1.55; }
 .quick-purchase { display: grid; grid-template-columns: 122px 1fr; gap: 10px; }
+.quick-purchase input { min-height: 52px; width: 100%; border: 1px solid var(--ink); border-radius: 0; background: var(--white); text-align: center; }
 .quantity { min-height: 52px; display: grid; grid-template-columns: 1fr 1fr 1fr; border: 1px solid var(--ink); }
 .quantity button { border: 0; background: transparent; font-size: 18px; }
 .quantity output { display: grid; place-items: center; font-weight: 700; }
 .quick-add { border: 0; background: var(--black); color: var(--white); font-size: 11px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; }
+.quick-add:disabled { cursor: not-allowed; opacity: .55; }
+.quick-full-link { width: max-content; margin-top: 18px; padding-bottom: 3px; border-bottom: 1px solid var(--ink); font-size: 10px; font-weight: 700; text-transform: uppercase; }
 .quick-content > small { margin-top: 18px; color: var(--muted); font-size: 10px; line-height: 1.5; }
 
 .cart-drawer { position: fixed; inset: 0 0 0 auto; width: min(480px, 100vw); max-width: none; height: 100dvh; max-height: none; margin: 0; padding: 0; border: 0; background: var(--white); }
