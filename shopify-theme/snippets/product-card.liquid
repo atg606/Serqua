@@ -1,0 +1,59 @@
+{% doc %}
+Renders a Serqua product card backed by a Shopify product and native cart form.
+
+@param {product} product - Product to display.
+@param {string} [context] - Visual context: home or collection.
+{% enddoc %}
+
+{% liquid
+  assign variant = product.selected_or_first_available_variant
+  assign card_context = context | default: 'collection'
+  assign fallback_asset = 'official-prollegen-1kg.png'
+  if product.title contains '500'
+    assign fallback_asset = 'official-prollegen-500g.png'
+  endif
+%}
+
+<article class="{% if card_context == 'home' %}product-card{% else %}shop-card{% endif %}">
+  {% if card_context == 'home' %}
+    <a class="product-image{% if product.title contains '500' %} product-mini{% else %} product-large{% endif %}" href="{{ product.url }}">
+      {% if product.featured_image %}
+        {{ product.featured_image | image_url: width: 1400 | image_tag: loading: 'lazy', alt: product.featured_image.alt }}
+      {% else %}
+        <img src="{{ fallback_asset | asset_url }}" width="1254" height="1254" alt="{{ product.title | escape }}" loading="lazy">
+      {% endif %}
+    </a>
+    <div class="product-details">
+      <div><p class="product-size">{{ variant.sku }}</p><h3><a href="{{ product.url }}">{{ product.title }}</a></h3></div>
+      <div class="product-buy">
+        <p>{% if product.compare_at_price_max > product.price %}<del>{{ product.compare_at_price_max | money }}</del>{% endif %} <strong>{{ product.price | money }}</strong></p>
+        <div class="product-actions">
+          <a href="{{ product.url }}">{{ 'products.quick_view' | t }}</a>
+          {% form 'product', product %}
+            <input type="hidden" name="id" value="{{ variant.id }}">
+            <button class="add-button" type="submit"{% unless variant.available %} disabled{% endunless %}>{% if variant.available %}{{ 'products.add_to_cart' | t }}{% else %}{{ 'products.sold_out' | t }}{% endif %}</button>
+          {% endform %}
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <a class="card-art product-open" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
+      {% if product.featured_image %}
+        {{ product.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: product.featured_image.alt }}
+      {% else %}
+        <img src="{{ fallback_asset | asset_url }}" width="1254" height="1254" alt="{{ product.title | escape }}" loading="lazy">
+      {% endif %}
+    </a>
+    <div class="card-info">
+      <div class="card-heading"><p>{{ variant.sku }}</p><h3><a href="{{ product.url }}">{{ product.title }}</a></h3></div>
+      <p class="card-price">{% if product.compare_at_price_max > product.price %}<del>{{ product.compare_at_price_max | money }}</del>{% endif %}<strong>{{ product.price | money }}</strong></p>
+      <div class="card-actions">
+        <a class="quick-view" href="{{ product.url }}">{{ 'products.quick_view' | t }}</a>
+        {% form 'product', product %}
+          <input type="hidden" name="id" value="{{ variant.id }}">
+          <button class="add-to-bag" type="submit"{% unless variant.available %} disabled{% endunless %}>{% if variant.available %}{{ 'products.add_to_cart' | t }}{% else %}{{ 'products.sold_out' | t }}{% endif %}</button>
+        {% endform %}
+      </div>
+    </div>
+  {% endif %}
+</article>

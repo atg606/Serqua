@@ -1,0 +1,51 @@
+{% assign current_variant = product.selected_or_first_available_variant %}
+<section class="native-product">
+  <div class="native-product__media">
+    {% if product.featured_image %}
+      {{ product.featured_image | image_url: width: 1600 | image_tag: loading: 'eager', alt: product.featured_image.alt }}
+    {% elsif product.title contains '500' %}
+      <img src="{{ 'official-prollegen-500g.png' | asset_url }}" width="1254" height="1254" alt="{{ product.title | escape }}">
+    {% else %}
+      <img src="{{ 'official-prollegen-1kg.png' | asset_url }}" width="1254" height="1254" alt="{{ product.title | escape }}">
+    {% endif %}
+  </div>
+  <div class="native-product__content">
+    <p>{{ current_variant.sku }}</p>
+    <h1>{{ product.title }}</h1>
+    <div class="native-product__price">{% if product.compare_at_price_max > product.price %}<del>{{ product.compare_at_price_max | money }}</del>{% endif %}<strong>{{ product.price | money }}</strong></div>
+    <div class="native-product__description">{{ product.description }}</div>
+    {% form 'product', product %}
+      {% unless product.has_only_default_variant %}
+        <label for="Variant-{{ section.id }}">Variant</label>
+        <select id="Variant-{{ section.id }}" name="id">
+          {% for variant in product.variants %}<option value="{{ variant.id }}"{% if variant == current_variant %} selected{% endif %}>{{ variant.title }} — {{ variant.price | money }}</option>{% endfor %}
+        </select>
+      {% else %}
+        <input type="hidden" name="id" value="{{ current_variant.id }}">
+      {% endunless %}
+      <label for="Quantity-{{ section.id }}">{{ 'cart.quantity' | t }}</label>
+      <input id="Quantity-{{ section.id }}" type="number" name="quantity" value="1" min="1">
+      <button type="submit"{% unless current_variant.available %} disabled{% endunless %}>{% if current_variant.available %}{{ 'products.add_to_cart' | t }}{% else %}{{ 'products.sold_out' | t }}{% endif %}</button>
+      {{ form | payment_button }}
+    {% endform %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .native-product { max-width: 1280px; margin: 0 auto; padding: clamp(50px, 8vw, 110px) clamp(20px, 5vw, 70px); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(38px, 7vw, 100px); align-items: center; }
+  .native-product__media { background: var(--silver-1); }
+  .native-product__media img { width: 100%; aspect-ratio: 1 / 1; object-fit: contain; }
+  .native-product__content > p { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+  .native-product h1 { margin: 12px 0; font-family: "Barlow Condensed", sans-serif; font-size: clamp(58px, 7vw, 96px); font-weight: 600; line-height: .85; text-transform: uppercase; }
+  .native-product__price { display: flex; gap: 12px; align-items: baseline; font-size: 20px; }
+  .native-product__price del { color: var(--muted); font-size: 14px; }
+  .native-product__description { max-width: 55ch; margin: 28px 0; color: var(--muted); line-height: 1.7; }
+  .native-product form { display: grid; grid-template-columns: auto 110px; gap: 12px; align-items: center; }
+  .native-product label { font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+  .native-product select,
+  .native-product input { min-height: 48px; border: 1px solid var(--ink); padding: 0 12px; background: var(--white); }
+  .native-product form > button { grid-column: 1 / -1; min-height: 54px; border: 0; color: var(--white); background: var(--black); font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+  @media (max-width: 760px) { .native-product { grid-template-columns: 1fr; } }
+{% endstylesheet %}
+
+{% schema %}{"name":"Main product","settings":[]}{% endschema %}

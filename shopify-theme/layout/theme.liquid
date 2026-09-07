@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#090a0b">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <title>{{ page_title }}{% unless page_title contains shop.name %} — {{ shop.name }}{% endunless %}</title>
+    {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
+    {{ 'fonts.css' | asset_url | stylesheet_tag }}
+    {{ 'brand.css' | asset_url | stylesheet_tag }}
+    {% if template.name == 'index' %}
+      {{ 'home.css' | asset_url | stylesheet_tag }}
+    {% else %}
+      {{ 'collection.css' | asset_url | stylesheet_tag }}
+    {% endif %}
+    {{ content_for_header }}
+  </head>
+  <body>
+    <a class="skip-link" href="#MainContent">{{ 'accessibility.skip_to_content' | t }}</a>
+    <div class="announcement" aria-label="{{ 'header.store_information' | t }}">
+      <p>{{ 'header.free_shipping' | t }}</p>
+      <span aria-hidden="true">·</span>
+      <p>{{ 'header.cod' | t }}</p>
+    </div>
+    <header class="site-header">
+      <a class="wordmark" href="{{ routes.root_url }}" aria-label="{{ 'header.home_label' | t }}">{{ shop.name }}</a>
+      <nav class="desktop-nav" aria-label="{{ 'header.primary_navigation' | t }}">
+        <a href="{{ routes.root_url }}"{% if template.name == 'index' %} aria-current="page"{% endif %}>{{ 'nav.home' | t }}</a>
+        <a href="{{ routes.all_products_collection_url }}"{% if template.name == 'collection' or template.name == 'product' %} aria-current="page"{% endif %}>{{ 'nav.shop' | t }}</a>
+        <a href="{{ routes.all_products_collection_url }}">{{ 'nav.catalog' | t }}</a>
+        <a href="/pages/help">{{ 'nav.help' | t }}</a>
+      </nav>
+      <div class="header-actions">
+        <a class="account-link icon-button" href="{{ routes.account_url }}" aria-label="{{ 'header.account' | t }}">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.25"></circle><path d="M5.5 20c.5-4 2.7-6 6.5-6s6 2 6.5 6"></path></svg>
+          <span class="account-text">{{ 'header.account' | t }}</span>
+        </a>
+        <a class="cart-button" href="{{ routes.cart_url }}" aria-label="{{ 'header.cart_label' | t: count: cart.item_count }}">
+          <span class="cart-text">{{ 'header.bag' | t }}</span>
+          <span class="cart-count" aria-hidden="true">{{ cart.item_count }}</span>
+        </a>
+        <button class="menu-button" type="button" aria-expanded="false" aria-controls="mobile-menu">
+          <span></span><span></span><span></span><span class="sr-only">{{ 'header.menu' | t }}</span>
+        </button>
+      </div>
+      <nav class="mobile-nav" id="mobile-menu" aria-label="{{ 'header.mobile_navigation' | t }}" hidden>
+        <a href="{{ routes.root_url }}">{{ 'nav.home' | t }}</a>
+        <a href="{{ routes.all_products_collection_url }}">{{ 'nav.shop' | t }}</a>
+        <a href="{{ routes.all_products_collection_url }}">{{ 'nav.catalog' | t }}</a>
+        <a href="/pages/help">{{ 'nav.help_customer_care' | t }}</a>
+        <a href="{{ routes.account_url }}">{{ 'header.account' | t }}</a>
+        <a href="{{ routes.cart_url }}">{{ 'header.bag_with_count' | t: count: cart.item_count }}</a>
+      </nav>
+    </header>
+    <main id="MainContent" role="main">
+      {{ content_for_layout }}
+    </main>
+    <footer id="help">
+      <div class="footer-lead">
+        <a class="wordmark" href="{{ routes.root_url }}">{{ shop.name }}</a>
+        <p>{{ 'footer.promise' | t }}</p>
+      </div>
+      <div class="footer-links">
+        <div><p>{{ 'footer.explore' | t }}</p><a href="{{ routes.all_products_collection_url }}">{{ 'nav.shop' | t }}</a><a href="{{ routes.all_products_collection_url }}">{{ 'nav.catalog' | t }}</a></div>
+        <div><p>{{ 'footer.customer_care' | t }}</p><a href="/pages/help">{{ 'footer.track_order' | t }}</a><a href="/pages/help#shipping">{{ 'footer.shipping' | t }}</a><a href="/pages/help#returns">{{ 'footer.returns' | t }}</a><a href="/policies/terms-of-service">{{ 'footer.terms' | t }}</a><a href="/policies/privacy-policy">{{ 'footer.privacy' | t }}</a></div>
+        <div><p>{{ 'footer.contact' | t }}</p><a href="https://wa.me/918792917772">{{ 'footer.whatsapp' | t }}</a><a href="mailto:carol.serqua@gmail.com">{{ 'footer.email' | t }}</a><a href="https://www.instagram.com/serquaworld/">{{ 'footer.instagram' | t }}</a></div>
+      </div>
+      {% assign current_year = 'now' | date: '%Y' %}
+      <div class="footer-bottom"><span>{{ 'footer.copyright' | t: year: current_year }}</span><span>{{ 'footer.tagline' | t }}</span></div>
+    </footer>
+    <script src="{{ 'theme.js' | asset_url }}" defer></script>
+  </body>
+</html>

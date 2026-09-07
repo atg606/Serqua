@@ -1,0 +1,32 @@
+.wordmark,
+.brand-script {
+  display: inline-block;
+  overflow: hidden;
+  color: transparent !important;
+  background: url("{{ 'serqua-wordmark-silver.png' | asset_url }}") center / contain no-repeat;
+  text-indent: -999em;
+  text-shadow: none;
+  white-space: nowrap;
+}
+
+.wordmark {
+  width: 3em;
+  height: 1.25em;
+}
+
+.site-header > .wordmark {
+  display: inline-block;
+  align-self: center;
+  padding: 0;
+}
+
+.brand-script {
+  font-size: max(1.2em, 17px);
+  width: 2.4em;
+  height: 1em;
+  vertical-align: -0.22em;
+}
+
+#shop-title .brand-script {
+  filter: brightness(0);
+}

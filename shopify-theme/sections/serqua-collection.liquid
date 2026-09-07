@@ -1,0 +1,104 @@
+{% liquid
+  assign current_sort = collection.sort_by | default: collection.default_sort_by
+  assign product_count = collection.products_count
+%}
+
+<section class="collection" id="products" aria-labelledby="collection-title-{{ section.id }}">
+  <div class="shop-layout">
+    <aside class="catalog-sidebar" aria-label="{{ 'collection.categories' | t }}">
+      <div class="sidebar-intro">
+        <p>{{ 'collection.shop_label' | t }}</p>
+        <h1 id="collection-title-{{ section.id }}">{{ 'collection.all_products' | t }}</h1>
+        <span>{{ 'collection.product_count' | t: count: product_count }}</span>
+      </div>
+      <nav class="category-nav" aria-label="{{ 'collection.categories' | t }}">
+        <p>{{ 'collection.categories' | t }}</p>
+        <a class="is-active" href="{{ routes.all_products_collection_url }}"><span>{{ 'collection.all_products' | t }}</span><b>{{ collections.all.products_count }}</b></a>
+        <a href="{{ routes.collections_url }}/prollegen"><span>{{ 'collection.prollegen' | t }}</span><b>{{ collections.prollegen.products_count }}</b></a>
+        <p>{{ 'collection.shop_by_size' | t }}</p>
+        <a href="{{ routes.search_url }}?q=1kg&type=product"><span>{{ 'collection.one_kilogram' | t }}</span></a>
+        <a href="{{ routes.search_url }}?q=500g&type=product"><span>{{ 'collection.five_hundred_grams' | t }}</span></a>
+        <p>{{ 'collection.coming_soon' | t }}</p>
+        <span class="disabled-filter"><span>{{ 'collection.wellness' | t }}</span><b>0</b></span>
+        <span class="disabled-filter"><span>{{ 'collection.accessories' | t }}</span><b>0</b></span>
+      </nav>
+      <div class="sidebar-note"><strong>{{ 'collection.need_help' | t }}</strong><span>{{ 'collection.help_copy' | t }}</span><a href="https://wa.me/918792917772">{{ 'collection.start_conversation' | t }}</a></div>
+    </aside>
+
+    <div class="collection-main">
+      <header class="collection-header">
+        <div><p>{{ 'collection.eyebrow' | t }}</p><h2>{% if collection.title != blank %}{{ collection.title }}{% else %}{{ 'collection.heading' | t }}{% endif %}</h2></div>
+        <form class="collection-tools" action="{{ collection.url }}" method="get">
+          <label for="SortBy-{{ section.id }}">{{ 'collection.sort_by' | t }}</label>
+          <select id="SortBy-{{ section.id }}" name="sort_by" data-auto-submit>
+            {% for option in collection.sort_options %}<option value="{{ option.value }}"{% if option.value == current_sort %} selected{% endif %}>{{ option.name }}</option>{% endfor %}
+          </select>
+        </form>
+      </header>
+
+      {% paginate collection.products by section.settings.products_per_page %}
+        <div class="shop-grid">
+          {% for product in collection.products %}
+            {% render 'product-card', product: product, context: 'collection' %}
+          {% else %}
+            <p class="filter-empty">{{ 'collection.empty' | t }}</p>
+          {% endfor %}
+        </div>
+        {% if paginate.pages > 1 %}<nav class="pagination" aria-label="Pagination">{{ paginate | default_pagination }}</nav>{% endif %}
+      {% endpaginate %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .category-nav a,
+  .category-nav .disabled-filter {
+    width: 100%;
+    min-height: 43px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--rule);
+    color: var(--muted);
+    font-size: 12px;
+  }
+  .category-nav a b,
+  .category-nav .disabled-filter b {
+    min-width: 24px;
+    height: 24px;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    background: var(--white);
+    font-size: 9px;
+  }
+  .category-nav a:hover,
+  .category-nav a.is-active { padding-left: 9px; color: var(--ink); font-weight: 700; }
+  .category-nav a.is-active::before { content: "→"; margin-right: 7px; }
+  .category-nav a.is-active span { margin-right: auto; }
+  .disabled-filter { opacity: .52; }
+  .card-actions a,
+  .card-actions form,
+  .card-actions button { width: 100%; min-height: 36px; }
+  .card-actions a { display: grid; place-items: center; border: 1px solid var(--ink); font-size: 8px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; }
+  .pagination { padding: 36px 0 0; text-align: center; }
+  .pagination a,
+  .pagination .current { display: inline-block; padding: 10px 13px; border: 1px solid var(--rule); }
+  @media (max-width: 900px) {
+    .category-nav .disabled-filter { display: none; }
+    .category-nav a { flex: 0 0 auto; width: auto; min-height: 39px; padding: 0 14px; gap: 11px; border: 1px solid var(--rule); background: var(--white); }
+    .category-nav a:hover,
+    .category-nav a.is-active { padding-left: 14px; border-color: var(--ink); background: var(--ink); color: var(--white); }
+    .category-nav a.is-active::before { display: none; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Serqua collection",
+  "settings": [
+    { "type": "range", "id": "products_per_page", "label": "Products per page", "min": 2, "max": 24, "step": 2, "default": 12 }
+  ]
+}
+{% endschema %}

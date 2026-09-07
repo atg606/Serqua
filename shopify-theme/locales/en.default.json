@@ -1,0 +1,82 @@
+{
+  "accessibility": {
+    "skip_to_content": "Skip to content"
+  },
+  "header": {
+    "store_information": "Store information",
+    "free_shipping": "Free shipping on orders of ₹4,499 and above",
+    "cod": "COD available on eligible orders",
+    "home_label": "Serqua home",
+    "primary_navigation": "Primary navigation",
+    "mobile_navigation": "Mobile navigation",
+    "account": "Account",
+    "bag": "Bag",
+    "bag_with_count": "Bag ({{ count }})",
+    "cart_label": "Cart, {{ count }} items",
+    "menu": "Menu"
+  },
+  "nav": {
+    "home": "Home",
+    "shop": "Shop",
+    "catalog": "Catalog",
+    "help": "Help",
+    "help_customer_care": "Help & customer care"
+  },
+  "footer": {
+    "promise": "Premium supplements for maintaining balance—fitness and beauty from the inside out.",
+    "explore": "Explore",
+    "customer_care": "Customer care",
+    "track_order": "Track your order",
+    "shipping": "Shipping",
+    "returns": "Returns & refunds",
+    "terms": "Terms and conditions",
+    "privacy": "Privacy policy",
+    "contact": "Contact",
+    "whatsapp": "WhatsApp",
+    "email": "Email support",
+    "instagram": "Instagram",
+    "copyright": "© {{ year }} Serqua Private Limited",
+    "tagline": "Balance is Power."
+  },
+  "products": {
+    "add_to_cart": "Add to cart",
+    "quick_view": "Quick view",
+    "sold_out": "Sold out",
+    "from": "From",
+    "choose": "Choose Prollegen",
+    "coming_soon": "Coming soon"
+  },
+  "collection": {
+    "shop_label": "Serqua shop",
+    "all_products": "All products.",
+    "product_count": "{{ count }} products",
+    "categories": "Categories",
+    "prollegen": "Prollegen",
+    "shop_by_size": "Shop by size",
+    "one_kilogram": "1 kilogram",
+    "five_hundred_grams": "500 grams",
+    "coming_soon": "Coming soon",
+    "wellness": "Wellness",
+    "accessories": "Accessories",
+    "need_help": "Need help choosing?",
+    "help_copy": "Talk to us on WhatsApp for product guidance.",
+    "start_conversation": "Start a conversation ↗",
+    "eyebrow": "Performance + beauty nutrition",
+    "heading": "Prollegen collection",
+    "sort_by": "Sort by",
+    "empty": "No approved products are available in this category yet."
+  },
+  "cart": {
+    "title": "Your bag",
+    "empty": "Your bag is ready for a better ritual.",
+    "quantity": "Quantity",
+    "remove": "Remove",
+    "subtotal": "Subtotal",
+    "update": "Update bag",
+    "checkout": "Secure checkout"
+  },
+  "general": {
+    "not_found": "Page not found",
+    "continue_shopping": "Continue shopping"
+  }
+}

@@ -1,0 +1,128 @@
+<section class="hero" id="top" aria-labelledby="hero-title-{{ section.id }}">
+  <img class="hero-image" src="{{ 'official-prollegen-hero-warm.png' | asset_url }}" width="1672" height="941" alt="{{ section.settings.hero_image_alt | escape }}">
+  <div class="hero-shade"></div>
+  <div class="hero-content">
+    <p class="hero-product">{{ section.settings.hero_eyebrow }}</p>
+    <h1 id="hero-title-{{ section.id }}">{{ section.settings.hero_title }}</h1>
+    <p class="hero-support">{{ section.settings.hero_support }}</p>
+    <div class="hero-actions">
+      <a class="button button-light" href="{{ routes.all_products_collection_url }}">{{ section.settings.hero_button }}</a>
+      <a class="text-link" href="#world">{{ section.settings.hero_link }} <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+  <div class="hero-formula" aria-label="{{ section.settings.formula_label | escape }}">
+    <span><strong>24g</strong>{{ section.settings.protein_label }}</span>
+    <span><strong>Type I &amp; III</strong>{{ section.settings.collagen_label }}</span>
+    <span><strong>120mg</strong>{{ section.settings.vitamin_label }}</span>
+    <span><strong>Dark vanilla</strong>{{ section.settings.flavour_label }}</span>
+  </div>
+</section>
+
+<section class="world" id="world" aria-labelledby="world-title-{{ section.id }}">
+  <div class="world-statement">
+    <p>{{ section.settings.world_eyebrow }}</p>
+    <h2 id="world-title-{{ section.id }}">{{ section.settings.world_title }}</h2>
+  </div>
+  <div class="world-copy">
+    <div class="world-monogram" aria-hidden="true">S/Q</div>
+    <p class="world-lead">{{ section.settings.world_lead }}</p>
+    <p>{{ section.settings.world_copy }}</p>
+    <a class="text-link dark" href="#why">{{ section.settings.world_link }} <span aria-hidden="true">→</span></a>
+  </div>
+</section>
+
+<section class="shop" id="shop" aria-labelledby="shop-title-{{ section.id }}">
+  <header class="section-heading">
+    <div><p class="section-note">{{ section.settings.shop_eyebrow }}</p><h2 id="shop-title-{{ section.id }}">{{ section.settings.shop_title }}</h2></div>
+    <p class="shop-manifesto"><strong>{{ section.settings.shop_manifesto }}</strong><span>{{ section.settings.shop_manifesto_copy }}</span></p>
+  </header>
+  <div class="product-grid">
+    {% assign home_collection = section.settings.featured_collection | default: collections.all %}
+    {% for product in home_collection.products limit: 2 %}
+      {% render 'product-card', product: product, context: 'home' %}
+    {% else %}
+      <article class="product-card">
+        <div class="product-image product-large"><img src="{{ 'official-prollegen-1kg.png' | asset_url }}" width="1254" height="1254" alt="Prollegen one kilogram Bourbon Vanilla jar"></div>
+        <div class="product-details"><div><p class="product-size">PROL-1000</p><h3>Prollegen™ 1kg</h3></div><div class="product-buy"><p><del>₹5,499</del> <strong>₹4,499</strong></p><button class="add-button" type="button" disabled>{{ 'products.coming_soon' | t }}</button></div></div>
+      </article>
+      <article class="product-card">
+        <div class="product-image product-mini"><img src="{{ 'official-prollegen-500g.png' | asset_url }}" width="1254" height="1254" alt="Prollegen 500 gram Bourbon Vanilla jar"></div>
+        <div class="product-details"><div><p class="product-size">PROL-500</p><h3>Prollegen™ 500g</h3></div><div class="product-buy"><p><del>₹3,499</del> <strong>₹2,999</strong></p><button class="add-button" type="button" disabled>{{ 'products.coming_soon' | t }}</button></div></div>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="benefits" id="why" aria-labelledby="benefits-title-{{ section.id }}">
+  <div class="benefits-intro"><p>{{ section.settings.benefits_eyebrow }}</p><h2 id="benefits-title-{{ section.id }}">{{ section.settings.benefits_title }}</h2><p>{{ section.settings.benefits_copy }}</p></div>
+  <div class="benefit-list">
+    <article><span>01</span><h3>Performance</h3><p>24g high-quality protein per serving supports muscle development and recovery.</p></article>
+    <article><span>02</span><h3>Skin + collagen</h3><p>Type I &amp; III collagen with Vitamin C supports skin health and collagen formation.</p></article>
+    <article><span>03</span><h3>Joints + connection</h3><p>Collagen and MSM complement a routine focused on joints and connective tissue.</p></article>
+    <article><span>04</span><h3>Everyday wellbeing</h3><p>Zero added sugar, zero carbohydrates and DigeZyme® digestive enzymes.</p></article>
+  </div>
+</section>
+
+<section class="ingredients" id="ingredients" aria-labelledby="ingredients-title-{{ section.id }}">
+  <div class="ingredient-stage"><img src="{{ 'prollegen-open-scoop.png' | asset_url }}" width="1254" height="1254" alt="{{ section.settings.ingredients_image_alt | escape }}" loading="lazy"></div>
+  <div class="ingredient-copy">
+    <p class="section-note">{{ section.settings.ingredients_eyebrow }}</p><h2 id="ingredients-title-{{ section.id }}">{{ section.settings.ingredients_title }}</h2>
+    <ul>
+      <li><span>01</span><strong>Whey protein isolate</strong><small>Muscle development + recovery</small></li>
+      <li><span>02</span><strong>Type I &amp; III collagen</strong><small>Skin, joints + connective tissue</small></li>
+      <li><span>03</span><strong>Vitamin C</strong><small>120mg per 30g serving</small></li>
+      <li><span>04</span><strong>MSM</strong><small>Complements the collagen blend</small></li>
+      <li><span>05</span><strong>DigeZyme®</strong><small>Digestive enzyme blend</small></li>
+    </ul>
+    <p class="formula-note">{{ section.settings.formula_note }}</p>
+  </div>
+</section>
+
+<section class="social" id="social" aria-labelledby="social-title-{{ section.id }}">
+  <header><h2 id="social-title-{{ section.id }}">{{ section.settings.social_title }}</h2><a href="{{ section.settings.instagram_url }}">{{ section.settings.instagram_label }} <span aria-hidden="true">↗</span></a></header>
+  <div class="social-grid"><a class="social-image social-product" href="{{ section.settings.instagram_url }}" aria-label="{{ section.settings.instagram_label | escape }}"></a><a class="social-image social-detail" href="{{ section.settings.instagram_url }}" aria-label="{{ section.settings.instagram_label | escape }}"></a><a class="social-image social-people" href="{{ section.settings.instagram_url }}" aria-label="{{ section.settings.instagram_label | escape }}"></a></div>
+</section>
+
+<section class="service-strip" aria-label="Customer service information">
+  <div><strong>Across India</strong><span>Delivery to serviceable locations</span></div><div><strong>3–7 business days</strong><span>Typical delivery timeline</span></div><div><strong>COD available</strong><span>On eligible orders and locations</span></div><div><strong>Here to help</strong><span>WhatsApp support, 9am–8pm</span></div>
+</section>
+
+{% schema %}
+{
+  "name": "Serqua homepage",
+  "settings": [
+    { "type": "text", "id": "hero_eyebrow", "label": "Hero eyebrow", "default": "Introducing Prollegen™" },
+    { "type": "inline_richtext", "id": "hero_title", "label": "Hero title", "default": "Balance is power." },
+    { "type": "textarea", "id": "hero_support", "label": "Hero supporting text", "default": "Protein and collagen, thoughtfully formulated for the body you train and the skin you live in." },
+    { "type": "text", "id": "hero_button", "label": "Hero button", "default": "Discover Prollegen" },
+    { "type": "text", "id": "hero_link", "label": "Hero secondary link", "default": "Enter the Serqua world" },
+    { "type": "text", "id": "hero_image_alt", "label": "Hero image description", "default": "Prollegen Bourbon Vanilla jar with a metal scoop and warm studio spotlight" },
+    { "type": "text", "id": "formula_label", "label": "Formula accessibility label", "default": "Key product information" },
+    { "type": "text", "id": "protein_label", "label": "Protein label", "default": "Protein" },
+    { "type": "text", "id": "collagen_label", "label": "Collagen label", "default": "Collagen" },
+    { "type": "text", "id": "vitamin_label", "label": "Vitamin label", "default": "Vitamin C" },
+    { "type": "text", "id": "flavour_label", "label": "Flavour label", "default": "Flavour*" },
+    { "type": "text", "id": "world_eyebrow", "label": "World eyebrow", "default": "Fitness + beauty, from the inside out." },
+    { "type": "inline_richtext", "id": "world_title", "label": "World title", "default": "The space between strength and radiance." },
+    { "type": "textarea", "id": "world_lead", "label": "World lead", "default": "Serqua creates holistic performance supplements for fast-paced lives." },
+    { "type": "textarea", "id": "world_copy", "label": "World copy", "default": "We bridge fitness and beauty without choosing a side—supporting performance, recovery, skin, joints and everyday wellbeing." },
+    { "type": "text", "id": "world_link", "label": "World link", "default": "Why Serqua" },
+    { "type": "text", "id": "shop_eyebrow", "label": "Shop eyebrow", "default": "Better skin. Better lifts." },
+    { "type": "text", "id": "shop_title", "label": "Shop title", "default": "Introducing Serqua." },
+    { "type": "text", "id": "shop_manifesto", "label": "Shop statement", "default": "Premium nutrition." },
+    { "type": "text", "id": "shop_manifesto_copy", "label": "Shop statement copy", "default": "One upgraded daily ritual." },
+    { "type": "collection", "id": "featured_collection", "label": "Featured collection" },
+    { "type": "text", "id": "benefits_eyebrow", "label": "Benefits eyebrow", "default": "One daily formula" },
+    { "type": "text", "id": "benefits_title", "label": "Benefits title", "default": "Made for more than the mirror." },
+    { "type": "textarea", "id": "benefits_copy", "label": "Benefits copy", "default": "Prollegen™ combines whey protein isolate and collagen peptides with selected nutrients for performance, recovery and beauty." },
+    { "type": "text", "id": "ingredients_eyebrow", "label": "Ingredients eyebrow", "default": "Inside every scoop" },
+    { "type": "text", "id": "ingredients_title", "label": "Ingredients title", "default": "A considered blend." },
+    { "type": "text", "id": "ingredients_image_alt", "label": "Ingredients image description", "default": "Open Prollegen jar with a suspended scoop of powder" },
+    { "type": "textarea", "id": "formula_note", "label": "Formula note", "default": "*Dark vanilla is the planned launch flavour; exact naming and final formulation remain subject to approval." },
+    { "type": "text", "id": "social_title", "label": "Social title", "default": "Inside the Serqua world." },
+    { "type": "url", "id": "instagram_url", "label": "Instagram URL" },
+    { "type": "text", "id": "instagram_label", "label": "Instagram label", "default": "Follow @serquaworld" }
+  ],
+  "presets": [{ "name": "Serqua homepage" }]
+}
+{% endschema %}

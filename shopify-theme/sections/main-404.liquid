@@ -1,0 +1,12 @@
+<section class="not-found">
+  <h1>{{ 'general.not_found' | t }}</h1>
+  <a href="{{ routes.root_url }}">{{ 'general.continue_shopping' | t }}</a>
+</section>
+
+{% stylesheet %}
+  .not-found { max-width: 920px; min-height: 55vh; margin: 0 auto; padding: clamp(55px, 8vw, 110px) 20px; }
+  .not-found h1 { margin: 0 0 42px; font-family: "Barlow Condensed", sans-serif; font-size: clamp(58px, 8vw, 96px); font-weight: 600; line-height: .88; text-transform: uppercase; }
+  .not-found a { max-width: 280px; min-height: 52px; display: grid; place-items: center; border: 1px solid var(--ink); font-size: 11px; font-weight: 800; text-transform: uppercase; }
+{% endstylesheet %}
+
+{% schema %}{"name":"404","settings":[]}{% endschema %}
