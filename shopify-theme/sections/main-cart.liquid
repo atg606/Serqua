@@ -7,9 +7,17 @@
     <form action="{{ routes.cart_url }}" method="post">
       <div class="native-cart__items">
         {% for item in cart.items %}
-          <article class="native-cart__item">
-            <a href="{{ item.url }}">{% if item.image %}{{ item.image | image_url: width: 240 | image_tag: loading: 'lazy', alt: item.image.alt }}{% endif %}</a>
-            <div><p>{{ item.product.title }}</p><small>{{ item.variant.title }}</small><a href="{{ item.url_to_remove }}">{{ 'cart.remove' | t }}</a></div>
+          <article class="native-cart__item{% unless item.image %} native-cart__item--without-image{% endunless %}">
+            {% if item.image %}
+              <a class="native-cart__image" href="{{ item.url }}">
+                {{ item.image | image_url: width: 320 | image_tag: loading: 'lazy', alt: item.product.title }}
+              </a>
+            {% endif %}
+            <div class="native-cart__copy">
+              <p>{{ item.product.title }}</p>
+              {% unless item.variant.title == 'Default Title' %}<small>{{ item.variant.title }}</small>{% endunless %}
+              <a class="native-cart__remove" href="{{ item.url_to_remove }}">{{ 'cart.remove' | t }}</a>
+            </div>
             <label for="Quantity-{{ forloop.index }}">{{ 'cart.quantity' | t }}<input id="Quantity-{{ forloop.index }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0"></label>
             <strong>{{ item.final_line_price | money }}</strong>
           </article>
@@ -24,10 +32,12 @@
   .native-cart { max-width: 1120px; min-height: 55vh; margin: 0 auto; padding: clamp(55px, 8vw, 110px) 20px; }
   .native-cart h1 { margin: 0 0 40px; font-family: "Barlow Condensed", sans-serif; font-size: clamp(60px, 8vw, 100px); font-weight: 600; line-height: .85; text-transform: uppercase; }
   .native-cart__item { padding: 20px 0; display: grid; grid-template-columns: 110px 1fr 130px auto; gap: 20px; align-items: center; border-top: 1px solid var(--rule); }
-  .native-cart__item img { width: 110px; height: 110px; object-fit: contain; background: var(--silver-1); }
+  .native-cart__item--without-image { grid-template-columns: 1fr 130px auto; }
+  .native-cart__image { display: block; margin: 0; border: 0; background: var(--silver-1); }
+  .native-cart__image img { width: 110px; height: 110px; display: block; object-fit: cover; }
   .native-cart__item p { margin: 0 0 5px; font-weight: 700; }
   .native-cart__item small { display: block; color: var(--muted); }
-  .native-cart__item a { display: inline-block; margin-top: 10px; border-bottom: 1px solid; font-size: 10px; text-transform: uppercase; }
+  .native-cart__remove { display: inline-block; margin-top: 10px; border-bottom: 1px solid; font-size: 10px; text-transform: uppercase; }
   .native-cart__item label { font-size: 10px; text-transform: uppercase; }
   .native-cart__item input { width: 100%; min-height: 42px; margin-top: 6px; padding: 0 10px; border: 1px solid var(--ink); }
   .native-cart__summary { max-width: 430px; margin: 35px 0 0 auto; }
@@ -36,7 +46,7 @@
   .cart-continue { width: 100%; min-height: 52px; margin-top: 10px; display: grid; place-items: center; border: 1px solid var(--ink); background: var(--white); font-size: 11px; font-weight: 800; text-transform: uppercase; }
   .native-cart__summary button[name="checkout"] { color: var(--white); background: var(--black); }
   .cart-continue { max-width: 280px; }
-  @media (max-width: 650px) { .native-cart__item { grid-template-columns: 80px 1fr; } .native-cart__item img { width: 80px; height: 80px; } .native-cart__item label, .native-cart__item > strong { grid-column: 2; } }
+  @media (max-width: 650px) { .native-cart__item { grid-template-columns: 80px 1fr; } .native-cart__item--without-image { grid-template-columns: 1fr; } .native-cart__image img { width: 80px; height: 80px; } .native-cart__item label, .native-cart__item > strong { grid-column: 2; } .native-cart__item--without-image label, .native-cart__item--without-image > strong { grid-column: 1; } }
 {% endstylesheet %}
 
 {% schema %}{"name":"Main cart","settings":[]}{% endschema %}
