@@ -1,0 +1,91 @@
+<section class="help-hero" aria-labelledby="help-title">
+  <div>
+    <p>{{ 'help.customer_care' | t }}</p>
+    <h1 id="help-title">{{ 'help.title' | t }}</h1>
+  </div>
+  <p>{{ 'help.intro' | t }}</p>
+</section>
+
+<section class="support-area" aria-labelledby="contact-title">
+  <aside class="contact-rail">
+    <div>
+      <p>{{ 'help.contact_us' | t }}</p>
+      <h2 id="contact-title">{{ 'help.talk_to_person' | t }}</h2>
+    </div>
+    <a href="https://wa.me/918792917772" target="_blank" rel="noreferrer">
+      <span>{{ 'help.whatsapp' | t }}</span><strong>{{ 'help.fastest_response' | t }}</strong><i aria-hidden="true">↗</i>
+    </a>
+    <a href="mailto:carol.serqua@gmail.com">
+      <span>{{ 'help.email' | t }}</span><strong>carol.serqua@gmail.com</strong><i aria-hidden="true">↗</i>
+    </a>
+    <div class="support-hours">
+      <span>{{ 'help.support_hours' | t }}</span><strong>{{ 'help.hours' | t }}</strong><small>{{ 'help.holiday_note' | t }}</small>
+    </div>
+  </aside>
+
+  <div class="support-form-wrap">
+    <header>
+      <p>{{ 'help.send_request' | t }}</p>
+      <h2>{{ 'help.form_title' | t }}</h2>
+      <span>{{ 'help.required_note' | t }}</span>
+    </header>
+    {% form 'contact', id: 'SerquaSupportForm', class: 'support-form' %}
+      {% if form.posted_successfully? %}
+        <p class="form-status form-success" role="status" tabindex="-1">{{ 'help.success' | t }}</p>
+      {% endif %}
+      {% if form.errors %}
+        <div class="form-status form-error" role="alert">{{ form.errors | default_errors }}</div>
+      {% endif %}
+      <div class="field-row">
+        <div><label for="SupportName">{{ 'help.full_name' | t }}</label><input id="SupportName" name="contact[name]" type="text" autocomplete="name" value="{{ form.name | escape }}" required></div>
+        <div><label for="SupportEmail">{{ 'help.email_address' | t }}</label><input id="SupportEmail" name="contact[email]" type="email" autocomplete="email" inputmode="email" value="{{ form.email | escape }}" required></div>
+      </div>
+      <div class="field-row">
+        <div><label for="SupportPhone">{{ 'help.mobile_number' | t }} <span>{{ 'help.optional' | t }}</span></label><input id="SupportPhone" name="contact[phone]" type="tel" autocomplete="tel" inputmode="tel" placeholder="+91 98765 43210" pattern="[+0-9 ()-]{8,20}"></div>
+        <div><label for="SupportOrder">{{ 'help.order_number' | t }} <span>{{ 'help.if_applicable' | t }}</span></label><input id="SupportOrder" name="contact[order_number]" type="text" autocomplete="off" placeholder="SERQUA-1001"></div>
+      </div>
+      <label for="SupportTopic">{{ 'help.topic_label' | t }}</label>
+      <select id="SupportTopic" name="contact[topic]" required>
+        <option value="">{{ 'help.select_topic' | t }}</option>
+        <option>{{ 'help.topic_product' | t }}</option><option>{{ 'help.topic_order' | t }}</option><option>{{ 'help.topic_delivery' | t }}</option><option>{{ 'help.topic_return' | t }}</option><option>{{ 'help.topic_account' | t }}</option><option>{{ 'help.topic_other' | t }}</option>
+      </select>
+      <label for="SupportMessage">{{ 'help.message' | t }}</label>
+      <textarea id="SupportMessage" name="contact[body]" rows="5" minlength="10" placeholder="{{ 'help.message_placeholder' | t }}" required>{{ form.body }}</textarea>
+      <label class="consent-field"><input name="contact[consent]" type="checkbox" value="Agreed" required><span>{{ 'help.consent' | t }}</span></label>
+      <button type="submit">{{ 'help.send_button' | t }} <span aria-hidden="true">→</span></button>
+    {% endform %}
+  </div>
+</section>
+
+<section class="track-order" aria-labelledby="track-title">
+  <div>
+    <p>{{ 'help.order_status' | t }}</p>
+    <h2 id="track-title">{{ 'help.track_title' | t }}</h2>
+    <span>{{ 'help.track_copy' | t }}</span>
+  </div>
+  <div class="track-actions">
+    <a class="track-primary" href="{{ routes.account_url }}">{{ 'help.view_orders' | t }} <span aria-hidden="true">→</span></a>
+    <a href="https://wa.me/918792917772" target="_blank" rel="noreferrer">{{ 'help.tracking_help' | t }} <span aria-hidden="true">↗</span></a>
+  </div>
+</section>
+
+<section class="faq" aria-labelledby="faq-title">
+  <header><p>{{ 'help.faq_label' | t }}</p><h2 id="faq-title">{{ 'help.faq_title' | t }}</h2></header>
+  <div class="faq-list">
+    <details><summary>{{ 'help.faq_product_q' | t }}</summary><p>{{ 'help.faq_product_a' | t }}</p></details>
+    <details><summary>{{ 'help.faq_sizes_q' | t }}</summary><p>{{ 'help.faq_sizes_a' | t }}</p></details>
+    <details id="shipping"><summary>{{ 'help.faq_delivery_q' | t }}</summary><p>{{ 'help.faq_delivery_a' | t }}</p></details>
+    <details><summary>{{ 'help.faq_shipping_q' | t }}</summary><p>{{ 'help.faq_shipping_a' | t }}</p></details>
+    <details><summary>{{ 'help.faq_cod_q' | t }}</summary><p>{{ 'help.faq_cod_a' | t }}</p></details>
+    <details id="returns"><summary>{{ 'help.faq_returns_q' | t }}</summary><p>{{ 'help.faq_returns_a' | t }} <a href="/policies/refund-policy">{{ 'help.read_policy' | t }}</a></p></details>
+    <details><summary>{{ 'help.faq_accounts_q' | t }}</summary><p>{{ 'help.faq_accounts_a' | t }}</p></details>
+  </div>
+</section>
+
+{% stylesheet %}
+  .help-hero{min-height:340px;padding:clamp(44px,5vw,72px) max(24px,calc((100vw - 1440px)/2 + 70px));display:grid;grid-template-columns:1.15fr .85fr;align-items:end;gap:70px;color:#f5f5f5;background:#090a0b}.help-hero div>p,.track-order>div>p{margin:0 0 18px;color:#aaa;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.help-hero h1{max-width:620px;margin:0;font-family:"Barlow Condensed",sans-serif;font-size:clamp(70px,9vw,96px);font-weight:700;line-height:.8;letter-spacing:-.025em;text-transform:uppercase}.help-hero>p{max-width:47ch;margin:0 0 5px;color:#d1d1d1;font-size:clamp(16px,1.5vw,20px);line-height:1.65}.support-area{display:grid;grid-template-columns:clamp(270px,32vw,440px) minmax(0,1fr)}.contact-rail{padding:clamp(55px,7vw,95px) clamp(24px,5vw,70px);background:#d8d8d8}.contact-rail>div:first-child p,.support-form-wrap header p,.faq header p{margin:0 0 11px;font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.contact-rail h2{margin:0 0 42px;font-size:clamp(38px,4.5vw,56px);font-weight:800;line-height:.98;letter-spacing:-.035em}.contact-rail>a{position:relative;padding:20px 35px 20px 0;display:block;border-top:1px solid #1b1b1b}.contact-rail>a span,.contact-rail>a strong,.support-hours strong,.support-hours small{display:block}.contact-rail>a span,.support-hours span{margin-bottom:6px;color:#686868;font-size:9px;font-weight:700;text-transform:uppercase}.contact-rail>a strong{font-family:"Bodoni Moda",serif;font-size:17px;font-weight:500;overflow-wrap:anywhere}.contact-rail>a i{position:absolute;right:0;top:25px;font-style:normal}.support-hours{padding-top:20px;border-top:1px solid #1b1b1b}.support-hours strong{margin-bottom:5px;font-size:14px}.support-hours small{color:#686868;font-size:9px;line-height:1.5}.support-form-wrap{padding:clamp(55px,7vw,95px) max(24px,calc((100vw - 1440px)/2 + 70px));background:#fff}.support-form-wrap>header{margin-bottom:35px}.support-form-wrap h2{margin:0;font-size:clamp(39px,4.5vw,58px);font-weight:800;line-height:.98;letter-spacing:-.035em}.support-form-wrap header>span{display:block;margin-top:12px;color:#686868;font-size:9px}.field-row{display:grid;grid-template-columns:1fr 1fr;gap:15px}.support-form label:not(.consent-field){margin:17px 0 7px;display:block;font-size:9px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}.support-form label span{color:#686868;font-weight:500}.support-form input,.support-form select,.support-form textarea{width:100%;border:1px solid #ccc;border-radius:0;background:#fff}.support-form input,.support-form select{height:48px;padding:0 13px}.support-form textarea{padding:13px;resize:vertical}.support-form input:focus,.support-form select:focus,.support-form textarea:focus{border-color:#1b1b1b;outline:2px solid transparent}.consent-field{margin-top:15px;display:grid;grid-template-columns:17px 1fr;gap:9px;align-items:start;color:#686868;font-size:10px;line-height:1.5}.consent-field input{width:17px;height:17px;margin:0;accent-color:#090a0b}.support-form>button{width:100%;min-height:50px;margin-top:24px;padding:0 17px;display:flex;justify-content:space-between;align-items:center;border:0;color:#fff;background:#090a0b;font-size:9px;font-weight:800;text-transform:uppercase}.form-status{margin:0 0 16px;padding:13px;border:1px solid #1b1b1b;font-size:11px;line-height:1.5}.form-success{background:#f0f5f0}.form-error{border-color:#a33434;background:#fff3f3}.form-error ul{margin:8px 0 0;padding-left:18px}.track-order{padding:clamp(65px,8vw,110px) max(24px,calc((100vw - 1440px)/2 + 70px));display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(50px,9vw,130px);color:#f5f5f5;background:#090a0b}.track-order h2{margin:0;font-family:"Barlow Condensed",sans-serif;font-size:clamp(55px,7vw,84px);line-height:.84;text-transform:uppercase}.track-order>div>span{display:block;max-width:40ch;margin-top:22px;color:#aaa;font-size:11px;line-height:1.6}.track-actions{align-self:end;display:grid;gap:12px}.track-actions a{min-height:50px;padding:0 17px;display:flex;align-items:center;justify-content:space-between;border:1px solid #f5f5f5;color:#f5f5f5;font-size:9px;font-weight:800;text-transform:uppercase}.track-actions .track-primary{color:#090a0b;background:#f5f5f5}.faq{padding:clamp(70px,9vw,130px) max(24px,calc((100vw - 1440px)/2 + 70px));display:grid;grid-template-columns:.7fr 1.3fr;gap:clamp(50px,9vw,130px);background:#f2f2f2}.faq h2{margin:0;font-size:clamp(43px,5vw,64px);font-weight:800;letter-spacing:-.035em}.faq-list{border-top:1px solid #1b1b1b}.faq-list details{scroll-margin-top:100px;border-bottom:1px solid #ccc}.faq-list summary{padding:20px 36px 20px 0;cursor:pointer;font-size:14px;font-weight:700}.faq-list details p{max-width:68ch;margin:-4px 0 20px;color:#686868;font-size:12px;line-height:1.7}.faq-list details p a{text-decoration:underline;text-underline-offset:3px}@media(max-width:800px){.help-hero,.support-area,.track-order,.faq{grid-template-columns:1fr}.help-hero{min-height:420px;align-content:end;gap:36px}.contact-rail,.support-form-wrap{padding:55px 24px}.track-order,.faq{gap:45px}}@media(max-width:560px){.help-hero{min-height:390px;padding:44px 20px}.field-row{grid-template-columns:1fr;gap:0}.track-order,.faq{padding-left:20px;padding-right:20px}}
+{% endstylesheet %}
+
+{% schema %}
+{"name":"Serqua help","settings":[],"presets":[{"name":"Serqua help"}]}
+{% endschema %}

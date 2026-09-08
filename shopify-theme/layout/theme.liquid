@@ -29,7 +29,7 @@
         <a href="{{ routes.root_url }}"{% if template.name == 'index' %} aria-current="page"{% endif %}>{{ 'nav.home' | t }}</a>
         <a href="{{ routes.all_products_collection_url }}"{% if template.name == 'collection' or template.name == 'product' %} aria-current="page"{% endif %}>{{ 'nav.shop' | t }}</a>
         <a href="{{ routes.all_products_collection_url }}">{{ 'nav.catalog' | t }}</a>
-        <a href="/pages/help">{{ 'nav.help' | t }}</a>
+        <a href="/pages/help"{% if template.name == 'page' and page.handle == 'help' %} aria-current="page"{% endif %}>{{ 'nav.help' | t }}</a>
       </nav>
       <div class="header-actions">
         <a class="account-link icon-button" href="{{ routes.account_url }}" aria-label="{{ 'header.account' | t }}">
@@ -48,7 +48,7 @@
         <a href="{{ routes.root_url }}">{{ 'nav.home' | t }}</a>
         <a href="{{ routes.all_products_collection_url }}">{{ 'nav.shop' | t }}</a>
         <a href="{{ routes.all_products_collection_url }}">{{ 'nav.catalog' | t }}</a>
-        <a href="/pages/help">{{ 'nav.help_customer_care' | t }}</a>
+        <a href="/pages/help"{% if template.name == 'page' and page.handle == 'help' %} aria-current="page"{% endif %}>{{ 'nav.help_customer_care' | t }}</a>
         <a href="{{ routes.account_url }}">{{ 'header.account' | t }}</a>
         <a href="{{ routes.cart_url }}">{{ 'header.bag_with_count' | t: count: cart.item_count }}</a>
       </nav>
