@@ -11,7 +11,7 @@
         <a class="cart-continue" href="{{ routes.all_products_collection_url }}">{{ 'general.continue_shopping' | t }}</a>
       </div>
     {% else %}
-      <form class="native-cart__layout" action="{{ routes.cart_url }}" method="post">
+      <form class="native-cart__layout" action="{{ routes.cart_url }}" method="post" data-cart-form data-updating-label="{{ 'cart.updating' | t }}">
         <div class="native-cart__items" aria-label="{{ 'cart.items' | t }}">
           {% for item in cart.items %}
             <article class="native-cart__item{% unless item.image %} native-cart__item--without-image{% endunless %}">
@@ -31,7 +31,7 @@
               <div class="native-cart__purchase">
                 <label for="Quantity-{{ forloop.index }}">
                   <span>{{ 'cart.quantity' | t }}</span>
-                  <input id="Quantity-{{ forloop.index }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0" inputmode="numeric">
+                  <input id="Quantity-{{ forloop.index }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0" inputmode="numeric" data-cart-quantity>
                 </label>
                 <strong>{{ item.final_line_price | money }}</strong>
               </div>
@@ -46,7 +46,9 @@
             <div><dt>{{ 'cart.shipping' | t }}</dt><dd>{{ 'cart.calculated_checkout' | t }}</dd></div>
           </dl>
           <button class="native-cart__checkout" type="submit" name="checkout">{{ 'cart.checkout' | t }} <span aria-hidden="true">→</span></button>
-          <button class="native-cart__update" type="submit" name="update">{{ 'cart.update' | t }}</button>
+          <button type="submit" name="update" value="{{ 'cart.update' | t }}" data-cart-update hidden></button>
+          <noscript><button class="native-cart__fallback-update" type="submit" name="update">{{ 'cart.update' | t }}</button></noscript>
+          <p class="sr-only" aria-live="polite" data-cart-status></p>
           <p class="native-cart__note">{{ 'cart.checkout_note' | t }}</p>
         </aside>
       </form>
@@ -89,8 +91,8 @@
   .native-cart__summary button { width: 100%; min-height: 54px; padding: 0 20px; border-radius: 0; cursor: pointer; font-size: 11px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; transition: background-color .25s, color .25s, transform .25s var(--ease); }
   .native-cart__summary button:hover { transform: translateY(-2px); }
   .native-cart__checkout { display: flex; align-items: center; justify-content: space-between; border: 1px solid var(--silver-1); background: var(--silver-1); color: var(--ink); }
-  .native-cart__update { margin-top: 10px; border: 1px solid var(--graphite); background: transparent; color: var(--silver-1); }
-  .native-cart__update:hover { border-color: var(--silver-2); }
+  .native-cart__fallback-update { margin-top: 10px; border: 1px solid var(--graphite); background: transparent; color: var(--silver-1); }
+  .native-cart__layout.is-updating .native-cart__summary { opacity: .82; }
   .native-cart__note { margin: 18px 0 0; color: var(--silver-3); font-size: 10px; line-height: 1.55; text-align: center; }
   .native-cart__empty { min-height: 330px; padding: clamp(50px, 8vw, 96px) 0; display: flex; flex-direction: column; align-items: flex-start; }
   .native-cart__empty p { max-width: 22ch; margin: 0 0 26px; font-family: "Bodoni Moda", serif; font-size: clamp(24px, 3vw, 36px); line-height: 1.25; }
@@ -99,5 +101,39 @@
   @media (max-width: 600px) { .native-cart { padding-inline: 16px; } .native-cart__heading { align-items: flex-start; flex-direction: column; gap: 10px; } .native-cart__heading h1 { font-size: 58px; } .native-cart__heading > a { min-height: 36px; } .native-cart__item { grid-template-columns: 104px minmax(0, 1fr); gap: 16px; } .native-cart__item--without-image { grid-template-columns: 1fr; } .native-cart__image img { width: 104px; height: 104px; } .native-cart__purchase { grid-column: 2; min-width: 0; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; } .native-cart__item--without-image .native-cart__purchase { grid-column: 1; } .native-cart__purchase label { justify-items: start; } .native-cart__summary { padding: 24px 20px; } }
   @media (prefers-reduced-motion: reduce) { .native-cart__heading > a span, .native-cart__image img, .native-cart__summary button { transition: none; } }
 {% endstylesheet %}
+
+{% javascript %}
+  document.querySelectorAll('[data-cart-form]').forEach((form) => {
+    const updateButton = form.querySelector('[data-cart-update]');
+    const status = form.querySelector('[data-cart-status]');
+    const quantityInputs = form.querySelectorAll('[data-cart-quantity]');
+    let updateTimer;
+    let isUpdating = false;
+
+    const submitUpdate = () => {
+      window.clearTimeout(updateTimer);
+      if (isUpdating || !updateButton) return;
+      if ([...quantityInputs].some((input) => !input.checkValidity())) return;
+
+      isUpdating = true;
+      form.classList.add('is-updating');
+      form.setAttribute('aria-busy', 'true');
+      if (status) status.textContent = form.dataset.updatingLabel;
+      form.requestSubmit(updateButton);
+    };
+
+    quantityInputs.forEach((input) => {
+      input.addEventListener('input', () => {
+        window.clearTimeout(updateTimer);
+        updateTimer = window.setTimeout(submitUpdate, 600);
+      });
+      input.addEventListener('change', submitUpdate);
+    });
+
+    form.querySelector('[name="checkout"]')?.addEventListener('click', () => {
+      window.clearTimeout(updateTimer);
+    });
+  });
+{% endjavascript %}
 
 {% schema %}{"name":"Main cart","settings":[]}{% endschema %}

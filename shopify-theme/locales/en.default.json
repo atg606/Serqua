@@ -85,6 +85,7 @@
     "order_summary": "Order summary",
     "checkout_note": "Taxes and shipping are calculated at checkout.",
     "update": "Update bag",
+    "updating": "Updating bag",
     "checkout": "Secure checkout"
   },
   "help": {
