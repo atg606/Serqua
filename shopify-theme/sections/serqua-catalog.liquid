@@ -1,0 +1,134 @@
+{%- liquid
+  assign first_product = section.settings.product_one
+  assign second_product = section.settings.product_two
+  if first_product == blank
+    assign first_product = collections.all.products.first
+  endif
+  if second_product == blank
+    assign second_product = collections.all.products[1]
+  endif
+  if second_product == blank
+    assign second_product = first_product
+  endif
+-%}
+
+<section class="catalog-hero" aria-labelledby="catalog-title">
+  <div class="catalog-hero__copy">
+    <p>{{ 'catalog.issue' | t }}</p>
+    <h1 id="catalog-title">{{ 'catalog.title' | t }}</h1>
+    <div class="catalog-hero__intro">
+      <span>{{ 'catalog.season' | t }}</span>
+      <p>{{ 'catalog.intro' | t }}</p>
+    </div>
+  </div>
+  <div class="catalog-hero__media">
+    {% if section.settings.hero_image != blank %}
+      {{ section.settings.hero_image | image_url: width: 2200 | image_tag: widths: '750, 1100, 1500, 1900, 2200', sizes: '(min-width: 900px) 58vw, 100vw', loading: 'eager', fetchpriority: 'high', alt: section.settings.hero_image.alt }}
+    {% else %}
+      <img src="{{ 'official-prollegen-hero-warm.png' | asset_url }}" width="1672" height="941" alt="{{ 'catalog.hero_alt' | t }}" loading="eager" fetchpriority="high">
+    {% endif %}
+  </div>
+</section>
+
+<section class="catalog-manifesto" aria-labelledby="catalog-manifesto-title">
+  <p>{{ 'catalog.formula_label' | t }}</p>
+  <h2 id="catalog-manifesto-title">{{ 'catalog.formula_title' | t }}</h2>
+  <p>{{ 'catalog.formula_copy' | t }}</p>
+</section>
+
+<section class="catalog-stories" aria-label="{{ 'catalog.stories_label' | t }}">
+  <article class="catalog-story catalog-story--large">
+    <div class="catalog-story__media">
+      {% if section.settings.story_image_one != blank %}
+        {{ section.settings.story_image_one | image_url: width: 1800 | image_tag: widths: '600, 900, 1200, 1500, 1800', sizes: '(min-width: 900px) 61vw, 100vw', loading: 'lazy', alt: section.settings.story_image_one.alt }}
+      {% else %}
+        <img src="{{ 'official-prollegen-products.jpeg' | asset_url }}" width="1536" height="1024" alt="{{ 'catalog.story_one_alt' | t }}" loading="lazy">
+      {% endif %}
+    </div>
+    <div class="catalog-story__copy">
+      <span>01</span>
+      <div><h3>{{ 'catalog.story_one_title' | t }}</h3><p>{{ 'catalog.story_one_copy' | t }}</p></div>
+    </div>
+  </article>
+
+  <article class="catalog-story catalog-story--portrait">
+    <div class="catalog-story__media">
+      {% if section.settings.story_image_two != blank %}
+        {{ section.settings.story_image_two | image_url: width: 1400 | image_tag: widths: '500, 750, 1000, 1400', sizes: '(min-width: 900px) 39vw, 100vw', loading: 'lazy', alt: section.settings.story_image_two.alt }}
+      {% else %}
+        <img src="{{ 'prollegen-open-scoop.png' | asset_url }}" width="1254" height="1254" alt="{{ 'catalog.story_two_alt' | t }}" loading="lazy">
+      {% endif %}
+    </div>
+    <div class="catalog-story__copy">
+      <span>02</span>
+      <div><h3>{{ 'catalog.story_two_title' | t }}</h3><p>{{ 'catalog.story_two_copy' | t }}</p></div>
+    </div>
+  </article>
+
+  <article class="catalog-story catalog-story--wide">
+    <div class="catalog-story__copy">
+      <span>03</span>
+      <div><h3>{{ 'catalog.story_three_title' | t }}</h3><p>{{ 'catalog.story_three_copy' | t }}</p></div>
+    </div>
+    <div class="catalog-story__media">
+      {% if section.settings.story_image_three != blank %}
+        {{ section.settings.story_image_three | image_url: width: 2000 | image_tag: widths: '700, 1000, 1400, 1800, 2000', sizes: '100vw', loading: 'lazy', alt: section.settings.story_image_three.alt }}
+      {% else %}
+        <img src="{{ 'serqua-lifestyle.png' | asset_url }}" width="1448" height="1086" alt="{{ 'catalog.story_three_alt' | t }}" loading="lazy">
+      {% endif %}
+    </div>
+  </article>
+</section>
+
+<section class="catalog-products" aria-labelledby="catalog-products-title">
+  <header>
+    <div><p>{{ 'catalog.shop_label' | t }}</p><h2 id="catalog-products-title">{{ 'catalog.shop_title' | t }}</h2></div>
+    <a href="{{ routes.all_products_collection_url }}">{{ 'catalog.shop_all' | t }} <span aria-hidden="true">→</span></a>
+  </header>
+  <div class="catalog-products__grid">
+    {% for featured_product in collections.all.products limit: 2 %}
+      <article class="catalog-product">
+        <a class="catalog-product__image" href="{{ featured_product.url }}">
+          {% if featured_product.featured_image %}
+            {{ featured_product.featured_image | image_url: width: 1200 | image_tag: widths: '400, 650, 900, 1200', sizes: '(min-width: 700px) 50vw, 100vw', loading: 'lazy', alt: featured_product.featured_image.alt }}
+          {% endif %}
+        </a>
+        <div class="catalog-product__info">
+          <div><p>{{ featured_product.vendor | default: shop.name }}</p><h3><a href="{{ featured_product.url }}">{{ featured_product.title }}</a></h3></div>
+          <strong>{{ featured_product.price | money }}</strong>
+        </div>
+        {% if featured_product.available %}
+          {% form 'product', featured_product, class: 'catalog-product__form' %}
+            <input type="hidden" name="id" value="{{ featured_product.selected_or_first_available_variant.id }}">
+            <input type="hidden" name="quantity" value="1">
+            <button type="submit">{{ 'products.add_to_cart' | t }} <span aria-hidden="true">＋</span></button>
+          {% endform %}
+        {% else %}
+          <span class="catalog-product__sold-out">{{ 'products.sold_out' | t }}</span>
+        {% endif %}
+      </article>
+    {% else %}
+      <p>{{ 'collection.empty' | t }}</p>
+    {% endfor %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .catalog-hero{padding:clamp(34px,5vw,76px) max(20px,calc((100vw - 1440px)/2 + 42px)) 0;background:#f4f4f2}.catalog-hero__copy{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(260px,.55fr);gap:clamp(35px,8vw,120px);align-items:end;padding-bottom:clamp(30px,4vw,58px)}.catalog-hero__copy>p,.catalog-products header p,.catalog-manifesto>p:first-child{margin:0;align-self:start;font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}.catalog-hero h1{grid-row:2;margin:0;max-width:9ch;font-family:"Barlow Condensed",sans-serif;font-size:clamp(82px,13vw,188px);font-weight:600;line-height:.74;letter-spacing:-.04em;text-transform:uppercase}.catalog-hero__intro{grid-column:2;grid-row:2;align-self:end}.catalog-hero__intro span{display:block;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid #aaa;font-size:10px;font-weight:800;letter-spacing:.11em;text-transform:uppercase}.catalog-hero__intro p{margin:0;color:#4d4d4d;font-size:clamp(14px,1.35vw,18px);line-height:1.65}.catalog-hero__media{height:min(66vw,840px);overflow:hidden;background:#111}.catalog-hero__media img{width:100%;height:100%;display:block;object-fit:cover;object-position:center}.catalog-manifesto{padding:clamp(80px,11vw,160px) max(20px,calc((100vw - 1440px)/2 + 42px));display:grid;grid-template-columns:.42fr 1.15fr .63fr;gap:clamp(30px,5vw,80px);align-items:start;color:#f5f5f3;background:#090a0b}.catalog-manifesto h2{margin:0;max-width:12ch;font-family:"Barlow Condensed",sans-serif;font-size:clamp(54px,7vw,104px);font-weight:600;line-height:.86;letter-spacing:-.025em;text-transform:uppercase}.catalog-manifesto>p:last-child{max-width:37ch;margin:0;color:#b7b7b7;font-size:clamp(14px,1.2vw,17px);line-height:1.75}.catalog-stories{display:grid;grid-template-columns:1.45fr .9fr;background:#f4f4f2}.catalog-story{min-width:0}.catalog-story--large{border-right:1px solid #a8a8a8}.catalog-story--wide{grid-column:1/-1;padding-top:clamp(70px,9vw,130px);display:grid;grid-template-columns:.62fr 1.38fr;border-top:1px solid #a8a8a8}.catalog-story__media{overflow:hidden;background:#cfcfcd}.catalog-story--large .catalog-story__media{aspect-ratio:1.1}.catalog-story--portrait .catalog-story__media{aspect-ratio:.82}.catalog-story--wide .catalog-story__media{aspect-ratio:1.8}.catalog-story__media img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}.catalog-story:hover .catalog-story__media img{transform:scale(1.018)}.catalog-story__copy{padding:clamp(22px,3.2vw,46px);display:grid;grid-template-columns:36px 1fr;gap:15px}.catalog-story__copy>span{padding-top:7px;color:#666;font-size:10px;font-weight:700}.catalog-story__copy h3{margin:0 0 12px;font-family:"Barlow Condensed",sans-serif;font-size:clamp(34px,4vw,58px);font-weight:600;line-height:.92;text-transform:uppercase}.catalog-story__copy p{max-width:44ch;margin:0;color:#555;font-size:13px;line-height:1.7}.catalog-story--wide>.catalog-story__copy{padding:clamp(35px,6vw,90px)}.catalog-products{padding:clamp(75px,10vw,140px) max(20px,calc((100vw - 1440px)/2 + 42px));background:#fff}.catalog-products>header{margin-bottom:38px;padding-bottom:26px;display:flex;align-items:end;justify-content:space-between;gap:30px;border-bottom:1px solid #111}.catalog-products h2{margin:7px 0 0;font-family:"Barlow Condensed",sans-serif;font-size:clamp(50px,7vw,88px);font-weight:600;line-height:.9;text-transform:uppercase}.catalog-products>header>a{padding-bottom:7px;border-bottom:1px solid #111;font-size:11px;font-weight:800;text-transform:uppercase}.catalog-products__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:#bcbcbc}.catalog-product{padding:clamp(20px,3vw,38px);display:grid;grid-template-columns:1fr auto;gap:22px;background:#f2f2f0}.catalog-product__image{grid-column:1/-1;aspect-ratio:1.08;overflow:hidden;background:#d6d6d4}.catalog-product__image img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .6s ease}.catalog-product__image:hover img{transform:scale(1.02)}.catalog-product__info{grid-column:1/-1;display:flex;align-items:start;justify-content:space-between;gap:20px}.catalog-product__info p{margin:0 0 6px;color:#666;font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.catalog-product__info h3{margin:0;font-size:clamp(22px,2vw,30px);letter-spacing:-.025em}.catalog-product__info strong{font-size:15px;white-space:nowrap}.catalog-product__form{grid-column:1/-1}.catalog-product__form button,.catalog-product__sold-out{width:100%;min-height:52px;padding:0 17px;display:flex;align-items:center;justify-content:space-between;border:1px solid #111;border-radius:0;color:#fff;background:#090a0b;font-size:10px;font-weight:800;text-transform:uppercase}.catalog-product__sold-out{grid-column:1/-1;color:#555;background:transparent}@media(max-width:800px){.catalog-hero__copy,.catalog-manifesto{grid-template-columns:1fr}.catalog-hero h1,.catalog-hero__intro{grid-column:1;grid-row:auto}.catalog-hero__media{height:74vw;min-height:360px}.catalog-manifesto{gap:30px}.catalog-stories{grid-template-columns:1fr}.catalog-story--large{border-right:0;border-bottom:1px solid #a8a8a8}.catalog-story--portrait .catalog-story__media{aspect-ratio:1}.catalog-story--wide{grid-column:1;grid-template-columns:1fr;padding-top:55px}.catalog-story--wide .catalog-story__copy{order:2}.catalog-story--wide .catalog-story__media{aspect-ratio:1.1}.catalog-products__grid{grid-template-columns:1fr}}@media(max-width:520px){.catalog-hero{padding-top:28px}.catalog-hero h1{font-size:clamp(72px,25vw,112px)}.catalog-hero__intro{max-width:34ch}.catalog-hero__media{margin-left:-20px;margin-right:-20px}.catalog-products>header{align-items:start;flex-direction:column}.catalog-story__copy{grid-template-columns:28px 1fr}.catalog-product{padding:14px}}
+  @media(prefers-reduced-motion:reduce){.catalog-story__media img,.catalog-product__image img{transition:none}.catalog-story:hover .catalog-story__media img,.catalog-product__image:hover img{transform:none}}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Serqua catalog",
+  "settings": [
+    {"type":"image_picker","id":"hero_image","label":"Hero image"},
+    {"type":"image_picker","id":"story_image_one","label":"Story image 1"},
+    {"type":"image_picker","id":"story_image_two","label":"Story image 2"},
+    {"type":"image_picker","id":"story_image_three","label":"Story image 3"},
+    {"type":"product","id":"product_one","label":"Featured product 1"},
+    {"type":"product","id":"product_two","label":"Featured product 2"}
+  ],
+  "presets": [{"name":"Serqua catalog"}]
+}
+{% endschema %}

@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "serqua-catalog",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}
