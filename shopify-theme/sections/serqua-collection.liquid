@@ -1,7 +1,26 @@
+{{ 'community.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'community.js' | asset_url }}" defer></script>
 {% liquid
   assign current_sort = collection.sort_by | default: collection.default_sort_by
   assign product_count = collection.products_count
 %}
+
+<section class="shop-community" aria-label="Serqua community campaign" aria-roledescription="carousel" data-community-carousel>
+        <div class="shop-community__viewport">
+        <figure class="shop-community__slide" data-community-slide aria-hidden="true">
+          <img src="{{ 'shop-community-women.jpg' | asset_url }}" alt="Five women from the Serqua community with Prollagen products" width="2400" height="1560" loading="eager" fetchpriority="high" />
+        </figure>
+        <figure class="shop-community__slide shop-community__slide--product is-active" data-community-slide aria-hidden="false">
+          <img src="{{ 'shop-community-product.jpg' | asset_url }}" alt="Prollagen Bourbon Vanilla jar surrounded by a vanilla cream splash" width="1536" height="1024" loading="eager" />
+        </figure>
+        <figure class="shop-community__slide" data-community-slide aria-hidden="true">
+          <img src="{{ 'shop-community-men.jpeg' | asset_url }}" alt="Five men from the Serqua community with Prollagen products" width="1600" height="1200" loading="eager" />
+        </figure>
+        </div>
+        <button class="shop-community__arrow shop-community__arrow--previous" type="button" aria-label="Show previous campaign image" data-community-previous>←</button>
+        <button class="shop-community__arrow shop-community__arrow--next" type="button" aria-label="Show next campaign image" data-community-next>→</button>
+        <p class="shop-community__count" aria-live="polite"><span data-community-current>02</span> / 03</p>
+      </section>
 
 <section class="collection" id="products" aria-labelledby="collection-title-{{ section.id }}">
   <div class="shop-layout">

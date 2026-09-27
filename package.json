@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
+    "theme:sync": "node scripts/sync-storefront-theme.mjs && node scripts/build-theme-assistant.mjs",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"

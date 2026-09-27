@@ -1,0 +1,20 @@
+.shop-community { position: relative; width: 100%; height: clamp(360px, 36vw, 680px); overflow: hidden; background: var(--white); border-bottom: 1px solid var(--ink); }
+.shop-community__viewport { position: absolute; inset: 0; overflow: hidden; }
+.shop-community__slide { position: absolute; inset: 0; margin: 0; background: var(--white); opacity: 0; visibility: hidden; transform: translateX(3%); transition: opacity .55s var(--ease), transform .7s var(--ease), visibility 0s linear .7s; }
+.shop-community__slide.is-active { z-index: 1; opacity: 1; visibility: visible; transform: translateX(0); transition-delay: 0s; }
+.shop-community__slide img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center 18%; }
+.shop-community__slide--product { background: var(--black); }
+.shop-community__slide--product img { object-fit: contain; object-position: center; }
+.shop-community__arrow { position: absolute; z-index: 2; top: 50%; width: 52px; height: 52px; padding: 0; display: grid; place-items: center; border: 1px solid var(--ink); border-radius: 0; color: var(--ink); background: var(--white); font-size: 25px; line-height: 1; transform: translateY(-50%); transition: color .2s, background-color .2s; }
+.shop-community__arrow:hover { color: var(--white); background: var(--black); }
+.shop-community__arrow--previous { left: clamp(14px, 2.4vw, 36px); }
+.shop-community__arrow--next { right: clamp(14px, 2.4vw, 36px); }
+.shop-community__count { position: absolute; z-index: 2; left: 50%; bottom: clamp(14px, 2.4vw, 34px); margin: 0; padding: 8px 12px; color: var(--white); background: var(--black); font-size: 10px; font-weight: 700; letter-spacing: .13em; transform: translateX(-50%); }
+@media(max-width:650px){
+  .shop-community { height: clamp(260px, 66vw, 360px); }
+  .shop-community__arrow { top: auto; bottom: 14px; width: 44px; height: 44px; transform: none; }
+  .shop-community__arrow--previous { left: 14px; }
+  .shop-community__arrow--next { right: 14px; }
+  .shop-community__count { bottom: 24px; }
+}
+@media(prefers-reduced-motion:reduce){.shop-community__slide{transition:none;transform:none}}

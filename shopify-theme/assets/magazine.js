@@ -24,10 +24,12 @@ if (slider) {
   previousButton?.addEventListener('click', () => showSlide(activeIndex - 1));
   nextButton?.addEventListener('click', () => showSlide(activeIndex + 1));
   slider.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') event.preventDefault();
     if (event.key === 'ArrowLeft') showSlide(activeIndex - 1);
     if (event.key === 'ArrowRight') showSlide(activeIndex + 1);
   });
   slider.addEventListener('pointerdown', (event) => {
+    if (event.target.closest('button')) return;
     pointerStart = event.clientX;
     slider.setPointerCapture(event.pointerId);
   });
@@ -54,11 +56,9 @@ if (editorial) {
   let page = 0;
   let touchStart = null;
   function turnPage(index) {
-    page = Math.max(0, Math.min(index, pages.length - 1));
+    page = (index + pages.length) % pages.length;
     pages.forEach((figure, i) => { figure.hidden = i !== page; });
     count.textContent = `${String(page + 1).padStart(2, '0')} / ${String(pages.length).padStart(2, '0')}`;
-    previous.disabled = page === 0;
-    next.disabled = page === pages.length - 1;
   }
   previous.addEventListener('click', () => turnPage(page - 1));
   next.addEventListener('click', () => turnPage(page + 1));
