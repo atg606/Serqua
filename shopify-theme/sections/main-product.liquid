@@ -25,8 +25,7 @@
       {% endunless %}
       <label for="Quantity-{{ section.id }}">{{ 'cart.quantity' | t }}</label>
       <input id="Quantity-{{ section.id }}" type="number" name="quantity" value="1" min="1">
-      <button type="submit"{% unless current_variant.available %} disabled{% endunless %}>{% if current_variant.available %}{{ 'products.add_to_cart' | t }}{% else %}{{ 'products.sold_out' | t }}{% endif %}</button>
-      {{ form | payment_button }}
+      <button type="button" disabled>{{ 'products.coming_soon' | t }}</button>
     {% endform %}
   </div>
 </section>

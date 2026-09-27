@@ -1,5 +1,5 @@
 <section class="hero" id="top" aria-labelledby="hero-title-{{ section.id }}">
-  <img class="hero-image" src="{{ 'official-prollegen-hero-warm.png' | asset_url }}" width="1672" height="941" alt="{{ section.settings.hero_image_alt | escape }}">
+  <img class="hero-image" src="{{ 'prollagen-bourbon-hero-v2.jpeg' | asset_url }}" width="1536" height="1024" alt="{{ section.settings.hero_image_alt | escape }}">
   <div class="hero-shade"></div>
   <div class="hero-content">
     <p class="hero-product">{{ section.settings.hero_eyebrow }}</p>
@@ -14,7 +14,7 @@
     <span><strong>24g</strong>{{ section.settings.protein_label }}</span>
     <span><strong>Type I &amp; III</strong>{{ section.settings.collagen_label }}</span>
     <span><strong>120mg</strong>{{ section.settings.vitamin_label }}</span>
-    <span><strong>Dark vanilla</strong>{{ section.settings.flavour_label }}</span>
+    <span><strong>Bourbon vanilla</strong>{{ section.settings.flavour_label }}</span>
   </div>
 </section>
 
@@ -42,12 +42,12 @@
       {% render 'product-card', product: product, context: 'home' %}
     {% else %}
       <article class="product-card">
-        <div class="product-image product-large"><img src="{{ 'official-prollegen-1kg.png' | asset_url }}" width="1254" height="1254" alt="Prollegen one kilogram Bourbon Vanilla jar"></div>
-        <div class="product-details"><div><p class="product-size">PROL-1000</p><h3>Prollegen™ 1kg</h3></div><div class="product-buy"><p><del>₹5,499</del> <strong>₹4,499</strong></p><button class="add-button" type="button" disabled>{{ 'products.coming_soon' | t }}</button></div></div>
+        <div class="product-image product-large"><img src="{{ 'prollagen-bourbon-1kg.jpeg' | asset_url }}" width="1254" height="1254" alt="Prollagen one kilogram Bourbon Vanilla jar"></div>
+        <div class="product-details"><div><p class="product-size">PROL-1000</p><h3>Prollagen™ 1kg</h3></div><div class="product-buy"><p><del>₹6,499</del> <strong>₹5,499</strong></p><button class="add-button" type="button" disabled>{{ 'products.coming_soon' | t }}</button></div></div>
       </article>
       <article class="product-card">
-        <div class="product-image product-mini"><img src="{{ 'official-prollegen-500g.png' | asset_url }}" width="1254" height="1254" alt="Prollegen 500 gram Bourbon Vanilla jar"></div>
-        <div class="product-details"><div><p class="product-size">PROL-500</p><h3>Prollegen™ 500g</h3></div><div class="product-buy"><p><del>₹3,499</del> <strong>₹2,999</strong></p><button class="add-button" type="button" disabled>{{ 'products.coming_soon' | t }}</button></div></div>
+        <div class="product-image product-mini"><img src="{{ 'prollagen-bourbon-500g.jpeg' | asset_url }}" width="1254" height="1254" alt="Prollagen 500 gram Bourbon Vanilla jar"></div>
+        <div class="product-details"><div><p class="product-size">PROL-500</p><h3>Prollagen™ 500g</h3></div><div class="product-buy"><p><del>₹3,499</del> <strong>₹2,999</strong></p><button class="add-button" type="button" disabled>{{ 'products.coming_soon' | t }}</button></div></div>
       </article>
     {% endfor %}
   </div>
@@ -64,7 +64,7 @@
 </section>
 
 <section class="ingredients" id="ingredients" aria-labelledby="ingredients-title-{{ section.id }}">
-  <div class="ingredient-stage"><img src="{{ 'prollegen-open-scoop.png' | asset_url }}" width="1254" height="1254" alt="{{ section.settings.ingredients_image_alt | escape }}" loading="lazy"></div>
+  <div class="ingredient-stage"><img src="{{ 'prollagen-ingredient-science.jpeg' | asset_url }}" width="1254" height="1254" alt="{{ section.settings.ingredients_image_alt | escape }}" loading="lazy"></div>
   <div class="ingredient-copy">
     <p class="section-note">{{ section.settings.ingredients_eyebrow }}</p><h2 id="ingredients-title-{{ section.id }}">{{ section.settings.ingredients_title }}</h2>
     <ul>
@@ -91,12 +91,12 @@
 {
   "name": "Serqua homepage",
   "settings": [
-    { "type": "text", "id": "hero_eyebrow", "label": "Hero eyebrow", "default": "Introducing Prollegen™" },
-    { "type": "inline_richtext", "id": "hero_title", "label": "Hero title", "default": "Balance is power." },
+    { "type": "text", "id": "hero_eyebrow", "label": "Hero eyebrow", "default": "Introducing Prollagen™" },
+    { "type": "inline_richtext", "id": "hero_title", "label": "Hero title", "default": "Balanced, inside-out" },
     { "type": "textarea", "id": "hero_support", "label": "Hero supporting text", "default": "Protein and collagen, thoughtfully formulated for the body you train and the skin you live in." },
-    { "type": "text", "id": "hero_button", "label": "Hero button", "default": "Discover Prollegen" },
+    { "type": "text", "id": "hero_button", "label": "Hero button", "default": "Discover Prollagen" },
     { "type": "text", "id": "hero_link", "label": "Hero secondary link", "default": "Enter the Serqua world" },
-    { "type": "text", "id": "hero_image_alt", "label": "Hero image description", "default": "Prollegen Bourbon Vanilla jar with a metal scoop and warm studio spotlight" },
+    { "type": "text", "id": "hero_image_alt", "label": "Hero image description", "default": "Prollagen Bourbon Vanilla jar with a vanilla splash" },
     { "type": "text", "id": "formula_label", "label": "Formula accessibility label", "default": "Key product information" },
     { "type": "text", "id": "protein_label", "label": "Protein label", "default": "Protein" },
     { "type": "text", "id": "collagen_label", "label": "Collagen label", "default": "Collagen" },
@@ -108,20 +108,20 @@
     { "type": "textarea", "id": "world_copy", "label": "World copy", "default": "We bridge fitness and beauty without choosing a side—supporting performance, recovery, skin, joints and everyday wellbeing." },
     { "type": "text", "id": "world_link", "label": "World link", "default": "Why Serqua" },
     { "type": "text", "id": "shop_eyebrow", "label": "Shop eyebrow", "default": "Better skin. Better lifts." },
-    { "type": "text", "id": "shop_title", "label": "Shop title", "default": "Introducing Serqua." },
+    { "type": "text", "id": "shop_title", "label": "Shop title", "default": "Introducing Prollagen." },
     { "type": "text", "id": "shop_manifesto", "label": "Shop statement", "default": "Premium nutrition." },
     { "type": "text", "id": "shop_manifesto_copy", "label": "Shop statement copy", "default": "One upgraded daily ritual." },
     { "type": "collection", "id": "featured_collection", "label": "Featured collection" },
     { "type": "text", "id": "benefits_eyebrow", "label": "Benefits eyebrow", "default": "One daily formula" },
     { "type": "text", "id": "benefits_title", "label": "Benefits title", "default": "Made for more than the mirror." },
-    { "type": "textarea", "id": "benefits_copy", "label": "Benefits copy", "default": "Prollegen™ combines whey protein isolate and collagen peptides with selected nutrients for performance, recovery and beauty." },
+    { "type": "textarea", "id": "benefits_copy", "label": "Benefits copy", "default": "Prollagen™ combines whey protein isolate and collagen peptides with selected nutrients for performance, recovery and beauty." },
     { "type": "text", "id": "ingredients_eyebrow", "label": "Ingredients eyebrow", "default": "Inside every scoop" },
-    { "type": "text", "id": "ingredients_title", "label": "Ingredients title", "default": "A considered blend." },
-    { "type": "text", "id": "ingredients_image_alt", "label": "Ingredients image description", "default": "Open Prollegen jar with a suspended scoop of powder" },
-    { "type": "textarea", "id": "formula_note", "label": "Formula note", "default": "*Dark vanilla is the planned launch flavour; exact naming and final formulation remain subject to approval." },
+    { "type": "text", "id": "ingredients_title", "label": "Ingredients title", "default": "Science, Skin and Strength" },
+    { "type": "text", "id": "ingredients_image_alt", "label": "Ingredients image description", "default": "Open Prollagen jar with a suspended scoop of powder" },
+    { "type": "textarea", "id": "formula_note", "label": "Formula note", "default": "*Bourbon vanilla is the planned launch flavour; exact naming and final formulation remain subject to approval." },
     { "type": "text", "id": "social_title", "label": "Social title", "default": "Inside the Serqua world." },
     { "type": "url", "id": "instagram_url", "label": "Instagram URL" },
-    { "type": "text", "id": "instagram_label", "label": "Instagram label", "default": "Follow @serquaworld" }
+    { "type": "text", "id": "instagram_label", "label": "Instagram label", "default": "Follow @serqua.in" }
   ],
   "presets": [{ "name": "Serqua homepage" }]
 }

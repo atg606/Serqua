@@ -49,6 +49,19 @@ h1, h2, h3, p { text-wrap: pretty; }
 .mobile-nav { position: fixed; inset: calc(34px + var(--header)) 0 0; z-index: var(--z-drawer); padding: 34px 24px; color: var(--silver-1); background: var(--black); }
 .mobile-nav a, .mobile-nav button { width: 100%; padding: 19px 0; display: block; border: 0; border-bottom: 1px solid var(--graphite); background: transparent; font-family: "Barlow Condensed", sans-serif; font-size: 38px; font-weight: 500; line-height: 1; text-align: left; text-transform: uppercase; }
 
+.shop-community { position: relative; width: 100%; height: clamp(360px, 36vw, 680px); overflow: hidden; background: var(--white); border-bottom: 1px solid var(--ink); }
+.shop-community__viewport { position: absolute; inset: 0; overflow: hidden; }
+.shop-community__slide { position: absolute; inset: 0; margin: 0; background: var(--white); opacity: 0; visibility: hidden; transform: translateX(3%); transition: opacity .55s var(--ease), transform .7s var(--ease), visibility 0s linear .7s; }
+.shop-community__slide.is-active { z-index: 1; opacity: 1; visibility: visible; transform: translateX(0); transition-delay: 0s; }
+.shop-community__slide img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center 18%; }
+.shop-community__slide--product { background: var(--black); }
+.shop-community__slide--product img { object-fit: contain; object-position: center; }
+.shop-community__arrow { position: absolute; z-index: 2; top: 50%; width: 52px; height: 52px; padding: 0; display: grid; place-items: center; border: 1px solid var(--ink); border-radius: 0; color: var(--ink); background: var(--white); font-size: 25px; line-height: 1; transform: translateY(-50%); transition: color .2s, background-color .2s; }
+.shop-community__arrow:hover { color: var(--white); background: var(--black); }
+.shop-community__arrow--previous { left: clamp(14px, 2.4vw, 36px); }
+.shop-community__arrow--next { right: clamp(14px, 2.4vw, 36px); }
+.shop-community__count { position: absolute; z-index: 2; left: 50%; bottom: clamp(14px, 2.4vw, 34px); margin: 0; padding: 8px 12px; color: var(--white); background: var(--black); font-size: 10px; font-weight: 700; letter-spacing: .13em; transform: translateX(-50%); }
+
 .collection { padding: 0 max(20px, calc((100vw - var(--max)) / 2 + 54px)) 0 0; background: var(--silver-1); }
 .shop-layout { display: grid; grid-template-columns: clamp(250px, 23vw, 330px) minmax(0, 1fr); gap: clamp(34px, 5vw, 74px); }
 .catalog-sidebar { min-height: 100%; padding: clamp(38px, 4.5vw, 68px) 24px clamp(90px, 9vw, 130px) max(24px, calc((100vw - var(--max)) / 2 + 54px)); background: var(--silver-2); }
@@ -121,7 +134,7 @@ h1, h2, h3, p { text-wrap: pretty; }
 
 body > footer { padding: clamp(70px, 9vw, 120px) max(20px, calc((100vw - var(--max)) / 2 + 74px)) 28px; color: var(--silver-1); background: oklch(0.04 0 0); }
 .footer-lead { padding-bottom: 70px; display: flex; align-items: end; justify-content: space-between; gap: 45px; border-bottom: 1px solid var(--graphite); }
-.footer-lead .wordmark { font-size: clamp(62px, 10vw, 130px); line-height: .78; }
+.footer-lead .wordmark { font-size: clamp(62px, 10vw, 130px); line-height: .78; width: clamp(190px, 30vw, 390px); max-width: 100%; height: auto; aspect-ratio: 12 / 5; flex-shrink: 0; }
 .footer-lead p { max-width: 43ch; margin: 0; color: var(--silver-3); font-size: 13px; }
 .footer-links { padding: 55px 0 70px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
 .footer-links div { display: flex; flex-direction: column; align-items: start; gap: 13px; }
@@ -220,6 +233,12 @@ dialog::backdrop { background: oklch(0.03 0 0 / .72); backdrop-filter: blur(4px)
 }
 
 @media (max-width: 650px) {
+  .shop-community { height: clamp(260px, 66vw, 360px); }
+  .shop-community__arrow { top: auto; bottom: 14px; width: 44px; height: 44px; transform: none; }
+  .shop-community__arrow--previous { left: 14px; }
+  .shop-community__arrow--next { right: 14px; }
+  .shop-community__count { bottom: 24px; }
+
   .announcement { min-height: 32px; font-size: 9px; }
   .announcement p:nth-of-type(2), .announcement span { display: none; }
   .site-header { padding-inline: 16px; }
@@ -251,6 +270,7 @@ dialog::backdrop { background: oklch(0.03 0 0 / .72); backdrop-filter: blur(4px)
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .shop-community__slide { transform: none; transition-duration: .01ms; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }

@@ -25,6 +25,74 @@ document.querySelectorAll('[data-auto-submit]').forEach((select) => {
   select.addEventListener('change', () => select.form.submit());
 });
 
+const cartAddButtons = document.querySelectorAll('[data-cart-add]');
+const shopRoot = window.Shopify?.routes?.root || '/';
+
+const updateCartFeedback = (cart) => {
+  const totalQuantity = Number(cart.item_count) || 0;
+  document.querySelectorAll('.cart-count').forEach((count) => {
+    count.textContent = String(totalQuantity);
+  });
+
+  cartAddButtons.forEach((button) => {
+    const variantId = String(button.dataset.variantId);
+    const quantity = cart.items
+      .filter((item) => String(item.variant_id) === variantId)
+      .reduce((total, item) => total + item.quantity, 0);
+    const defaultLabel = button.dataset.defaultLabel || 'Add to bag';
+    button.textContent = quantity ? `In bag · ${quantity}` : defaultLabel;
+    button.setAttribute(
+      'aria-label',
+      quantity ? `Add another item; ${quantity} currently in bag` : defaultLabel,
+    );
+  });
+};
+
+cartAddButtons.forEach((button) => {
+  const form = button.closest('form');
+  if (!form) return;
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (button.disabled) return;
+
+    button.disabled = true;
+    button.setAttribute('aria-busy', 'true');
+
+    let itemAdded = false;
+
+    try {
+      const addResponse = await fetch(`${shopRoot}cart/add.js`, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: new FormData(form),
+      });
+      if (!addResponse.ok) throw new Error('Unable to add item');
+      itemAdded = true;
+
+      const cartResponse = await fetch(`${shopRoot}cart.js`, {
+        headers: { Accept: 'application/json' },
+      });
+      if (!cartResponse.ok) throw new Error('Unable to refresh bag');
+      updateCartFeedback(await cartResponse.json());
+    } catch {
+      if (itemAdded) window.location.reload();
+      else form.submit();
+      return;
+    } finally {
+      button.disabled = false;
+      button.removeAttribute('aria-busy');
+    }
+  });
+});
+
+if (cartAddButtons.length) {
+  fetch(`${shopRoot}cart.js`, { headers: { Accept: 'application/json' } })
+    .then((response) => response.ok ? response.json() : null)
+    .then((cart) => { if (cart) updateCartFeedback(cart); })
+    .catch(() => {});
+}
+
 const quickDialog = document.querySelector('#quick-view');
 
 if (quickDialog) {
@@ -50,7 +118,7 @@ if (quickDialog) {
     quickSku.textContent = trigger.dataset.productSku;
     quickVariant.value = trigger.dataset.productVariant;
     quickLink.href = trigger.dataset.productUrl;
-    quickAdd.disabled = trigger.dataset.productAvailable !== 'true';
+    quickAdd.disabled = true;
     quickDialog.querySelector('[name="quantity"]').value = '1';
     quickDialog.showModal();
     document.body.classList.add('dialog-open');

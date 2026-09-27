@@ -45,7 +45,7 @@
             <div><dt>{{ 'cart.subtotal' | t }}</dt><dd>{{ cart.total_price | money }}</dd></div>
             <div><dt>{{ 'cart.shipping' | t }}</dt><dd>{{ 'cart.calculated_checkout' | t }}</dd></div>
           </dl>
-          <button class="native-cart__checkout" type="submit" name="checkout">{{ 'cart.checkout' | t }} <span aria-hidden="true">→</span></button>
+          <button class="native-cart__checkout" type="button" disabled>{{ 'products.coming_soon' | t }}</button>
           <button type="submit" name="update" value="{{ 'cart.update' | t }}" data-cart-update hidden></button>
           <noscript><button class="native-cart__fallback-update" type="submit" name="update">{{ 'cart.update' | t }}</button></noscript>
           <p class="sr-only" aria-live="polite" data-cart-status></p>

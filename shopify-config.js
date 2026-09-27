@@ -1,4 +1,14 @@
 export const SHOPIFY_STORE_URL = "https://jmkeq0-bd.myshopify.com";
+export const SHOPIFY_STOREFRONT_DOMAIN = "serqua.in";
+
+// Public Customer Account API credentials. The client ID is intentionally read
+// from Vite's public environment; never place a Shopify client secret here.
+export const SHOPIFY_CUSTOMER_ACCOUNT_CLIENT_ID =
+  import.meta.env.VITE_SHOPIFY_CUSTOMER_ACCOUNT_CLIENT_ID || "";
+
+export const SHOPIFY_CUSTOMER_ACCOUNT_REDIRECT_URI =
+  import.meta.env.VITE_SHOPIFY_CUSTOMER_ACCOUNT_REDIRECT_URI ||
+  "https://serqua.in/customer-auth/callback/";
 
 export const SHOPIFY_VARIANT_IDS = {
   "PROL-1000": "54664027799827",

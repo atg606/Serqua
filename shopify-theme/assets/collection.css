@@ -44,7 +44,9 @@ h1, h2, h3, p { text-wrap: pretty; }
 .header-actions { justify-self: end; display: flex; align-items: center; gap: 20px; }
 .account-link { display: flex; align-items: center; gap: 7px; color: var(--silver-3); font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 .account-link svg { width: 18px; fill: none; stroke: currentColor; stroke-width: 1.6; }
-.cart-button { min-height: 38px; padding: 0; border: 0; background: transparent; color: var(--silver-1); font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.cart-button { min-height: 38px; padding: 0; border: 0; background: transparent; color: var(--silver-1); font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; display: inline-flex; align-items: center; }
+.cart-button .cart-text { display: none; }
+.cart-button .cart-icon { width: 19px; height: 19px; flex-shrink: 0; }
 .cart-count { min-width: 22px; height: 22px; margin-left: 7px; padding: 0 6px; border-radius: 999px; display: inline-grid; place-items: center; background: var(--silver-1); color: var(--ink); font-size: 9px; }
 .menu-button { display: none; width: 38px; height: 38px; padding: 10px 7px; border: 0; background: transparent; }
 .menu-button span:not(.sr-only) { display: block; width: 22px; height: 1px; margin: 3px 0; background: currentColor; transition: transform .25s, opacity .2s; }
@@ -123,7 +125,7 @@ h1, h2, h3, p { text-wrap: pretty; }
 
 body > footer { padding: clamp(70px, 9vw, 120px) max(20px, calc((100vw - var(--max)) / 2 + 74px)) 28px; color: var(--silver-1); background: oklch(0.04 0 0); }
 .footer-lead { padding-bottom: 70px; display: flex; align-items: end; justify-content: space-between; gap: 45px; border-bottom: 1px solid var(--graphite); }
-.footer-lead .wordmark { font-size: clamp(62px, 10vw, 130px); line-height: .78; }
+.footer-lead .wordmark { font-size: clamp(62px, 10vw, 130px); line-height: .78; width: clamp(190px, 30vw, 390px); max-width: 100%; height: auto; aspect-ratio: 12 / 5; flex-shrink: 0; }
 .footer-lead p { max-width: 43ch; margin: 0; color: var(--silver-3); font-size: 13px; }
 .footer-links { padding: 55px 0 70px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
 .footer-links div { display: flex; flex-direction: column; align-items: start; gap: 13px; }

@@ -7,13 +7,18 @@ const addButtons = document.querySelectorAll('.add-button');
 const quickViewButtons = document.querySelectorAll('[data-home-quick-view]');
 
 const homepageProducts = {
-  'Prollegen 1kg': { id: 'PROL-1000', name: 'Prollegen™ 1kg', size: '1KG', servings: '33 servings', price: 4499, mrp: 5499 },
-  'Prollegen 500g': { id: 'PROL-500', name: 'Prollegen™ 500g', size: '500G', servings: '16 servings', price: 2999, mrp: 3499 },
+  'Prollagen 1kg': { id: 'PROL-1000', name: 'Prollagen™ 1kg', size: '1KG', servings: '33 servings', price: 5499, mrp: 6499 },
+  'Prollagen 500g': { id: 'PROL-500', name: 'Prollagen™ 500g', size: '500G', servings: '16 servings', price: 2999, mrp: 3499 },
 };
 
 let cart = [];
 try {
-  cart = JSON.parse(localStorage.getItem('serqua-cart')) || [];
+  cart = (JSON.parse(localStorage.getItem('serqua-cart')) || [])
+    .filter((item) => Object.values(homepageProducts).some((product) => product.id === item.id))
+    .map((item) => {
+      const product = Object.values(homepageProducts).find((entry) => entry.id === item.id);
+      return { ...product, quantity: Math.max(1, Number(item.quantity) || 1) };
+    });
 } catch {
   cart = [];
 }
@@ -22,6 +27,20 @@ let toastTimer;
 
 cartCount.textContent = String(cartItems);
 cartButton.setAttribute('aria-label', `Cart, ${cartItems} ${cartItems === 1 ? 'item' : 'items'}`);
+
+function renderAddButtons() {
+  addButtons.forEach((button) => {
+    const product = homepageProducts[button.dataset.product];
+    const quantity = cart.find((item) => item.id === product.id)?.quantity || 0;
+    button.textContent = quantity ? `In cart · ${quantity}` : 'Add to cart';
+    button.setAttribute(
+      'aria-label',
+      quantity ? `Add another ${product.name}; ${quantity} currently in cart` : `Add ${product.name} to cart`,
+    );
+  });
+}
+
+renderAddButtons();
 
 function setMenu(open) {
   menuButton.setAttribute('aria-expanded', String(open));
@@ -51,17 +70,11 @@ addButtons.forEach((button) => {
     cartItems = cart.reduce((total, item) => total + item.quantity, 0);
     cartCount.textContent = String(cartItems);
     cartButton.setAttribute('aria-label', `Cart, ${cartItems} ${cartItems === 1 ? 'item' : 'items'}`);
-
-    const original = button.textContent;
-    button.textContent = 'Added';
-    button.disabled = true;
-    window.setTimeout(() => {
-      button.textContent = original;
-      button.disabled = false;
-    }, 900);
+    renderAddButtons();
 
     window.clearTimeout(toastTimer);
-    toast.textContent = `${button.dataset.product} added to your cart.`;
+    const productQuantity = cart.find((item) => item.id === product.id)?.quantity || 0;
+    toast.textContent = `${product.name} added · ${productQuantity} in your cart.`;
     toast.classList.add('show');
     toastTimer = window.setTimeout(() => toast.classList.remove('show'), 2600);
   });

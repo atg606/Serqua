@@ -15,10 +15,25 @@
   height: 1.25em;
 }
 
-.site-header > .wordmark {
+body > .site-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header, 20);
+}
+
+html {
+  scroll-padding-top: calc(var(--header, 88px) + 16px);
+}
+
+.site-header > a.wordmark {
   display: inline-block;
   align-self: center;
   padding: 0;
+  width: clamp(112px, 12vw, 156px);
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 12 / 5;
+  transform: none;
 }
 
 .brand-script {

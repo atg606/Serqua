@@ -9,18 +9,21 @@
     {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
     {{ 'fonts.css' | asset_url | stylesheet_tag }}
     {{ 'brand.css' | asset_url | stylesheet_tag }}
-    {% if template.name == 'index' %}
+    {% if template.name == 'index' or template.suffix == 'catalog' %}
       {{ 'home.css' | asset_url | stylesheet_tag }}
     {% else %}
       {{ 'collection.css' | asset_url | stylesheet_tag }}
     {% endif %}
+    {% if template.suffix == 'catalog' %}
+      {{ 'magazine.css' | asset_url | stylesheet_tag }}
+      <script src="{{ 'magazine.js' | asset_url }}" defer></script>
+    {% endif %}
+    {{ 'serqua-assistant.css' | asset_url | stylesheet_tag }}
     {{ content_for_header }}
   </head>
-  <body>
+  <body{% if template.suffix == 'catalog' %} class="mag-page"{% endif %}>
     <a class="skip-link" href="#MainContent">{{ 'accessibility.skip_to_content' | t }}</a>
     <div class="announcement" aria-label="{{ 'header.store_information' | t }}">
-      <p>{{ 'header.free_shipping' | t }}</p>
-      <span aria-hidden="true">·</span>
       <p>{{ 'header.cod' | t }}</p>
     </div>
     <header class="site-header">
@@ -37,6 +40,7 @@
           <span class="account-text">{{ 'header.account' | t }}</span>
         </a>
         <a class="cart-button" href="{{ routes.cart_url }}" aria-label="{{ 'header.cart_label' | t: count: cart.item_count }}">
+          <svg class="cart-icon" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true" focusable="false"><path d="M5.5 8.5h13l-1 11h-11l-1-11Z"/><path d="M9 9V6.75a3 3 0 0 1 6 0V9"/></svg>
           <span class="cart-text">{{ 'header.bag' | t }}</span>
           <span class="cart-count" aria-hidden="true">{{ cart.item_count }}</span>
         </a>
@@ -64,14 +68,14 @@
       <div class="footer-links">
         <div><p>{{ 'footer.explore' | t }}</p><a href="{{ routes.all_products_collection_url }}">{{ 'nav.shop' | t }}</a><a href="/pages/catalog">{{ 'nav.catalog' | t }}</a></div>
         <div><p>{{ 'footer.customer_care' | t }}</p><a href="/pages/help">{{ 'footer.track_order' | t }}</a><a href="/pages/help#shipping">{{ 'footer.shipping' | t }}</a><a href="/pages/help#returns">{{ 'footer.returns' | t }}</a><a href="/policies/terms-of-service">{{ 'footer.terms' | t }}</a><a href="/policies/privacy-policy">{{ 'footer.privacy' | t }}</a></div>
-        <div><p>{{ 'footer.contact' | t }}</p><a href="https://wa.me/918792917772">{{ 'footer.whatsapp' | t }}</a><a href="mailto:carol.serqua@gmail.com">{{ 'footer.email' | t }}</a><a href="https://www.instagram.com/serquaworld/">{{ 'footer.instagram' | t }}</a></div>
+        <div><p>{{ 'footer.contact' | t }}</p><a href="https://wa.me/918792917772">{{ 'footer.whatsapp' | t }}</a><a href="mailto:carol.serqua@gmail.com">{{ 'footer.email' | t }}</a><a href="https://www.instagram.com/serqua.in/">{{ 'footer.instagram' | t }}</a></div>
       </div>
       {% assign current_year = 'now' | date: '%Y' %}
       <div class="footer-bottom"><span>{{ 'footer.copyright' | t: year: current_year }}</span><span>{{ 'footer.tagline' | t }}</span></div>
     </footer>
     <dialog class="quick-dialog" id="quick-view" aria-labelledby="quick-title">
       <button class="dialog-close" type="button" data-close-quick aria-label="{{ 'products.close_quick_view' | t }}">×</button>
-      <div class="quick-art"><img src="{{ 'official-prollegen-1kg.png' | asset_url }}" width="1254" height="1254" alt="" data-quick-image></div>
+      <div class="quick-art"><img src="{{ 'prollagen-bourbon-1kg.jpeg' | asset_url }}" width="1254" height="1254" alt="" data-quick-image></div>
       <div class="quick-content">
         <p>{{ 'products.quick_view' | t }}</p>
         <h2 id="quick-title" data-quick-title></h2>
@@ -82,11 +86,12 @@
         <form class="quick-purchase" method="post" action="{{ routes.cart_add_url }}">
           <input type="hidden" name="id" value="" data-quick-variant>
           <label><span class="sr-only">{{ 'cart.quantity' | t }}</span><input type="number" name="quantity" min="1" max="10" value="1"></label>
-          <button class="quick-add" type="submit">{{ 'products.add_to_cart' | t }}</button>
+          <button class="quick-add" type="button" disabled>{{ 'products.coming_soon' | t }}</button>
         </form>
         <a class="quick-full-link" href="{{ routes.all_products_collection_url }}" data-quick-link>{{ 'products.view_full_details' | t }}</a>
       </div>
     </dialog>
     <script src="{{ 'theme.js' | asset_url }}" defer></script>
+    <script src="{{ 'serqua-assistant.js' | asset_url }}" defer></script>
   </body>
 </html>

@@ -1,0 +1,425 @@
+.serqua-assistant-launcher,
+.serqua-assistant-dialog,
+.serqua-assistant-dialog * {
+  box-sizing: border-box;
+}
+
+.serqua-assistant-dialog .visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.serqua-assistant-launcher {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 900;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 18px;
+  border: 1px solid #fff;
+  border-radius: 2px;
+  background: #050505;
+  color: #fff;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.24);
+  font: 700 12px/1 "Manrope", Arial, sans-serif;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.serqua-assistant-launcher:hover,
+.serqua-assistant-launcher:focus-visible {
+  background: #242424;
+}
+
+.serqua-assistant-launcher:focus-visible,
+.serqua-assistant-dialog button:focus-visible,
+.serqua-assistant-dialog input:focus-visible,
+.serqua-assistant-dialog a:focus-visible {
+  outline: 2px solid #8faec0;
+  outline-offset: 3px;
+}
+
+.serqua-assistant-launcher svg {
+  width: 18px;
+  height: 18px;
+}
+
+.serqua-assistant-dialog {
+  position: fixed;
+  inset: auto 22px 22px auto;
+  z-index: 1000;
+  width: min(410px, calc(100vw - 28px));
+  height: min(680px, calc(100vh - 44px));
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #111;
+  border-radius: 4px;
+  background: #f3f3f1;
+  color: #090909;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+  font-family: "Manrope", Arial, sans-serif;
+}
+
+.serqua-assistant-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(2px);
+}
+
+.serqua-assistant-dialog[open] {
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+}
+
+.serqua-assistant-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 18px 17px;
+  background: #050505;
+  color: #fff;
+}
+
+.serqua-assistant-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.serqua-assistant-mark {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 1px solid #555;
+  color: #fff;
+  font-family: Georgia, serif;
+  font-size: 20px;
+  font-style: italic;
+}
+
+.serqua-assistant-brand strong {
+  display: block;
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.serqua-assistant-brand small {
+  display: block;
+  margin-top: 3px;
+  color: #aaa;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.serqua-assistant-close {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 25px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.serqua-assistant-messages {
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  padding: 18px;
+  scroll-behavior: smooth;
+}
+
+.serqua-assistant-message {
+  max-width: 88%;
+  padding: 12px 14px;
+  border: 1px solid #d4d4d0;
+  border-radius: 10px 10px 10px 2px;
+  background: #fff;
+  color: #181818;
+  font-size: 13px;
+  line-height: 1.55;
+  white-space: pre-line;
+}
+
+.serqua-assistant-message[data-role="user"] {
+  align-self: flex-end;
+  border-color: #111;
+  border-radius: 10px 10px 2px 10px;
+  background: #111;
+  color: #fff;
+}
+
+.serqua-assistant-message p {
+  margin: 0;
+}
+
+.serqua-assistant-message-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.serqua-assistant-message-actions a,
+.serqua-assistant-message-actions button {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  padding: 0 11px;
+  border: 1px solid #111;
+  border-radius: 0;
+  background: #fff;
+  color: #111;
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.serqua-assistant-message-actions a[data-primary="true"],
+.serqua-assistant-message-actions button[data-primary="true"] {
+  background: #111;
+  color: #fff;
+}
+
+.serqua-assistant-orders {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.serqua-assistant-order {
+  padding: 14px;
+  border: 1px solid #c8c8c3;
+  background: #fff;
+}
+
+.serqua-assistant-order-header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.serqua-assistant-order-header strong,
+.serqua-assistant-order-header b {
+  color: #111;
+  font-size: 14px;
+}
+
+.serqua-assistant-order-header small {
+  display: block;
+  margin-top: 3px;
+  color: #626262;
+  font-size: 10px;
+}
+
+.serqua-assistant-order-statuses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.serqua-assistant-order-statuses span {
+  padding: 5px 7px;
+  border-radius: 999px;
+  background: #ececea;
+  color: #333;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.serqua-assistant-order-items {
+  display: grid;
+  gap: 5px;
+  margin: 12px 0 0;
+  padding: 11px 0 0;
+  border-top: 1px solid #e0e0dc;
+  list-style: none;
+}
+
+.serqua-assistant-order-items li {
+  color: #333;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.serqua-assistant-order-tracking {
+  display: grid;
+  gap: 5px;
+  margin-top: 12px;
+}
+
+.serqua-assistant-order-tracking a,
+.serqua-assistant-order-tracking span {
+  color: #111;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.serqua-assistant-order-tracking a::after { content: " ↗"; }
+
+.serqua-assistant-order-note {
+  margin: 12px 0 0;
+  color: #666;
+  font-size: 10px;
+}
+
+.serqua-assistant-typing {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.serqua-assistant-typing i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #777;
+  animation: serqua-assistant-pulse 1s infinite ease-in-out;
+}
+
+.serqua-assistant-typing i:nth-child(2) { animation-delay: 0.14s; }
+.serqua-assistant-typing i:nth-child(3) { animation-delay: 0.28s; }
+
+.serqua-assistant-suggestions {
+  display: flex;
+  gap: 7px;
+  overflow-x: auto;
+  padding: 0 18px 12px;
+  scrollbar-width: none;
+}
+
+.serqua-assistant-suggestions::-webkit-scrollbar { display: none; }
+
+.serqua-assistant-suggestion {
+  flex: 0 0 auto;
+  min-height: 34px;
+  padding: 0 11px;
+  border: 1px solid #aaa;
+  border-radius: 999px;
+  background: transparent;
+  color: #202020;
+  font: 700 10px/1 "Manrope", Arial, sans-serif;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+}
+
+.serqua-assistant-suggestion:hover { border-color: #111; }
+
+.serqua-assistant-form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  padding: 14px 18px 10px;
+  border-top: 1px solid #c8c8c3;
+  background: #fff;
+}
+
+.serqua-assistant-form input {
+  width: 100%;
+  min-width: 0;
+  height: 44px;
+  padding: 0 13px;
+  border: 1px solid #aaa;
+  border-radius: 2px;
+  background: #fff;
+  color: #111;
+  font: 500 13px/1 "Manrope", Arial, sans-serif;
+}
+
+.serqua-assistant-form button {
+  min-width: 74px;
+  height: 44px;
+  border: 1px solid #111;
+  border-radius: 2px;
+  background: #111;
+  color: #fff;
+  font: 800 10px/1 "Manrope", Arial, sans-serif;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.serqua-assistant-form button:disabled,
+.serqua-assistant-form input:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
+
+.serqua-assistant-note {
+  margin: 0;
+  padding: 0 18px 13px;
+  background: #fff;
+  color: #777;
+  font-size: 9px;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+@keyframes serqua-assistant-pulse {
+  0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-2px); }
+}
+
+@media (max-width: 700px) {
+  .serqua-assistant-launcher {
+    right: 12px;
+    bottom: 74px;
+    width: 46px;
+    min-height: 44px;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .serqua-assistant-launcher span { display: none; }
+
+  body:not(:has(.mobile-buy)) .serqua-assistant-launcher { bottom: 12px; }
+
+  .serqua-assistant-dialog {
+    inset: auto 7px 7px;
+    width: calc(100vw - 14px);
+    height: min(700px, calc(100dvh - 14px));
+  }
+
+  .serqua-assistant-header { padding: 15px; }
+  .serqua-assistant-messages { padding: 15px; }
+  .serqua-assistant-suggestions { padding-inline: 15px; }
+  .serqua-assistant-form { padding-inline: 15px; }
+  .serqua-assistant-note { padding-inline: 15px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .serqua-assistant-messages { scroll-behavior: auto; }
+  .serqua-assistant-typing i { animation: none; }
+}

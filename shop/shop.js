@@ -1,10 +1,10 @@
-import officialProllegen1kgImage from "../assets/official-prollegen-1kg.png";
-import officialProllegen500gImage from "../assets/official-prollegen-500g.png";
+import officialProllagen1kgImage from "../assets/prollagen-bourbon-1kg.jpeg";
+import officialProllagen500gImage from "../assets/prollagen-bourbon-500g.jpeg";
 import { getShopifyCartUrl } from "../shopify-config.js";
 
 const products = {
-  "PROL-1000": { id: "PROL-1000", name: "Prollegen™ 1kg", size: "1KG", servings: "33 servings", price: 4499, mrp: 5499, image: officialProllegen1kgImage },
-  "PROL-500": { id: "PROL-500", name: "Prollegen™ 500g", size: "500G", servings: "16 servings", price: 2999, mrp: 3499, image: officialProllegen500gImage },
+  "PROL-1000": { id: "PROL-1000", name: "Prollagen™ 1kg", size: "1KG", servings: "33 servings", price: 5499, mrp: 6499, image: officialProllagen1kgImage },
+  "PROL-500": { id: "PROL-500", name: "Prollagen™ 500g", size: "500G", servings: "16 servings", price: 2999, mrp: 3499, image: officialProllagen500gImage },
 };
 
 const money = new Intl.NumberFormat("en-IN", {
@@ -21,9 +21,43 @@ let quickProduct = products["PROL-1000"];
 let quickQuantity = 1;
 let cart = loadCart();
 
+const communityCarousel = document.querySelector("[data-community-carousel]");
+const communitySlides = [...document.querySelectorAll("[data-community-slide]")];
+const communityCurrent = document.querySelector("[data-community-current]");
+let communityIndex = 1;
+
+function showCommunitySlide(nextIndex) {
+  communityIndex = (nextIndex + communitySlides.length) % communitySlides.length;
+  communitySlides.forEach((slide, index) => {
+    const isActive = index === communityIndex;
+    slide.classList.toggle("is-active", isActive);
+    slide.setAttribute("aria-hidden", String(!isActive));
+  });
+  communityCurrent.textContent = String(communityIndex + 1).padStart(2, "0");
+}
+
+if (communityCarousel && communitySlides.length) {
+  communityCarousel.querySelector("[data-community-previous]").addEventListener("click", () => showCommunitySlide(communityIndex - 1));
+  communityCarousel.querySelector("[data-community-next]").addEventListener("click", () => showCommunitySlide(communityIndex + 1));
+
+  let pointerStart = null;
+  communityCarousel.addEventListener("pointerdown", (event) => { pointerStart = event.clientX; });
+  communityCarousel.addEventListener("pointerup", (event) => {
+    if (pointerStart === null) return;
+    const distance = event.clientX - pointerStart;
+    pointerStart = null;
+    if (Math.abs(distance) < 48) return;
+    showCommunitySlide(communityIndex + (distance < 0 ? 1 : -1));
+  });
+  communityCarousel.addEventListener("pointercancel", () => { pointerStart = null; });
+}
+
 function loadCart() {
   try {
-    return JSON.parse(localStorage.getItem("serqua-cart")) || [];
+    const savedCart = JSON.parse(localStorage.getItem("serqua-cart")) || [];
+    return savedCart
+      .filter((item) => products[item.id])
+      .map((item) => ({ ...products[item.id], quantity: Math.max(1, Number(item.quantity) || 1) }));
   } catch {
     return [];
   }
@@ -56,7 +90,21 @@ function addToCart(product, quantity = 1) {
   else cart.push({ ...product, quantity });
   saveCart();
   renderCart();
-  showToast(`${product.name} added to your bag`);
+  const productQuantity = cart.find((item) => item.id === product.id)?.quantity || 0;
+  showToast(`${product.name} added · ${productQuantity} in your bag`);
+}
+
+function renderAddButtons() {
+  document.querySelectorAll(".add-to-bag").forEach((button) => {
+    const quantity = cart.find((item) => item.id === button.dataset.product)?.quantity || 0;
+    button.textContent = quantity ? `In bag · ${quantity}` : "Add to bag";
+    button.setAttribute(
+      "aria-label",
+      quantity
+        ? `Add another ${products[button.dataset.product].name}; ${quantity} currently in bag`
+        : `Add ${products[button.dataset.product].name} to bag`,
+    );
+  });
 }
 
 function renderCart() {
@@ -74,7 +122,7 @@ function renderCart() {
       <article class="cart-item">
         <div class="cart-item-art" aria-hidden="true"><span>${item.size}</span></div>
         <div class="cart-item-copy">
-          <p>Prollegen™</p>
+          <p>Prollagen™</p>
           <h3>${item.name}</h3>
           <div class="cart-item-actions">
             <div class="quantity" aria-label="Quantity for ${item.name}">
@@ -96,6 +144,7 @@ function renderCart() {
     : "You’ve unlocked free shipping";
   document.querySelector("[data-shipping-bar]").style.width = `${Math.min((subtotal / 4499) * 100, 100)}%`;
   document.querySelector("[data-checkout]").disabled = !cart.length;
+  renderAddButtons();
 }
 
 function updateQuickView(product) {
@@ -125,7 +174,6 @@ document.querySelectorAll("[data-open-product]").forEach((button) => {
 document.querySelectorAll(".add-to-bag").forEach((button) => {
   button.addEventListener("click", () => {
     addToCart(products[button.dataset.product]);
-    openDialog(cartDialog);
   });
 });
 
@@ -187,8 +235,8 @@ document.querySelector("[data-sort]").addEventListener("change", (event) => {
 });
 
 const categoryLabels = {
-  all: "Prollegen collection",
-  prollegen: "Prollegen collection",
+  all: "Prollagen collection",
+  prollegen: "Prollagen collection",
   1000: "One kilogram",
   500: "Five hundred grams",
 };

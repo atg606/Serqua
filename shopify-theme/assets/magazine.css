@@ -1,0 +1,313 @@
+.mag-page{--mag-paper:oklch(.955 .006 75);--mag-ink:oklch(.095 0 0);background:var(--mag-paper);color:var(--mag-ink)}
+.mag-page main{overflow:hidden;background:var(--mag-paper)}
+.mag-page figure{margin:0}
+.mag-page figure img{width:100%;height:100%;display:block;object-fit:cover}
+.mag-page em{font-weight:400}
+.mag-header{border-bottom-color:oklch(.2 0 0)}
+.mag-folio{margin:0;font-size:10px;font-weight:700;letter-spacing:.11em;text-transform:uppercase}
+
+.mag-cover{position:relative;min-height:calc(100svh - 110px);padding:clamp(38px,5vw,72px) max(22px,calc((100vw - var(--max))/2 + 64px));display:grid;grid-template-columns:minmax(0,1.05fr) minmax(250px,.95fr);align-items:center;overflow:hidden;color:var(--silver-1);background:var(--black);isolation:isolate}
+.mag-cover__art,.mag-cover__shade{position:absolute;inset:0;z-index:-2}
+.mag-cover__art{left:38%;overflow:hidden}
+.mag-cover__art img{width:100%;height:100%;object-fit:cover;object-position:center 32%;filter:saturate(.78) contrast(1.08)}
+.mag-cover__shade{z-index:-1;background:linear-gradient(90deg,#090a0b 0%,rgba(9,10,11,.96) 27%,rgba(9,10,11,.42) 60%,rgba(9,10,11,.12) 100%)}
+.mag-cover--pair .mag-cover__art{inset:0}
+.mag-cover--pair .mag-cover__art img{object-fit:contain;object-position:right center;filter:none}
+.mag-cover--pair .mag-cover__shade{background:linear-gradient(90deg,#000 0%,rgba(0,0,0,.7) 32%,transparent 62%)}
+@media(max-width:680px){
+  .mag-cover--pair .mag-cover__art{inset:30% 0 0}
+  .mag-cover--pair .mag-cover__art img{object-fit:cover;object-position:right top}
+  .mag-cover--pair .mag-cover__shade{background:linear-gradient(180deg,#000 0%,rgba(0,0,0,.94) 35%,rgba(0,0,0,.55) 70%,rgba(0,0,0,.65) 100%)}
+}
+section.mag-cover--portrait .mag-cover__art{inset:20px 0 0 44%;translate:0}
+section.mag-cover--portrait .mag-cover__art img{object-fit:cover;object-position:center top}
+@media(max-width:680px){
+  section.mag-cover--portrait .mag-cover__art{inset:30% 0 0}
+  section.mag-cover--portrait .mag-cover__art img{object-fit:cover;object-position:center top}
+}
+.mag-cover__masthead{align-self:center;max-width:760px}
+@media(min-width:981px){
+  .mag-cover--pair .mag-cover__art{translate:-3vw 0}
+  .mag-cover--pair .mag-cover__masthead{margin-left:clamp(48px,6vw,88px)}
+  .mag-cover--pair h1 span{font-size:clamp(76px,8.7vw,104px)}
+  .mag-cover--pair h1 em{font-size:clamp(72px,8.2vw,100px)}
+  .mag-cover--pair .mag-cover__intro{width:calc(100% - 32px);margin-left:32px}
+  .mag-cover--pair .mag-cover__intro h2{font-size:clamp(26px,2.6vw,36px)}
+  .mag-cover--pair .mag-cover__intro p{font-size:17px}
+}
+.mag-cover__label{max-width:30ch;margin:0 0 clamp(30px,5vh,64px);color:oklch(.94 0 0);font-size:12px;font-weight:600;line-height:1.5;letter-spacing:.12em;text-transform:uppercase}
+.mag-cover h1{margin:0;color:var(--silver-1);font-family:"Barlow Condensed",sans-serif;font-weight:500;line-height:1;letter-spacing:-.035em;text-transform:none}
+.mag-cover h1 span,.mag-cover h1 em{display:block}
+.mag-cover h1 span{font-size:clamp(68px,8vw,96px);line-height:.86;text-transform:uppercase}
+.mag-cover h1 em{margin-top:clamp(12px,1.5vw,22px);margin-left:clamp(44px,7vw,104px);font-size:clamp(64px,7.5vw,92px);font-style:italic;line-height:.86}
+.mag-cover__intro{width:min(480px,88%);margin:clamp(38px,6vh,70px) 0 0 clamp(24px,5vw,76px)}
+.mag-cover__intro h2{margin:0 0 14px;font-family:"Barlow Condensed",sans-serif;font-size:clamp(23px,2.4vw,34px);font-weight:400;line-height:1.04;letter-spacing:-.025em}
+.mag-cover__intro p{max-width:45ch;margin:0;color:oklch(.86 0 0);font-size:clamp(14px,1.1vw,17px);line-height:1.6}
+.mag-cover__notes{align-self:stretch;justify-self:end;padding-block:6%;display:flex;flex-direction:column;justify-content:space-between;font-size:10px;line-height:1.25;letter-spacing:.06em;text-transform:uppercase}
+.mag-cover__notes p{margin:0;padding-top:16px;border-top:1px solid oklch(.68 0 0);min-width:88px}
+.mag-cover__enter{position:absolute;right:max(22px,calc((100vw - var(--max))/2 + 64px));bottom:26px;display:flex;align-items:center;gap:14px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.mag-cover__enter span{font-size:18px}
+.mag-breath{height:clamp(54px,9vw,128px);background:var(--mag-paper)}
+
+.mag-opening{padding:0 max(20px,calc((100vw - var(--max))/2 + 54px)) clamp(72px,9vw,130px);background:var(--mag-paper)}
+.mag-running-line{margin:0 0 clamp(36px,5vw,70px);display:grid;grid-template-columns:minmax(40px,1fr) auto minmax(40px,1fr);align-items:center;gap:26px;color:oklch(.2 0 0);font-size:clamp(11px,1vw,14px);font-weight:600;line-height:1.45;letter-spacing:.18em;text-align:center;text-transform:uppercase}
+.mag-running-line span{height:1px;background:oklch(.65 0 0)}
+.mag-opening__grid{display:grid;grid-template-columns:minmax(260px,.78fr) minmax(240px,.64fr) minmax(320px,.9fr);grid-template-areas:"group copy slider";gap:clamp(24px,4vw,62px);align-items:center}
+.mag-opening__group{grid-area:group;position:relative;height:min(660px,66vw)}
+.mag-opening__group img{object-position:center 58%}
+.mag-opening__group--strength{background:#000;color:#fff}
+.mag-opening__group--strength img{object-fit:contain;object-position:center}
+.mag-opening__group figcaption,.mag-feature figcaption,.mag-after figcaption{position:absolute;top:18px;left:18px;max-width:16ch;color:inherit;font-size:9px;font-weight:700;line-height:1.35;letter-spacing:.06em;text-transform:uppercase}
+.mag-opening__copy{grid-area:copy;align-self:center}
+.mag-opening__copy h2{margin:24px 0;font-family:"Barlow Condensed",sans-serif;font-size:clamp(48px,5vw,74px);font-weight:500;line-height:.85;letter-spacing:-.04em}
+.mag-opening__copy h2 em{font-style:italic}
+.mag-opening__copy.mag-opening__copy--resilience h2{font-size:clamp(34px,3.3vw,48px);line-height:1.08;letter-spacing:-.02em;margin:22px 0 26px}
+.mag-opening__story{max-width:42ch;font-size:15px;line-height:1.7}
+.mag-opening__story p{margin:0 0 18px}
+.mag-opening__story p:last-child{margin-bottom:0}
+.mag-opening__copy>p:last-child{max-width:34ch;margin:0;font-size:14px;line-height:1.6}
+.mag-opening__copy::after,.mag-feature__aside::after,.mag-after__copy::after{width:56px;height:1px;margin-top:24px;display:block;background:currentColor;content:""}
+
+.mag-slider{grid-area:slider;position:relative;overflow:hidden;outline:none}
+.mag-slider:focus-visible{outline:3px solid var(--focus);outline-offset:5px}
+.mag-slider__track{display:flex;transition:transform .62s var(--ease);will-change:transform}
+.mag-slide{position:relative;flex:0 0 100%;aspect-ratio:.78;overflow:hidden;background:oklch(.9 0 0)}
+.mag-slide img{object-position:center 24%}
+.mag-slide img.mag-slide__artwork{object-fit:contain;object-position:center;background:#fff}
+.mag-slide figcaption{position:absolute;right:18px;bottom:18px;max-width:15ch;font-size:9px;font-weight:700;line-height:1.35;letter-spacing:.06em;text-align:right;text-transform:uppercase}
+.mag-slider__count{position:absolute;top:16px;right:18px;margin:0;font-size:10px;letter-spacing:.08em}
+
+.mag-feature{position:relative;min-height:clamp(580px,78svh,820px);display:grid;grid-template-columns:minmax(0,1.55fr) minmax(260px,.45fr);background:oklch(.9 .012 75)}
+.mag-feature__image{position:relative;grid-row:1;grid-column:1;height:100%;min-height:580px;overflow:hidden}
+.mag-feature__image img{object-position:center 50%}
+.mag-feature__headline{position:absolute;z-index:1;left:max(22px,calc((100vw - var(--max))/2 + 74px));bottom:clamp(46px,8vw,96px);color:var(--mag-ink)}
+.mag-feature__headline h2{margin:16px 0 0;font-family:"Barlow Condensed",sans-serif;font-size:clamp(60px,7vw,94px);font-weight:500;line-height:.76;letter-spacing:-.04em}
+.mag-feature__headline h2 em{font-style:italic}
+.mag-feature__aside{grid-column:2;padding:clamp(44px,6vw,88px) clamp(28px,4vw,62px);display:flex;flex-direction:column;justify-content:center}
+.mag-feature__aside h3{margin:0 0 22px;font-family:"Barlow Condensed",sans-serif;font-size:clamp(40px,4vw,62px);font-weight:500;line-height:.9;letter-spacing:-.04em}
+.mag-feature__aside p{max-width:25ch;margin:0;font-size:15px;line-height:1.6}
+.mag-feature__aside a{margin-top:36px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+
+.mag-campaign{min-height:clamp(650px,82svh,860px);padding:clamp(60px,7vw,104px) max(22px,calc((100vw - var(--max))/2 + 64px));display:grid;grid-template-columns:minmax(170px,.32fr) minmax(320px,.72fr) minmax(360px,.96fr);gap:clamp(28px,4vw,68px);align-items:center;color:var(--silver-1);background:radial-gradient(circle at 38% 52%,oklch(.17 0 0),var(--black) 42%)}
+.mag-campaign__nutrition{align-self:stretch;padding-block:20px;display:flex;flex-direction:column;justify-content:space-between;text-transform:uppercase}
+.mag-campaign__nutrition>p{margin:0;font-size:9px;line-height:1.55;letter-spacing:.12em}
+.mag-campaign__nutrition dl{margin:0}.mag-campaign__nutrition dl div+div{margin-top:28px}
+.mag-campaign__nutrition dt{font-family:"Barlow Condensed",sans-serif;font-size:clamp(44px,5vw,68px);line-height:.9}.mag-campaign__nutrition dd{max-width:14ch;margin:8px 0 0;font-size:9px;line-height:1.5;letter-spacing:.14em}
+.mag-campaign__product{height:min(610px,62vw);display:grid;place-items:center}
+.mag-campaign__product img{object-fit:contain;filter:drop-shadow(0 24px 38px rgba(0,0,0,.58))}
+.mag-campaign__copy{text-align:left}
+.mag-campaign__copy h2{margin:24px 0 2px;font-family:"Barlow Condensed",sans-serif;font-size:clamp(64px,7.5vw,96px);font-weight:500;line-height:.84;letter-spacing:-.04em;text-transform:uppercase}
+.mag-campaign__tagline{margin:0 0 clamp(44px,6vw,76px);font-size:12px;letter-spacing:.35em;text-transform:uppercase}
+.mag-campaign__benefits{margin:0 0 42px;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;list-style:none}
+.mag-campaign__benefits li{padding-top:14px;border-top:1px solid oklch(.38 0 0);display:flex;flex-direction:column;font-size:10px;text-transform:uppercase}.mag-campaign__benefits span{color:var(--silver-3)}
+.mag-campaign__cta{width:min(260px,100%);min-height:58px;padding-inline:22px;display:flex;align-items:center;justify-content:space-between;background:var(--silver-1);color:var(--ink);font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+
+.mag-after{padding:clamp(76px,9vw,134px) max(20px,calc((100vw - var(--max))/2 + 54px));background:var(--mag-paper)}
+.mag-after__lead{display:grid;grid-template-columns:minmax(260px,.58fr) minmax(400px,1.42fr);gap:clamp(36px,7vw,104px);align-items:center}
+.mag-after__copy h2{margin:22px 0 26px;font-family:"Barlow Condensed",sans-serif;font-size:clamp(52px,6vw,84px);font-weight:500;line-height:.82;letter-spacing:-.04em}.mag-after__copy h2 em{font-style:italic}
+.mag-after__copy>p:last-of-type{max-width:34ch;margin:0;font-size:15px;line-height:1.65}
+.mag-after__lead figure{position:relative;height:min(710px,58vw);overflow:hidden}
+.mag-after__lead figure img{object-position:center 60%}
+.mag-after__gallery{margin-top:clamp(70px,9vw,128px);display:grid;grid-template-columns:.82fr 1.18fr .78fr;gap:clamp(18px,3vw,42px);align-items:start}
+.mag-after__gallery figure{position:relative;overflow:hidden}.mag-after__gallery figure:nth-child(1){height:min(720px,55vw)}.mag-after__gallery figure:nth-child(2){height:min(520px,42vw);margin-top:9vw}.mag-after__gallery figure:nth-child(3){height:min(610px,48vw);margin-top:2vw}
+.mag-after__gallery img{object-position:center 30%}.mag-after__motion img{object-position:center 22%}.mag-after__ritual img{object-position:center 60%}
+.mag-after__gallery figcaption{top:auto;right:18px;bottom:18px;left:18px;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.45)}
+
+.mag-conclusion{padding:clamp(70px,9vw,124px) max(22px,calc((100vw - var(--max))/2 + 64px));border-top:1px solid oklch(.97 0 0);background:linear-gradient(125deg,oklch(.76 .006 250) 0%,oklch(.89 .004 250) 24%,oklch(.98 0 0) 40%,oklch(.87 .006 250) 57%,oklch(.79 .008 250) 78%,oklch(.91 .004 250) 100%);color:var(--mag-ink)}
+.mag-conclusion>.mag-folio{padding-bottom:28px;border-bottom:1px solid oklch(.68 0 0);letter-spacing:.22em;text-align:center}
+.mag-conclusion__grid{margin-top:clamp(50px,6vw,88px);display:grid;grid-template-columns:1fr 1.1fr .44fr;gap:clamp(34px,6vw,94px);align-items:start}
+.mag-conclusion h2{margin:0;font-family:"Barlow Condensed",sans-serif;font-size:clamp(48px,5vw,74px);font-weight:500;line-height:.87;letter-spacing:-.04em;text-transform:uppercase}
+.mag-conclusion__grid>div>p:first-child{max-width:57ch;margin:0;font-size:15px;line-height:1.72}
+.mag-conclusion__signoff{margin:28px 0 0;font-family:"Barlow Condensed",sans-serif;font-size:18px;line-height:1.35}.mag-conclusion__signoff em{font-style:italic}
+.mag-conclusion__note{margin:0;padding-top:18px;border-top:1px solid var(--mag-ink);font-size:10px;line-height:1.55;letter-spacing:.12em;text-transform:uppercase}
+
+.mag-archive{padding:clamp(64px,8vw,110px) max(22px,calc((100vw - var(--max))/2 + 64px));display:grid;grid-template-columns:minmax(220px,.42fr) minmax(0,1.58fr);gap:clamp(42px,8vw,120px);color:var(--silver-1);background:var(--black)}
+.mag-archive>header>p:first-child{margin:0 0 18px;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.mag-archive h2{margin:0 0 18px;font-family:"Barlow Condensed",sans-serif;font-size:clamp(44px,5vw,72px);font-weight:500;line-height:.9;letter-spacing:-.04em}
+.mag-archive>header>p:last-child{max-width:30ch;margin:0;color:var(--silver-3);font-size:13px;line-height:1.6}
+.mag-archive__issues{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:22px}
+.mag-issue{min-width:0}.mag-issue__cover{position:relative;aspect-ratio:.72;overflow:hidden;background:var(--graphite)}.mag-issue__cover img{filter:grayscale(1);transition:transform .6s var(--ease),filter .4s}.mag-issue:hover .mag-issue__cover img{filter:grayscale(0);transform:scale(1.02)}
+.mag-issue__number{position:absolute;right:14px;bottom:12px;left:14px;margin:0;color:#fff;font-family:"Barlow Condensed",sans-serif;font-size:32px;font-style:italic;text-shadow:0 2px 10px rgba(0,0,0,.5)}
+.mag-issue__meta{padding-top:18px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;font-size:14px;font-weight:600;line-height:1.6;letter-spacing:.06em;text-transform:uppercase}.mag-issue__meta span:last-child{color:var(--silver-2)}
+
+.mag-page>footer{background:oklch(.92 0 0);color:var(--mag-ink)}
+.mag-page>footer .footer-lead,.mag-page>footer .footer-bottom{border-color:oklch(.74 0 0)}
+.mag-page>footer .footer-lead p,.mag-page>footer .footer-links p,.mag-page>footer .footer-bottom{color:oklch(.37 0 0)}
+.mag-page>footer .wordmark{filter:brightness(0);width:clamp(190px,30vw,390px);max-width:100%;height:auto;aspect-ratio:12/5;flex-shrink:0}
+.mag-page>footer .footer-links a:hover{color:var(--mag-ink);text-decoration:underline;text-underline-offset:4px}
+
+@media(max-width:1000px){
+  .mag-cover{grid-template-columns:1fr .35fr}.mag-cover__art{left:26%}
+  .mag-opening__grid{grid-template-columns:1fr 1fr;grid-template-areas:"group copy" "group slider";align-items:start}.mag-opening__group{height:100%;min-height:760px}.mag-slider{margin-top:26px}
+  .mag-campaign{grid-template-columns:.32fr .68fr}.mag-campaign__copy{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:24px 42px;align-items:end}.mag-campaign__copy .mag-folio,.mag-campaign__copy h2,.mag-campaign__tagline{grid-column:1}.mag-campaign__benefits{grid-column:2;grid-row:1/4;margin:0}.mag-campaign__cta{grid-column:2}
+  .mag-conclusion__grid{grid-template-columns:.85fr 1.15fr}.mag-conclusion__note{grid-column:2}
+}
+
+@media(max-width:720px){
+  .mag-cover{min-height:calc(100svh - 100px);padding:32px 20px 70px;display:block}.mag-cover__art{left:0;top:34%;opacity:.82}.mag-cover__art img{object-position:center 18%}.mag-cover__shade{background:linear-gradient(180deg,#090a0b 0%,rgba(9,10,11,.94) 36%,rgba(9,10,11,.34) 68%,rgba(9,10,11,.7) 100%)}
+  .mag-cover__label{max-width:27ch;margin-bottom:24px;font-size:11px}.mag-cover h1 span{font-size:clamp(60px,20vw,82px)}.mag-cover h1 em{margin-top:10px;margin-left:28px;font-size:clamp(58px,18vw,76px)}.mag-cover__intro{width:100%;margin:28px 0 0}.mag-cover__intro p{max-width:34ch}.mag-cover__notes{position:absolute;right:20px;bottom:76px;left:20px;padding:0;flex-direction:row;align-items:end}.mag-cover__notes p{min-width:74px}.mag-cover__enter{right:20px;bottom:24px}
+  .mag-breath{height:48px}
+  .mag-opening{padding:0 16px 68px}.mag-running-line{grid-template-columns:1fr;gap:12px;margin-bottom:34px;line-height:1.7}.mag-running-line span{display:none}.mag-opening__grid{grid-template-columns:1fr;grid-template-areas:"copy" "group" "slider";gap:34px}.mag-opening__group{height:auto;min-height:0;aspect-ratio:.78}.mag-opening__copy h2{font-size:clamp(48px,14vw,66px)}.mag-slider{margin-top:0}
+  .mag-feature{min-height:auto;display:block}.mag-feature__image{height:68svh;min-height:520px}.mag-feature__headline{left:20px;bottom:34px}.mag-feature__headline h2{font-size:clamp(56px,17vw,76px)}.mag-feature__aside{padding:54px 20px 64px}
+  .mag-campaign{padding:62px 20px 72px;grid-template-columns:1fr;gap:28px}.mag-campaign__nutrition{min-height:210px;display:grid;grid-template-columns:.7fr 1.3fr;gap:20px}.mag-campaign__nutrition dl{display:grid;grid-template-columns:1fr 1fr;gap:18px}.mag-campaign__nutrition dl div+div{margin:0}.mag-campaign__product{height:430px}.mag-campaign__copy{grid-column:auto;display:block}.mag-campaign__copy h2{font-size:clamp(58px,17vw,82px)}.mag-campaign__tagline{margin-bottom:38px;letter-spacing:.2em}.mag-campaign__benefits{margin-bottom:34px;grid-template-columns:1fr 1fr}.mag-campaign__cta{width:100%}
+  .mag-after{padding:68px 16px}.mag-after__lead{grid-template-columns:1fr;gap:42px}.mag-after__lead figure{height:auto;aspect-ratio:.78}.mag-after__copy h2{font-size:clamp(48px,14vw,66px)}.mag-after__gallery{margin-top:72px;grid-template-columns:1fr;gap:16px}.mag-after__gallery figure:nth-child(n){height:auto;margin:0;aspect-ratio:.78}.mag-after__gallery figure:nth-child(2){aspect-ratio:1.08}
+  .mag-conclusion{padding:64px 20px}.mag-conclusion>.mag-folio{text-align:left;line-height:1.7}.mag-conclusion__grid{margin-top:44px;grid-template-columns:1fr;gap:34px}.mag-conclusion h2{font-size:clamp(44px,13vw,62px)}.mag-conclusion__note{grid-column:auto;max-width:20ch}
+  .mag-archive{padding:60px 20px;grid-template-columns:1fr;gap:38px}.mag-archive__issues{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}.mag-archive__issues::-webkit-scrollbar{display:none}.mag-issue{min-width:74vw;scroll-snap-align:start}
+}
+
+/* Keep editorial photographs bounded instead of using their intrinsic height. */
+.mag-feature{min-height:0;display:grid;grid-template-columns:minmax(0,1.45fr) minmax(280px,.55fr)}
+.mag-feature__image{height:clamp(440px,48vw,600px);min-height:0;min-width:0;background:#f5f5f5}
+.mag-page .mag-feature__image img{width:100%;height:100%;object-fit:contain;object-position:center}
+.mag-feature__headline{position:relative;grid-area:1/1;align-self:end;left:auto;bottom:auto;margin:0 0 28px 24px;pointer-events:none}
+.mag-feature__headline h2{font-size:clamp(36px,4.2vw,58px);line-height:1}
+.mag-feature__aside{grid-column:2;grid-row:1}
+.mag-conclusion h2{font-family:"Barlow Condensed",sans-serif;font-size:clamp(44px,4.6vw,64px);font-weight:600;line-height:1.08;letter-spacing:0}
+.mag-cover__art{top:28px}
+.mag-cover__art img{object-position:center top}
+.mag-campaign__nutrition dt{font-family:"Barlow Condensed",sans-serif;font-size:clamp(48px,4.5vw,64px);font-weight:600;line-height:1.1;letter-spacing:0}
+.mag-campaign__nutrition dd{max-width:20ch;font-size:13px;font-weight:500;line-height:1.5;letter-spacing:.04em}
+.mag-campaign__nutrition>p{font-size:12px;font-weight:600;line-height:1.6;letter-spacing:.06em}
+.mag-archive{padding:48px max(22px,calc((100% - 1100px)/2));grid-template-columns:minmax(220px,.7fr) minmax(0,1.3fr);align-items:center;gap:clamp(32px,4vw,60px);background:oklch(.90 0 0);color:var(--mag-ink);border-bottom:1px solid oklch(.76 0 0)}
+.mag-archive>header>p:last-child{color:oklch(.37 0 0);font-size:15px}
+.mag-archive__issues{width:100%;max-width:none;justify-self:end}
+.mag-issue{display:grid;grid-template-columns:240px minmax(0,1fr);align-items:center;gap:28px}
+.mag-issue__meta{padding:0;display:flex;flex-direction:column;align-items:flex-start;gap:18px;font-size:15px;letter-spacing:.03em}
+.mag-issue__meta span:last-child{color:oklch(.37 0 0);font-size:12px}
+.mag-issue__cover{aspect-ratio:3/4}
+.mag-issue__cover img{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:contain;object-position:center}
+@media(max-width:720px){
+  .mag-feature{grid-template-columns:1fr}
+  .mag-feature__image{height:clamp(380px,110vw,520px)}
+  .mag-feature__headline{grid-area:2/1;margin:0;padding:24px 20px;background:#f5f5f5}
+  .mag-feature__headline h2{font-size:clamp(32px,9vw,44px)}
+  .mag-feature__aside{grid-column:1;grid-row:3;padding:40px 20px 48px}
+  .mag-cover__art{top:34%}
+  .mag-cover__art img{object-position:center top}
+  .mag-campaign__nutrition{grid-template-columns:1fr;gap:24px}
+  .mag-archive{grid-template-columns:1fr;padding:36px 20px;gap:28px}
+  .mag-archive__issues{justify-self:center}
+  .mag-issue{flex:0 0 100%;min-width:0;grid-template-columns:minmax(140px,.85fr) minmax(0,1fr);gap:20px}
+}
+/* Readable magazine typography: solid strokes and relaxed line spacing. */
+.mag-page main h1,.mag-page main h2,.mag-page main h3{font-weight:600;line-height:1.1;letter-spacing:-.01em;text-wrap:balance}
+.mag-page main h1 em,.mag-page main h2 em,.mag-page .mag-conclusion__signoff em{font-style:normal;font-weight:inherit}
+.mag-page .mag-cover h1{font-family:"Bodoni Moda",serif;font-weight:500;line-height:1;letter-spacing:-.035em}
+.mag-cover h1 span,.mag-cover h1 em{line-height:.86}
+.mag-page .mag-cover h1 em{font-style:italic;font-weight:400}
+.mag-page .mag-conclusion__signoff{font-family:"Manrope",sans-serif;font-size:1.125rem;font-weight:500;line-height:1.6}
+.mag-page>footer .footer-links a{font-family:"Manrope",sans-serif;font-size:1.125rem;font-weight:500;line-height:1.6}
+.mag-cover__intro p,.mag-opening__copy>p:last-child,.mag-feature__aside p,.mag-after__copy>p:last-of-type,.mag-conclusion__grid>div>p:first-child{font-size:1rem;line-height:1.65}
+/* Campaign artwork and live typography follow the supplied magazine advertisement. */
+.mag-campaign{min-height:0;padding:0 4.6%;grid-template-columns:15% 45% 40%;gap:0;background:#0b0b0b;align-items:center}
+.mag-campaign__nutrition{padding:3.5rem 0 1.25rem;justify-content:flex-start;gap:1.5rem;z-index:1}
+.mag-campaign__nutrition>p{font-size:.6875rem;line-height:1.5;letter-spacing:.12em;max-width:17ch}
+.mag-campaign__nutrition>p:first-child{margin-bottom:.75rem;letter-spacing:.02em}
+.mag-campaign__nutrition dt{font-family:"Bodoni Moda",serif;font-weight:500;font-size:clamp(2.5rem,4vw,4rem);line-height:1}
+.mag-campaign__nutrition dd{font-size:.75rem;line-height:1.45;letter-spacing:.17em;max-width:16ch}
+.mag-campaign__nutrition dl div+div{margin-top:1.75rem}
+.mag-campaign__nutrition .mag-campaign__closing{margin-top:auto;padding-top:2rem;position:relative;font-size:.625rem}
+.mag-campaign__closing::before{content:"";position:absolute;top:0;left:0;width:44px;height:1px;background:currentColor}
+.mag-campaign__product{position:relative;width:100%;height:auto;aspect-ratio:645/660;overflow:hidden;align-self:end;display:block;background:#0b0b0b}
+.mag-page .mag-campaign__product img{position:absolute;inset:0;width:100%;max-width:none;height:100%;object-fit:contain;object-position:center;filter:none}
+.mag-campaign__copy{display:block;padding-left:2rem}
+.mag-page .mag-campaign__copy h2{margin:0;font-family:"Bodoni Moda",serif;font-size:clamp(3rem,5.8vw,6rem);font-weight:500;line-height:1.08;letter-spacing:-.035em;text-wrap:nowrap}
+.mag-campaign__tagline{margin:.25rem 0 3.5rem;font-size:clamp(.625rem,1vw,1rem);letter-spacing:.3em;white-space:nowrap}
+.mag-campaign__benefits{gap:1rem;margin:0 0 3rem;grid-template-columns:repeat(4,minmax(0,1fr))}
+.mag-campaign__benefits li{border:0;padding:0;font-size:.75rem;line-height:1.5}
+.mag-campaign__benefits strong{font-weight:500}
+.mag-campaign__benefits span{color:inherit}
+.mag-campaign__benefits svg{width:42px;height:42px;margin-bottom:1rem;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.mag-campaign__cta{width:260px;min-height:54px;padding:0 2.5rem;letter-spacing:.24em;font-size:.75rem;font-weight:500}
+.mag-campaign__cta span{font-size:1.75rem}
+.mag-campaign__signature{margin:1.5rem 0 0;font-size:.5625rem;letter-spacing:.5em;text-transform:uppercase;color:var(--silver-2)}
+@media(max-width:1000px){
+  .mag-campaign{grid-template-columns:26% 74%;padding:0 24px 48px}
+  .mag-campaign__product{max-height:560px;max-width:548px;justify-self:center}
+  .mag-campaign__copy{grid-column:1/-1;padding:32px 0 0}
+  .mag-page .mag-campaign__copy h2{font-size:clamp(3rem,9vw,5rem)}
+  .mag-campaign__tagline{font-size:.75rem;margin-bottom:2rem}
+  .mag-campaign__nutrition{display:flex;min-height:0;padding-top:32px}
+  .mag-campaign__nutrition dl{display:block}
+  .mag-campaign__nutrition .mag-campaign__closing{margin-top:20px}
+}
+@media(max-width:480px){
+  .mag-campaign{padding-inline:20px;grid-template-columns:30% 70%}
+  .mag-campaign__nutrition{gap:1rem;padding-top:28px}
+  .mag-campaign__nutrition>p{font-size:.5625rem}
+  .mag-campaign__nutrition dt{font-size:2.5rem}
+  .mag-campaign__nutrition dd{font-size:.5625rem;letter-spacing:.08em}
+  .mag-campaign__nutrition dl div+div{margin-top:1.25rem}
+  .mag-campaign__nutrition .mag-campaign__closing{display:none}
+  .mag-campaign__product{align-self:center}
+  .mag-campaign__benefits{gap:.75rem;margin-bottom:2rem}
+  .mag-campaign__benefits li{font-size:.625rem}
+  .mag-campaign__benefits svg{width:32px;height:32px}
+  .mag-campaign__cta{width:100%}
+  .mag-campaign__signature{letter-spacing:.25em}
+}
+.mag-editorial{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:clamp(24px,4vw,48px);align-items:center;padding:clamp(36px,6vw,80px) max(20px,calc((100% - 1100px)/2));background:var(--mag-paper);color:#111}
+.mag-editorial__header{grid-column:1/-1}
+.mag-editorial__lifestyle{grid-column:2;grid-row:2;margin:0;width:100%;aspect-ratio:2/3;overflow:hidden}
+.mag-page .mag-editorial__lifestyle img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;filter:none}
+.mag-editorial__viewport{grid-column:1;grid-row:2}
+.mag-editorial__controls{grid-column:1}
+.mag-editorial__header{display:flex;align-items:end;justify-content:space-between;gap:24px;border-bottom:1px solid #aaa;padding-bottom:24px;margin-bottom:32px}
+.mag-editorial__header h2{font-family:"Barlow Condensed",sans-serif;font-weight:600;font-size:clamp(36px,5vw,60px);line-height:1.05;letter-spacing:-.02em;margin:12px 0 0}
+.mag-editorial__header>p{font-size:13px;margin:0}
+.mag-editorial__viewport{position:relative;width:min(100%,560px);margin:auto;touch-action:pan-y}
+.mag-editorial__viewport figure{margin:0}
+.mag-editorial__viewport figure[hidden]{display:none}
+.mag-page .mag-editorial__viewport img{display:block;width:100%;height:auto;aspect-ratio:2/3;object-fit:contain;filter:none;background:#fff}
+.mag-editorial__controls{display:flex;justify-content:center;align-items:center;width:min(100%,560px);margin:20px auto 0}
+.mag-editorial__arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:1;display:grid;place-items:center;width:44px;height:48px;border:1px solid #111;background:rgba(255,255,255,.92);color:#111;font-size:26px;cursor:pointer}
+.mag-editorial__arrow--prev{left:8px}
+.mag-editorial__arrow--next{right:8px}
+.mag-editorial__arrow:hover{background:#111;color:#fff}
+.mag-editorial__arrow:disabled{opacity:.35;cursor:default;background:#fff;color:#111}
+.mag-editorial__controls span{font-size:12px;letter-spacing:.18em;font-variant-numeric:tabular-nums}
+.mag-editorial :focus-visible{outline:2px solid #111;outline-offset:5px}
+@media(max-width:700px){.mag-editorial{grid-template-columns:minmax(0,1fr)}.mag-editorial__lifestyle{grid-column:1;grid-row:auto;margin-bottom:24px}.mag-editorial__viewport{grid-column:1;grid-row:auto;width:100%}.mag-editorial__controls{grid-column:1}.mag-editorial__header{align-items:start;flex-direction:column;gap:16px}}
+.mag-editorial + .mag-after{position:relative}
+.mag-editorial + .mag-after::before{content:"";position:absolute;top:0;left:50%;width:120px;transform:translateX(-50%);height:1px;background:#000}
+.mag-after__lead--movement{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(28px,4vw,56px)}
+.mag-after__lead--movement .mag-after__copy h2{font-size:clamp(40px,4.5vw,64px);line-height:1.05;letter-spacing:-.02em;margin:20px 0 28px}
+.mag-after__lead--movement .mag-after__copy>.mag-folio{max-width:none;margin:0;font-size:11px;line-height:1.5}
+.mag-after__story{max-width:48ch;font-size:clamp(15px,1.4vw,18px);line-height:1.65}
+.mag-after__story p{margin:0 0 20px}
+.mag-after__story p:last-child{margin-bottom:0}
+@media(max-width:700px){.mag-after__lead--movement{grid-template-columns:minmax(0,1fr);gap:32px}.mag-after__story{max-width:none}}
+.mag-after__lead figure.mag-after__movement{width:min(100%,540px);height:auto;aspect-ratio:3/4;justify-self:center}
+.mag-page .mag-after__movement img{width:100%;height:auto;object-fit:contain;object-position:center}
+/* A black photographic spread, followed by a compact issue-library layout. */
+.mag-after{padding-bottom:0}
+.mag-after__gallery{grid-template-columns:repeat(3,minmax(0,1fr));align-items:start}
+.mag-after__gallery figure:nth-child(n){width:100%;height:auto;aspect-ratio:3/4;margin:0}
+.mag-page .mag-after__gallery img{width:100%;height:100%;object-fit:contain;object-position:center}
+.mag-after__gallery{margin-inline:calc(-1 * max(20px,calc((100vw - var(--max))/2 + 54px)));padding:48px max(20px,calc((100vw - var(--max))/2 + 54px));background:var(--black)}
+.mag-archive{display:block;padding:48px max(24px,calc((100% - 1100px)/2)) 56px;background:var(--mag-paper)}
+.mag-archive>header{display:grid;grid-template-columns:1.2fr 1fr;gap:12px 48px;align-items:end;padding-bottom:28px;border-bottom:1px solid oklch(.6 0 0)}
+.mag-archive>header>p:first-child{grid-column:1/-1;margin:0;font-size:11px}
+.mag-archive h2{margin:0;font-size:clamp(44px,5vw,68px)}
+.mag-archive>header>p:last-child{max-width:42ch;justify-self:end}
+.mag-archive__issues{display:grid;grid-template-columns:1fr;margin-top:32px;gap:32px}
+.mag-issue{grid-template-columns:minmax(220px,320px) minmax(0,1fr);gap:clamp(32px,6vw,88px);padding:0 0 24px;border-bottom:1px solid oklch(.72 0 0)}
+.mag-issue__cover{transform:rotate(-2deg);transition:transform .3s ease}
+.mag-issue:hover .mag-issue__cover{transform:rotate(0)}
+.mag-issue__meta{gap:28px;max-width:580px}
+.mag-issue__meta>span:first-child{font-family:"Barlow Condensed",sans-serif;font-size:clamp(36px,4.5vw,64px);font-weight:600;line-height:1.08;letter-spacing:0;text-wrap:balance}
+.mag-issue__meta>span:last-child{font-size:12px;letter-spacing:.12em}
+.mag-issue__meta::after{content:"Explore the issue ↗";padding:14px 0;border-bottom:1px solid currentColor;font-size:14px;letter-spacing:.04em}
+.mag-issue:focus-visible{outline:2px solid currentColor;outline-offset:8px}
+@media(max-width:720px){
+  .mag-after__gallery{margin-inline:-16px;padding:28px 16px}
+  .mag-archive{padding:36px 24px}
+  .mag-archive>header{grid-template-columns:1fr;gap:18px}
+  .mag-archive>header>p:last-child{justify-self:start}
+  .mag-issue{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:24px}
+  .mag-issue__meta{gap:16px}
+  .mag-issue__meta>span:first-child{font-size:clamp(26px,7vw,38px)}
+  .mag-issue__meta>span:last-child{font-size:10px}
+  .mag-issue__meta::after{font-size:11px;padding:10px 0}
+}
+@media(prefers-reduced-motion:reduce){.mag-slider__track,.mag-issue__cover,.mag-issue__cover img{transition:none}.mag-issue:hover .mag-issue__cover img{transform:none}}
