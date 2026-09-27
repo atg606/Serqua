@@ -3,6 +3,9 @@
     "main": {
       "type": "serqua-home",
       "settings": {
+        "hero_title": "Better lifts, better skin",
+        "world_title": "Balanced, inside-out",
+        "instagram_label": "Follow @serqua.in",
         "instagram_url": "https://www.instagram.com/serqua.in/"
       }
     }
